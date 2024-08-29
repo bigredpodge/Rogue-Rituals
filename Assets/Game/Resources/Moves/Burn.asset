@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Set your opponent on fire, dealing damage every turn.
   brand: 1
   power: 0
-  accuracy: 90
+  accuracy: 100
   alwaysHits: 0
   pp: 10
   priority: 0
