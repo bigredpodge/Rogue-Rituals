@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cd0971801262f409729f3601cc45b0, type: 3}
+  m_Name: Vamp
+  m_EditorClassIdentifier: 
+  name: Vamp
+  description: 
+  model: {fileID: 3039207374650124178, guid: bb1b4b290c85b9e45b8652c2a813e680, type: 3}
+  brand1: 0
+  brand2: 5
+  maxHP: 40
+  strength: 60
+  discipline: 60
+  fortitude: 60
+  willpower: 70
+  initiative: 70
+  expYield: 600
+  growthRate: 1
+  catchRate: 255
+  learnableMoves: []

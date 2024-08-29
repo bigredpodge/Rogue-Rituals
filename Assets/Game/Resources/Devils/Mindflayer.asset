@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cd0971801262f409729f3601cc45b0, type: 3}
+  m_Name: Mindflayer
+  m_EditorClassIdentifier: 
+  name: Mindflayer
+  description: 
+  model: {fileID: 7808496003167887087, guid: ba1560cc66cb5f44ab2160a3e84f5103, type: 3}
+  brand1: 0
+  brand2: 5
+  maxHP: 60
+  strength: 20
+  discipline: 60
+  fortitude: 60
+  willpower: 70
+  initiative: 70
+  expYield: 600
+  growthRate: 1
+  catchRate: 255
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 8e73b95d947b30344be775ac20a802fa, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 9be3c532becf9e84ab4907f23fc95061, type: 2}
+    level: 3
+  - moveBase: {fileID: 11400000, guid: 78df5f0f5cf964e4dbf599122be42650, type: 2}
+    level: 30
+  - moveBase: {fileID: 11400000, guid: 8c1f129436d91f64a885b2ccc7617db5, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: 5ca5dfcd5eff6094da2abac842b1e68c, type: 2}
+    level: 15

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cd0971801262f409729f3601cc45b0, type: 3}
+  m_Name: Succubus
+  m_EditorClassIdentifier: 
+  name: Succubus
+  description: An enchating devil of seduction. It gives you a sultry wink whenever
+    you look over at it.
+  model: {fileID: 919132149155446097, guid: 61d20d37eb8f2754ab41613f6bada9e3, type: 3}
+  brand1: 0
+  brand2: 1
+  maxHP: 60
+  strength: 30
+  discipline: 80
+  fortitude: 40
+  willpower: 50
+  initiative: 0
+  expYield: 600
+  growthRate: 1
+  catchRate: 255
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 59164e1e273fc6041bb454e2c5fb822c, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 71490c52af4faaa40b2769df95a53824, type: 2}
+    level: 3
+  - moveBase: {fileID: 11400000, guid: d2cbb9b1615a3be4a94487dedeaa07e9, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: b4b6cab1929005941a0aff9cbb262757, type: 2}
+    level: 9
+  - moveBase: {fileID: 11400000, guid: a493f0aa7a75ff64bb2705973a4e2300, type: 2}
+    level: 13
+  - moveBase: {fileID: 11400000, guid: 77982b3c3e3efa5468d39d432756893d, type: 2}
+    level: 19

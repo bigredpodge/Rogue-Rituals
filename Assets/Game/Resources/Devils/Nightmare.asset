@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cd0971801262f409729f3601cc45b0, type: 3}
+  m_Name: Nightmare
+  m_EditorClassIdentifier: 
+  name: Nightmare
+  description: 
+  model: {fileID: 3424608986823399991, guid: 4f1972e56a27738479bf456976cdbac6, type: 3}
+  brand1: 0
+  brand2: 9
+  maxHP: 60
+  strength: 20
+  discipline: 60
+  fortitude: 60
+  willpower: 70
+  initiative: 40
+  expYield: 600
+  growthRate: 1
+  catchRate: 255
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: ff69caa7de81bfc4387a979df2cb61a5, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: c26a4634e55a9a4449b64fa942e81a47, type: 2}
+    level: 6
+  - moveBase: {fileID: 11400000, guid: 79d71ce81e70ed9449a2686909b9eeed, type: 2}
+    level: 8
+  - moveBase: {fileID: 11400000, guid: 1f429b3e00eb76a458c11da2f4ad4391, type: 2}
+    level: 4
