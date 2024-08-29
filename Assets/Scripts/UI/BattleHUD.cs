@@ -18,6 +18,10 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] List<TMP_Text> statGrowthTexts;
     [SerializeField] StatusUIHandler statusUIHandler;
 
+    public StatusUIHandler StatusUIHandler {
+        get { return statusUIHandler; }
+    }
+
     Devil _devil;
 
     public void SetData(Devil devil) {

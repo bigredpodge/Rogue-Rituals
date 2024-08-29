@@ -243,14 +243,15 @@ public class Devil
     }
 
     public void SetStatus(ConditionID conditionId, int time) {
-
-        if (Statuses != null) return;
-
         var status = ConditionsDB.Conditions[conditionId];
-        Statuses.Add(status, time);
-        status?.OnStart?.Invoke(this);
-        StatusChanges.Enqueue(Base.Name + status.StartMessage);
-        OnStatusChanged?.Invoke();
+        if (Statuses.ContainsKey(status))
+            Statuses[status] = time;
+        else {
+            Statuses.Add(status, time);
+            status?.OnStart?.Invoke(this);
+            StatusChanges.Enqueue(Base.Name + status.StartMessage);
+            OnStatusChanged?.Invoke();
+        }
     }
 
     public void CureStatus(ConditionID conditionId) {
@@ -262,26 +263,15 @@ public class Devil
         OnStatusChanged?.Invoke();
     }
 
-    public void SetVolatileStatus(ConditionID conditionId) {
-
-        if (VolatileStatus != null) return;
-
-        VolatileStatus = ConditionsDB.Conditions[conditionId];
-        VolatileStatus?.OnStart?.Invoke(this);
-        StatusChanges.Enqueue(Base.Name + VolatileStatus.StartMessage);
-    }
-
-    public void CureVolatileStatus() {
-        VolatileStatus = null;
-    }
-
     public bool OnBeforeMove() {
         bool canPerformMove = true;
-        foreach (var entry in Statuses) {
-            var condition = entry.Key;
-            Statuses[condition] -= 1;
-            
+        if (Statuses.Count == 0)
+            return canPerformMove;
 
+        for (int i = 0; i < Statuses.Count; i++) {
+            var condition = Statuses.ElementAt(i).Key;
+
+            Statuses[condition] -= 1;
             if (Statuses[condition] <= 0) {
                 CureStatus(condition.Id);
                 break;
@@ -297,8 +287,15 @@ public class Devil
     }
 
     public void OnAfterTurn () {
-        foreach (var entry in Statuses) {
-            var condition = entry.Key;
+        for (int i = 0; i < Statuses.Count; i++) {
+            var condition = Statuses.ElementAt(i).Key;
+
+            Statuses[condition] -= 1;
+            if (Statuses[condition] <= 0) {
+                CureStatus(condition.Id);
+                break;
+            }
+            
             condition?.OnAfterTurn?.Invoke(this);
         }
     }

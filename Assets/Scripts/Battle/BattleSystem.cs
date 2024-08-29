@@ -43,6 +43,9 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator SetupBattle() {
 
+        playerUnit.Hud.StatusUIHandler.Init();
+        enemyUnit.Hud.StatusUIHandler.Init();
+
         playerUnit.Setup(playerParty.GetHealthyDevil());
         enemyUnit.Setup(enemyDevil);
 
@@ -282,6 +285,7 @@ public class BattleSystem : MonoBehaviour
         if (!canRunMove) {
             yield return ShowStatusChanges(sourceUnit.Devil);
             yield return sourceUnit.Hud.UpdateHP();
+            sourceUnit.Hud.SetStatuses();
             yield return CheckFelled(sourceUnit);
             yield break;
         }
@@ -315,6 +319,7 @@ public class BattleSystem : MonoBehaviour
 
         sourceUnit.Devil.OnAfterTurn();
         yield return ShowStatusChanges(sourceUnit.Devil);
+        sourceUnit.Hud.SetStatuses();
         yield return sourceUnit.Hud.UpdateHP();
         yield return CheckFelled(sourceUnit);
     }
@@ -346,10 +351,12 @@ public class BattleSystem : MonoBehaviour
 
             // Status Cond
             if (effect.Status != ConditionID.none) {
-                if (effect.Target == MoveTarget.Self)
+                if (effect.Target == MoveTarget.Self) {
                     source.SetStatus(effect.Status, effect.StatusTime);
-                else
+                }
+                else {
                     target.SetStatus(effect.Status, effect.StatusTime);
+                }
             }
         }
         yield return ShowStatusChanges(source);
