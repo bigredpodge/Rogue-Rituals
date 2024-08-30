@@ -20,7 +20,7 @@ public class StatusUI : MonoBehaviour
             {ConditionID.dom, new Color(1f, .4f, 0f)}
         };
 
-        nameText.text = condition.Name;
+        nameText.text = condition.Id.ToString().ToUpper();
         background.color = statusColors[condition.Id];
         timeText.text = time+"";
     }
