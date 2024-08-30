@@ -270,14 +270,15 @@ public class Devil
 
         for (int i = 0; i < Statuses.Count; i++) {
             var condition = Statuses.ElementAt(i).Key;
-
-            Statuses[condition] -= 1;
-            if (Statuses[condition] <= 0) {
-                CureStatus(condition.Id);
-                break;
-            }
             
             if (condition?.OnBeforeMove != null) {
+                Statuses[condition] -= 1;
+
+                if (Statuses[condition] <= 0) {
+                    CureStatus(condition.Id);
+                    break;
+                }
+
                 if (!condition.OnBeforeMove(this)) 
                     canPerformMove = false;
             }
@@ -289,14 +290,16 @@ public class Devil
     public void OnAfterTurn () {
         for (int i = 0; i < Statuses.Count; i++) {
             var condition = Statuses.ElementAt(i).Key;
+            if(condition?.OnAfterTurn != null) {
 
-            Statuses[condition] -= 1;
-            if (Statuses[condition] <= 0) {
-                CureStatus(condition.Id);
-                break;
+                Statuses[condition] -= 1;
+                if (Statuses[condition] <= 0) {
+                    CureStatus(condition.Id);
+                    break;
+                }
+
+                condition?.OnAfterTurn?.Invoke(this);
             }
-            
-            condition?.OnAfterTurn?.Invoke(this);
         }
     }
 
