@@ -99,10 +99,10 @@ public class DevilBase : ScriptableObject
 public enum DevilBrand {
         None,
         Heat,
-        Ooze,
-        Rage,
         Squall,
         Insight,
+        Filth,
+        Rage,
         Allure,
         Lunacy,
         Discord,
@@ -129,12 +129,12 @@ public enum Stat {
 public class BrandChart {
         static float[][] chart = 
         {
-            //                   HEA OOZ RAG SQU INS ALL LUN DIS MIS
-            /*HEA*/ new float[] {.5f,.5f, 1f,.5f, 2f, 2f, 1f, 1f, 1f },
-            /*OOZ*/ new float[] { 2f,.5f,.5f,.5f, 1f, 1f, 2f, 1f, 2f },
-            /*RAG*/ new float[] { 1f,.5f, 1f, 1f, 2f, 1f, 1f, 2f, 1f },
-            /*SQU*/ new float[] { 2f,.5f, 1f, 1f, 1f, 1f, 1f,.5f, 2f },
-            /*INS*/ new float[] { 1f, 2f,.5f, 1f, 1f,.5f, 2f, 1f, 1f },
+            //                   HEA SQU INS FIL RAG ALL LUN DIS MIS
+            /*HEA*/ new float[] {.5f,.5f, 2f,.5f, 1f, 2f, 1f, 1f, 1f },
+            /*SQU*/ new float[] { 2f, 1f, 1f, 2f, 1f, 1f, 1f,.5f, 2f },
+            /*INS*/ new float[] { 1f, 1f, 1f, 2f,.5f,.5f, 2f, 1f, 1f },
+            /*FIL*/ new float[] { 2f,.5f, 1f,.5f,.5f, 1f, 2f, 1f, 2f },
+            /*RAG*/ new float[] { 1f, 1f, 2f,.5f, 1f, 1f, 1f, 2f, 1f },
             /*ALL*/ new float[] { 1f, 1f, 2f,.5f,.5f, 2f, 2f, 1f,.5f },
             /*LUN*/ new float[] { 1f, 1f, 2f, 2f, 1f,.5f, 2f, 1f, 1f },
             /*DIS*/ new float[] { 1f, 2f, 2f, 2f, 1f, 1f, 2f,.5f,.5f },
