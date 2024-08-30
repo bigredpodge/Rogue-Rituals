@@ -155,7 +155,7 @@ public class GameController : MonoBehaviour
         state = GameState.BUSY;
         localeChoiceUI.SetActive(false);
         currentLocale = newLocales[selection];
-        yield return dialogueBox.TypeDialogue("Taking the road to the "+currentLocale.LocaleID.ToString());
+        yield return dialogueBox.TypeDialogue("Taking the road to the "+currentLocale.LocaleID.ToString())+".";
         yield return new WaitForSeconds(1f);
 
         StartBattle();
