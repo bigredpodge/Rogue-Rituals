@@ -258,7 +258,7 @@ public class Devil
         var status = ConditionsDB.Conditions[conditionId];
         if (!Statuses.ContainsKey(status))
             return; 
-
+        StatusChanges.Enqueue(Base.Name + " shook off its " + ConditionsDB.Conditions[conditionId].Name);
         Statuses.Remove(status);
         OnStatusChanged?.Invoke();
     }
