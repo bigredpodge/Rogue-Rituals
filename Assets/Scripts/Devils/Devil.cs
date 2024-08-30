@@ -236,7 +236,7 @@ public class Devil
 
     public Move GetRandomMove() {
 
-        var movesWithPP = Moves.Where(x => x.PP > 0).ToList();
+        var movesWithPP = Moves.Where(x => x.AP > 0).ToList();
 
         int r = Random.Range(0, movesWithPP.Count);
         return movesWithPP[r];

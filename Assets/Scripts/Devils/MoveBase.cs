@@ -10,9 +10,9 @@ public class MoveBase : ScriptableObject
     [SerializeField] string description;
     [SerializeField] DevilBrand brand;
     [SerializeField] int power;
-    [SerializeField] int accuracy;
+    [SerializeField] int accuracy = 100;
     [SerializeField] bool alwaysHits;
-    [SerializeField] int pp;
+    [SerializeField] int ap = 10;
     [SerializeField] int priority;
     [SerializeField] MoveCategory moveCategory;
     [SerializeField] List<MoveEffects> effects = new List<MoveEffects>();
@@ -36,8 +36,8 @@ public class MoveBase : ScriptableObject
     public bool AlwaysHits {
         get { return alwaysHits; }
     }
-    public int PP {
-        get { return pp; }
+    public int AP {
+        get { return ap; }
     }
     public int Priority {
         get { return priority; }
@@ -55,8 +55,8 @@ public class MoveBase : ScriptableObject
 public class MoveEffects {
     [SerializeField] List<StatBoost> boosts;
     [SerializeField] ConditionID status;
-    [SerializeField] int statusTime;
-    [SerializeField] int chance;
+    [SerializeField] int statusTime = 10;
+    [SerializeField] int chance = 100;
     [SerializeField] MoveTarget target;
 
     public List<StatBoost> Boosts {

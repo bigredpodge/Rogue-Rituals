@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
-  m_Name: Move
+  m_Name: Mud Trap
   m_EditorClassIdentifier: 
-  name: Desperation
-  description: Double damage if the attacker is under a status condition.
-  brand: 9
+  name: Mud Trap
+  description: 'Effect not implemented: Extra damage if landing second.'
+  brand: 4
   power: 60
-  accuracy: 90
-  pp: 10
-  moveCategory: 1
+  accuracy: 100
+  alwaysHits: 0
+  ap: 20
+  priority: 0
+  moveCategory: 0
   effects: []

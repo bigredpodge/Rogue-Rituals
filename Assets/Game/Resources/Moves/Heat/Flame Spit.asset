@@ -10,11 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
-  m_Name: Fire Slap
+  m_Name: Flame Spit
   m_EditorClassIdentifier: 
-  name: Fire Slap
-  description: Whip a hot plume of fire at the enemy.
+  name: Flame Spit
+  description: Spit a plume of pure fire at the opponent, with a chance to burn them.
   brand: 1
   power: 40
-  accuracy: 90
-  pp: 20
+  accuracy: 100
+  alwaysHits: 0
+  ap: 20
+  priority: 0
+  moveCategory: 1
+  effects:
+  - boosts: []
+    status: 2
+    statusTime: 0
+    chance: 10
+    target: 0

@@ -5,10 +5,10 @@ using UnityEngine;
 public class Move
 {
     public MoveBase Base { get; set; }
-    public int PP { get; set; }
+    public int AP { get; set; }
 
     public Move(MoveBase dBase) {
         Base = dBase;
-        PP = dBase.PP;
+        AP = dBase.AP;
     }
 }

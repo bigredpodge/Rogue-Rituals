@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
-  m_Name: Body Throw
+  m_Name: Reconstitute
   m_EditorClassIdentifier: 
-  name: Body Throw
-  description: Launch your body at the enemy for massive damage, and damage to self.
-  brand: 2
-  power: 90
-  accuracy: 80
-  pp: 5
+  name: Reconstitute
+  description: 'Effect not implemented: Heal.'
+  brand: 4
+  power: 0
+  accuracy: 100
+  alwaysHits: 0
+  ap: 5
+  priority: 0
+  moveCategory: 2
+  effects: []

@@ -54,7 +54,7 @@ public class BattleSystem : MonoBehaviour
 
         dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
 
-        yield return dialogueBox.TypeDialogue("A fearsome " + enemyUnit.Devil.Base.Name + " approaches!");
+        yield return dialogueBox.TypeDialogue("Behold" + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
         yield return new WaitForSeconds(1f);
         
         ActionSelection();
@@ -198,7 +198,7 @@ public class BattleSystem : MonoBehaviour
         dialogueBox.UpdateMoveSelection(currentMove, playerUnit.Devil.Moves[currentMove]);
 
         if(Input.GetKeyDown(KeyCode.Z)) {
-            if (playerUnit.Devil.Moves[currentMove].PP == 0) return;
+            if (playerUnit.Devil.Moves[currentMove].AP == 0) return;
             
             StartCoroutine(RunTurns(BattleAction.MOVE));
         }
@@ -291,7 +291,7 @@ public class BattleSystem : MonoBehaviour
         }
         yield return ShowStatusChanges(sourceUnit.Devil);
 
-        move.PP--;
+        move.AP--;
         yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name + " uses " + move.Base.Name + "!");
         yield return new WaitForSeconds(1f);
 

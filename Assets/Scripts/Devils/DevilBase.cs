@@ -7,6 +7,8 @@ using UnityEngine;
 public class DevilBase : ScriptableObject
 {
     [SerializeField] string name;
+    [SerializeField] string rank;
+    [SerializeField] string domain;
 
     [TextArea]
     [SerializeField] string description;
@@ -44,6 +46,12 @@ public class DevilBase : ScriptableObject
 //Following allows properties to be accessed as functions
     public string Name {
         get { return name; }
+    }
+    public string Rank {
+        get { return rank; }
+    }
+    public string Domain {
+        get { return domain; }
     }
     public string Description {
         get { return description; }

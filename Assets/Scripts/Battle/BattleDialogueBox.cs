@@ -12,7 +12,7 @@ public class BattleDialogueBox : MonoBehaviour
     [SerializeField] GameObject actionSelector, moveSelector, moveDetails, itemSelector;
     [SerializeField] List<TMP_Text> actionTexts, moveTexts, shopItemTexts, battleItemTexts, battleItemCounts;
     [SerializeField] List<Image> shopItemSprites, battleItemSprites;
-    [SerializeField] TMP_Text ppText, brandText, typeText, powerText;
+    [SerializeField] TMP_Text apText, brandText, typeText, powerText;
 
     [SerializeField] float textSpeed;
 
@@ -69,14 +69,14 @@ public class BattleDialogueBox : MonoBehaviour
         powerText.text = "Power "+move.Base.Power;
         typeText.text = move.Base.Category+"";
 
-        ppText.text = "PP " + move.PP + " / " + move.Base.PP;
+        apText.text = "AP " + move.AP + " / " + move.Base.AP;
 
-        if (move.PP == 0)
-            ppText.color = new Color(0.75f, 0f, 0f);
-        else if (move.PP <= move.Base.PP*(3f/4f))
-            ppText.color = new Color(1f, 0.5f, 0f);
+        if (move.AP == 0)
+            apText.color = new Color(0.75f, 0f, 0f);
+        else if (move.AP <= move.Base.AP*(3f/4f))
+            apText.color = new Color(1f, 0.5f, 0f);
         else
-            ppText.color = Color.black;
+            apText.color = Color.black;
 
         brandText.text = move.Base.Brand.ToString();
         brandText.color = GetBrandColor(move.Base.Brand);
