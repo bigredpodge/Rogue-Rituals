@@ -64,13 +64,13 @@ public class ConditionsDB
                 }
             }
         },
-        {ConditionID.frz, new Condition() {
-                Name = "Freeze",
-                StartMessage = " becomes frozen.",
+        {ConditionID.fbl, new Condition() {
+                Name = "Feeble",
+                StartMessage = " is enfeebled.",
                 OnBeforeMove = (Devil devil) => {
                     if (Random.Range(1, 5) == 1) {
-                        devil.CureStatus(ConditionID.frz);
-                        devil.StatusChanges.Enqueue(devil.Base.Name + " is no longer frozen!");
+                        devil.CureStatus(ConditionID.fbl);
+                        devil.StatusChanges.Enqueue(devil.Base.Name + " is no longer feeble!");
                         return true;
                     }
                     devil.StatusChanges.Enqueue(devil.Base.Name + " is frozen.");
@@ -91,7 +91,7 @@ public class ConditionsDB
     public static float GetStatusBonus(Condition condition) {
         if (condition == null)
             return 1f;
-        else if (condition.Id == ConditionID.slp || condition.Id == ConditionID.frz )
+        else if (condition.Id == ConditionID.slp || condition.Id == ConditionID.fbl )
             return 2f;
         else if (condition.Id == ConditionID.par || condition.Id == ConditionID.psn || condition.Id == ConditionID.brn )
             return 1.5f;
@@ -101,5 +101,5 @@ public class ConditionsDB
 }
 
 public enum ConditionID {
-    none, psn, brn, slp, par, frz, dom
+    none, psn, brn, slp, par, fbl, dom
 }

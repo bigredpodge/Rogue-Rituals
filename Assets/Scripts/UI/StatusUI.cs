@@ -16,7 +16,7 @@ public class StatusUI : MonoBehaviour
             {ConditionID.brn, new Color(.8f, .4f, 0f)},
             {ConditionID.slp, new Color(.8f, 0f, .8f)},
             {ConditionID.par, new Color(.8f, .8f, 0f)},
-            {ConditionID.frz, new Color(0f, .8f, .8f)},
+            {ConditionID.fbl, new Color(0f, .8f, .8f)},
             {ConditionID.dom, new Color(1f, .4f, 0f)}
         };
 
