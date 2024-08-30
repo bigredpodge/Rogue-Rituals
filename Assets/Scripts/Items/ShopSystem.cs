@@ -15,6 +15,7 @@ public class ShopSystem : MonoBehaviour
     [SerializeField] Inventory inventory;
 
     ShopState state;
+    [SerializeField] List<ItemSlot> wildItems;
     List<ItemSlot> items = new List<ItemSlot>();
     private int currentSelection;
     public event Action OnShopOver;
@@ -40,9 +41,14 @@ public class ShopSystem : MonoBehaviour
     void GenerateItems() {
         items.Clear();
         for (int i=0; i<3; i++) {
-            var newItem = FindObjectOfType<BattleArea>().GetComponent<BattleArea>().GetRandomItem();
+            var newItem = GetRandomItem();
             items.Add(newItem);
         }
+    }
+
+    public ItemSlot GetRandomItem() {
+        var wildItem = wildItems[UnityEngine.Random.Range(0, wildItems.Count)];
+        return wildItem;
     }
 
     void PlayerChoice() {
