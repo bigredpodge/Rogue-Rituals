@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
 
         //Try chance for uncommon or rare wild encounter
         int randomNumber = Random.Range(1, 101);
-        Debug.Log("Random encounter number = " + randomNumber);
+        
         if (randomNumber < 6 && currentLocale.RareDevilBases.Count > 0) {
             wildDevil = currentLocale.GetRandomWildDevil(currentLocale.RareDevilBases, difficultyModifier);
         }

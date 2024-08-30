@@ -52,9 +52,14 @@ public class BattleSystem : MonoBehaviour
         partyScreen.Init();
         itemMenu.Init();
 
+        Debug.Log(  "Player Stats: Level - "+playerUnit.Devil.Level+" / HP - "+playerUnit.Devil.MaxHP+" / Strength - "+playerUnit.Devil.Strength+" / Discipline - "+playerUnit.Devil.Discipline+
+                    " / Fortitude - "+playerUnit.Devil.Fortitude+" / Willpower - "+playerUnit.Devil.Willpower+" / Initiative - "+playerUnit.Devil.Initiative);
+        Debug.Log("Enemy Stats: Level - "+enemyUnit.Devil.Level+" / HP - "+enemyUnit.Devil.MaxHP+" / Strength - "+enemyUnit.Devil.Strength+" / Discipline - "+enemyUnit.Devil.Discipline+
+                    " / Fortitude - "+enemyUnit.Devil.Fortitude+" / Willpower - "+enemyUnit.Devil.Willpower+" / Initiative - "+enemyUnit.Devil.Initiative);
+
         dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
 
-        yield return dialogueBox.TypeDialogue("Behold, you now face " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
+        yield return dialogueBox.TypeDialogue("Behold, you face " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
         yield return new WaitForSeconds(1f);
         
         ActionSelection();

@@ -80,12 +80,12 @@ public class Devil
 
     void CalculateStats() {
         Stats = new Dictionary<Stat, int>();
-        Stats.Add(Stat.MaxHP, Mathf.FloorToInt((4 * Base.MaxHP + IVs[Stat.MaxHP] * Level) / 100f) + 10 + Level);
-        Stats.Add(Stat.Strength, Mathf.FloorToInt((4 * Base.Strength + IVs[Stat.Strength] * Level) / 100f) + 5);
-        Stats.Add(Stat.Discipline, Mathf.FloorToInt((4 * Base.Discipline + IVs[Stat.Discipline]* Level) / 100f) + 5);
-        Stats.Add(Stat.Fortitude, Mathf.FloorToInt((4 * Base.Fortitude + IVs[Stat.Fortitude] * Level) / 100f) + 5);
-        Stats.Add(Stat.Willpower, Mathf.FloorToInt((4 * Base.Willpower + IVs[Stat.Willpower] * Level) / 100f) + 5);
-        Stats.Add(Stat.Initiative, Mathf.FloorToInt((4 * Base.Initiative + IVs[Stat.Initiative] * Level) / 100f) + 5);
+        Stats.Add(Stat.MaxHP, Mathf.FloorToInt(((2 * Base.MaxHP + IVs[Stat.MaxHP]) * Level) / 100f) + 10 + Level);
+        Stats.Add(Stat.Strength, Mathf.FloorToInt(((2 * Base.Strength + IVs[Stat.Strength]) * Level) / 100f) + 5);
+        Stats.Add(Stat.Discipline, Mathf.FloorToInt(((2 * Base.Discipline + IVs[Stat.Discipline]) * Level) / 100f) + 5);
+        Stats.Add(Stat.Fortitude, Mathf.FloorToInt(((2 * Base.Fortitude + IVs[Stat.Fortitude]) * Level) / 100f) + 5);
+        Stats.Add(Stat.Willpower, Mathf.FloorToInt(((2 * Base.Willpower + IVs[Stat.Willpower]) * Level) / 100f) + 5);
+        Stats.Add(Stat.Initiative, Mathf.FloorToInt(((2 * Base.Initiative + IVs[Stat.Initiative]) * Level) / 100f) + 5);
     }
 
     void GenerateIVs() {
