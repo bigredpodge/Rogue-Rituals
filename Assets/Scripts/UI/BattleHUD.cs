@@ -9,7 +9,7 @@ using System.Linq;
 public class BattleHUD : MonoBehaviour
 {
     
-    [SerializeField] TMP_Text nameText, levelText, hpText, statusText;
+    [SerializeField] TMP_Text nameText, levelText, hpText;
     [SerializeField] HPBar hpBar;
     [SerializeField] GameObject expBar;
     

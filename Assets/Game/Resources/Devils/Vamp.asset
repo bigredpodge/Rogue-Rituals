@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Vamp
   m_EditorClassIdentifier: 
   name: Vamp
+  rank: Devil
+  domain: Blood
   description: 
   model: {fileID: 3039207374650124178, guid: bb1b4b290c85b9e45b8652c2a813e680, type: 3}
-  brand1: 0
-  brand2: 5
+  brand1: 6
+  brand2: 3
   maxHP: 40
   strength: 60
   discipline: 60

@@ -15,10 +15,10 @@ MonoBehaviour:
   name: Mind Blow
   description: Assault the opponent with psychic power.
   brand: 3
-  power: 40
+  power: 0
   accuracy: 100
   alwaysHits: 0
   ap: 30
   priority: 0
-  moveCategory: 1
+  moveCategory: 0
   effects: []

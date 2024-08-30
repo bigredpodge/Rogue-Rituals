@@ -15,11 +15,11 @@ MonoBehaviour:
   name: Threaten
   description: Fill your opponent with fear, forcing them to miss their turn. (not
     implemented)
-  brand: 3
-  power: 0
-  accuracy: 70
+  brand: 5
+  power: 40
+  accuracy: 100
   alwaysHits: 0
   ap: 10
   priority: 0
-  moveCategory: 2
+  moveCategory: 1
   effects: []

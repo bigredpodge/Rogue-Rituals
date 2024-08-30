@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sudden Pain
   description: You forsee a great pain on the opponent before they can act.
-  brand: 5
-  power: 40
+  brand: 3
+  power: 0
   accuracy: 100
   alwaysHits: 0
-  pp: 10
+  ap: 10
   priority: 1
-  moveCategory: 1
+  moveCategory: 0
   effects: []

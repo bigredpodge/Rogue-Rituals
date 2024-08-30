@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Roiling Tempest
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
-  accuracy: 100
+  name: Roiling Tempest
+  description: They say the world will end in a great storm, to wipe the world anew.
+  brand: 2
+  power: 130
+  accuracy: 75
   alwaysHits: 0
-  ap: 10
+  ap: 5
   priority: 0
-  moveCategory: 0
+  moveCategory: 1
   effects: []

@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Engulf
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
-  accuracy: 100
+  name: Engulf
+  description: Deal massive damage, exposing yourself, greatly reducing your fortitude.
+  brand: 1
+  power: 120
+  accuracy: 90
   alwaysHits: 0
   ap: 10
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 1
+  effects:
+  - boosts:
+    - stat: 2
+      boost: -2
+    status: 0
+    statusTime: 0
+    chance: 0
+    target: 1

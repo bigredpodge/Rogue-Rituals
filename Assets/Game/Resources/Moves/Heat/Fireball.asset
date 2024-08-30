@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
+  name: Fireball
+  description: Annihilate the opponent in a ball of flame.
+  brand: 1
+  power: 90
   accuracy: 100
   alwaysHits: 0
   ap: 10
   priority: 0
-  moveCategory: 0
+  moveCategory: 1
   effects: []

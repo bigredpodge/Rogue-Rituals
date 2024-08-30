@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Mind Blast
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Mind Blast
+  description: A wave of psychic power blasts the opponent's entire body.
+  brand: 3
   power: 0
   accuracy: 100
   alwaysHits: 0
-  ap: 10
+  ap: 15
   priority: 0
   moveCategory: 0
   effects: []

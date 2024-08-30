@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Drowning Hold
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
-  accuracy: 100
+  name: Drowning Hold
+  description: Hold the opponent underneath a strong wave of water.
+  brand: 2
+  power: 80
+  accuracy: 90
   alwaysHits: 0
   ap: 10
   priority: 0

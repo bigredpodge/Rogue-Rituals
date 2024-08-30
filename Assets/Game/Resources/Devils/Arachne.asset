@@ -12,20 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cd0971801262f409729f3601cc45b0, type: 3}
   m_Name: Arachne
   m_EditorClassIdentifier: 
-  name: 
-  rank: 
-  domain: 
-  description: 
-  model: {fileID: 0}
-  brand1: 0
+  name: Arachne
+  rank: Devil
+  domain: Eyes
+  description: A tiny spider. Its watchful gaze and meticulous cunning suggests it
+    is more than it seems.
+  model: {fileID: 7808496003167887087, guid: ba1560cc66cb5f44ab2160a3e84f5103, type: 3}
+  brand1: 3
   brand2: 0
-  maxHP: 0
-  strength: 0
-  discipline: 0
-  fortitude: 0
-  willpower: 0
-  initiative: 0
-  expYield: 0
-  growthRate: 0
-  catchRate: 255
-  learnableMoves: []
+  maxHP: 59
+  strength: 52
+  discipline: 88
+  fortitude: 54
+  willpower: 74
+  initiative: 82
+  expYield: 120
+  growthRate: 1
+  catchRate: 90
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: a83865aeac768654f86444fa645ea981, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: c17efaccf37750c4e9fc1cdd7c1be235, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 320dfbca1a09165448e68cf32326b17b, type: 2}
+    level: 3
+  - moveBase: {fileID: 11400000, guid: bfe682088841571488515aa4b32fc7ea, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: b3489b07aca12334392f4373fc97e697, type: 2}
+    level: 11
+  - moveBase: {fileID: 11400000, guid: 1dcfaa53012ad0e4abda4d7b44f91675, type: 2}
+    level: 13
+  - moveBase: {fileID: 11400000, guid: 2a3860a1bcdfb054c93adb1a44afb647, type: 2}
+    level: 17
+  - moveBase: {fileID: 11400000, guid: b4b6cab1929005941a0aff9cbb262757, type: 2}
+    level: 20
+  - moveBase: {fileID: 11400000, guid: 8fb9d0df5e11eb64f9fc8ca708528b7d, type: 2}
+    level: 29
+  - moveBase: {fileID: 11400000, guid: 20d5ad13a5c31274882709668ab07111, type: 2}
+    level: 39
+  - moveBase: {fileID: 11400000, guid: 8c1f129436d91f64a885b2ccc7617db5, type: 2}
+    level: 45
+  - moveBase: {fileID: 11400000, guid: c9b352f9b56c0174a8dfa85887e85e97, type: 2}
+    level: 51
+  - moveBase: {fileID: 11400000, guid: 5ca5dfcd5eff6094da2abac842b1e68c, type: 2}
+    level: 58

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sudden Chill
   description: A chill comes over the opponent before they can act.
-  brand: 4
+  brand: 2
   power: 40
   accuracy: 100
   alwaysHits: 0
-  pp: 20
+  ap: 10
   priority: 1
   moveCategory: 1
   effects: []

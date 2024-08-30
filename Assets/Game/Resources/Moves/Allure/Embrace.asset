@@ -15,10 +15,10 @@ MonoBehaviour:
   name: Embrace
   description: Embrace the enemy, squeezing the life from them with a chance to madden.
   brand: 6
-  power: 70
+  power: 60
   accuracy: 100
   alwaysHits: 0
-  ap: 10
+  ap: 15
   priority: 0
   moveCategory: 0
   effects: []

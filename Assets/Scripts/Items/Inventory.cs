@@ -35,6 +35,14 @@ public class Inventory : MonoBehaviour
 
     public void StockItem(ItemBase item, int stock) {
         var itemSlot = ritualItemSlots.First(slot => slot.Item == item);
+        if (itemSlot == null) {
+            ritualItemSlots.Add(
+                new ItemSlot {
+                    Item = item,
+                    Count = stock
+                });
+            return;
+        }
         itemSlot.Count += stock;
     }
 
@@ -52,7 +60,11 @@ public class ItemSlot {
     [SerializeField] ItemBase item;
     [SerializeField] int count;
 
-    public ItemBase Item => item;
+    public ItemBase Item { 
+        get => item;
+        set => item = value;
+    }
+    
     public int Count {
         get => count;
         set => count = value;

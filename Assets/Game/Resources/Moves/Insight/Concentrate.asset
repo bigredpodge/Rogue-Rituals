@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Concentrate
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Concentrate
+  description: Focus yourself, raising your discipline.
+  brand: 3
   power: 0
   accuracy: 100
   alwaysHits: 0
-  ap: 10
+  ap: 20
   priority: 0
   moveCategory: 0
-  effects: []
+  effects:
+  - boosts:
+    - stat: 2
+      boost: 1
+    status: 0
+    statusTime: 0
+    chance: 0
+    target: 1

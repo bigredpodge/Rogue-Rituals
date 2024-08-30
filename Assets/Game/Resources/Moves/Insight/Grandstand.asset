@@ -16,7 +16,9 @@ MonoBehaviour:
   description: Inflict more damage the greater your discipline disparity.
   brand: 5
   power: 80
-  accuracy: 0
-  pp: 0
+  accuracy: 100
+  alwaysHits: 0
+  ap: 10
+  priority: 0
   moveCategory: 1
   effects: []

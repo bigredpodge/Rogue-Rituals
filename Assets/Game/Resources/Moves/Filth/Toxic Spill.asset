@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Toxic Spill
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
-  accuracy: 0
+  name: Toxic Spill
+  description: Inflict deadly toxins on the opponent, with a chance to burn them
+    with acid.
+  brand: 4
+  power: 60
+  accuracy: 100
   alwaysHits: 0
-  ap: 0
+  ap: 15
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 1
+  effects:
+  - boosts: []
+    status: 2
+    statusTime: 10
+    chance: 10
+    target: 0

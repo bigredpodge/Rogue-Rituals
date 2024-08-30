@@ -54,7 +54,7 @@ public class BattleSystem : MonoBehaviour
 
         dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
 
-        yield return dialogueBox.TypeDialogue("Behold" + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
+        yield return dialogueBox.TypeDialogue("Behold, you now face " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
         yield return new WaitForSeconds(1f);
         
         ActionSelection();

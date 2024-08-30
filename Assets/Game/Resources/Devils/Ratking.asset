@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cd0971801262f409729f3601cc45b0, type: 3}
+  m_Name: Ratking
+  m_EditorClassIdentifier: 
+  name: Ratking
+  rank: Devil
+  domain: Tails
+  description: 
+  model: {fileID: 8118468995395705577, guid: 5018ed70bd6d60e4dbb2cdd064f79410, type: 3}
+  brand1: 4
+  brand2: 8
+  maxHP: 50
+  strength: 50
+  discipline: 50
+  fortitude: 50
+  willpower: 50
+  initiative: 50
+  expYield: 80
+  growthRate: 0
+  catchRate: 200
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: ab406dff9d8a1a04587e447332cff79c, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: ad451732f5e0b824688d46ce7a9aedd7, type: 2}
+    level: 3
+  - moveBase: {fileID: 11400000, guid: b3489b07aca12334392f4373fc97e697, type: 2}
+    level: 6
+  - moveBase: {fileID: 11400000, guid: 861b12c5e142c344da8a54daef6231d8, type: 2}
+    level: 9
+  - moveBase: {fileID: 11400000, guid: 0cd59da0ca6383841bf702e20228c2e5, type: 2}
+    level: 11
+  - moveBase: {fileID: 11400000, guid: 320dfbca1a09165448e68cf32326b17b, type: 2}
+    level: 13
+  - moveBase: {fileID: 11400000, guid: b4b6cab1929005941a0aff9cbb262757, type: 2}
+    level: 18
+  - moveBase: {fileID: 11400000, guid: 28e8d6b55f9e7ce4eaf24115e7df0d21, type: 2}
+    level: 24
+  - moveBase: {fileID: 11400000, guid: 61b0344f2816bef4592257df33be5fd7, type: 2}
+    level: 28
+  - moveBase: {fileID: 11400000, guid: 9be3c532becf9e84ab4907f23fc95061, type: 2}
+    level: 32
+  - moveBase: {fileID: 11400000, guid: 4b0f7e1a8c6df444082c67292c4159e7, type: 2}
+    level: 34
+  - moveBase: {fileID: 11400000, guid: 430a7a406a061cd4ab063d6aed3ffd9c, type: 2}
+    level: 51
+  - moveBase: {fileID: 11400000, guid: 03d14e36b63f8c949afb27782f6b1c2d, type: 2}
+    level: 75

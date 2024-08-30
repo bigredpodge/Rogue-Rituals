@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Light Fuse
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Light Fuse
+  description: 'Inflict Doom on the user. (not yet implemented: when doom expires,
+    inflict massive damage and kill the user)'
+  brand: 1
   power: 0
   accuracy: 100
   alwaysHits: 0
-  ap: 10
+  ap: 5
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 2
+  effects:
+  - boosts: []
+    status: 6
+    statusTime: 3
+    chance: 100
+    target: 1

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Nightmare
   m_EditorClassIdentifier: 
   name: Nightmare
+  rank: Devil
+  domain: Bad Dreams
   description: 
   model: {fileID: 3424608986823399991, guid: 4f1972e56a27738479bf456976cdbac6, type: 3}
-  brand1: 0
-  brand2: 9
+  brand1: 9
+  brand2: 8
   maxHP: 60
   strength: 20
   discipline: 60

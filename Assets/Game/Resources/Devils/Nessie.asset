@@ -13,29 +13,43 @@ MonoBehaviour:
   m_Name: Nessie
   m_EditorClassIdentifier: 
   name: Nessie
-  description: A serene fiend of the deep. It seems a little shy.
+  rank: Devil
+  domain: Mists
+  description: A serene fiend of the misty lochs. It seems a little shy.
   model: {fileID: 919132149155446097, guid: 9d69c49c06840bd4788c9d903785cf10, type: 3}
-  brand1: 0
+  brand1: 2
   brand2: 0
-  maxHP: 80
-  strength: 20
-  discipline: 70
-  fortitude: 70
-  willpower: 40
-  initiative: 0
-  expYield: 600
-  growthRate: 0
-  catchRate: 255
+  maxHP: 75
+  strength: 70
+  discipline: 84
+  fortitude: 60
+  willpower: 60
+  initiative: 60
+  expYield: 120
+  growthRate: 1
+  catchRate: 90
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 79d71ce81e70ed9449a2686909b9eeed, type: 2}
+  - moveBase: {fileID: 11400000, guid: a54802a222688ec42a23a7b4efbc19ea, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 71490c52af4faaa40b2769df95a53824, type: 2}
+  - moveBase: {fileID: 11400000, guid: 27f9fc541dfa2e94c8c4f5d3e15962ca, type: 2}
     level: 4
-  - moveBase: {fileID: 11400000, guid: c6a7cb77379dd054dbcc18071f6963b1, type: 2}
-    level: 1
-  - moveBase: {fileID: 11400000, guid: 110bcde77cc734b4eb8754013913ab8e, type: 2}
-    level: 12
-  - moveBase: {fileID: 11400000, guid: 0cd59da0ca6383841bf702e20228c2e5, type: 2}
-    level: 14
-  - moveBase: {fileID: 11400000, guid: cfc6eed9a9bc8b9429097979818fdd22, type: 2}
+  - moveBase: {fileID: 11400000, guid: d730f4b4fd8a6a046a4bb061469b8b21, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: 2c727ecc429ea38479d551d615cb3772, type: 2}
+    level: 11
+  - moveBase: {fileID: 11400000, guid: 320dfbca1a09165448e68cf32326b17b, type: 2}
+    level: 13
+  - moveBase: {fileID: 11400000, guid: 61b0344f2816bef4592257df33be5fd7, type: 2}
+    level: 18
+  - moveBase: {fileID: 11400000, guid: e581368c235e80f439af98248ad92ce7, type: 2}
     level: 22
+  - moveBase: {fileID: 11400000, guid: 110bcde77cc734b4eb8754013913ab8e, type: 2}
+    level: 27
+  - moveBase: {fileID: 11400000, guid: 0cd59da0ca6383841bf702e20228c2e5, type: 2}
+    level: 30
+  - moveBase: {fileID: 11400000, guid: c6a7cb77379dd054dbcc18071f6963b1, type: 2}
+    level: 34
+  - moveBase: {fileID: 11400000, guid: a5452b4a24488244fa732ff0aa059fd7, type: 2}
+    level: 45
+  - moveBase: {fileID: 11400000, guid: 4eabe1c319ae33b42a90467212759e91, type: 2}
+    level: 62

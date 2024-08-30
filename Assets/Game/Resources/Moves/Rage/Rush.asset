@@ -15,9 +15,9 @@ MonoBehaviour:
   name: Rush
   description: Rush ahead in a great rage, and take damage if you miss (recoil not
     implemented)
-  brand: 3
-  power: 80
-  accuracy: 70
+  brand: 5
+  power: 90
+  accuracy: 80
   alwaysHits: 0
   ap: 10
   priority: 0

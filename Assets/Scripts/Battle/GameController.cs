@@ -13,7 +13,12 @@ public class GameController : MonoBehaviour
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] ShopSystem shopSystem;
     [SerializeField] TMP_Text difficultyText;
+    private Locale currentLocale;
+    [SerializeField] public List<Locale> locales;
     private int difficultyModifier;
+    public void GetRandomNewLocale() {
+        currentLocale = locales[(int)currentLocale.NextAvailableLocales[Random.Range(0, currentLocale.NextAvailableLocales.Count)]];
+    }
 
     private void Awake() {
         ConditionsDB.Init();
@@ -23,6 +28,11 @@ public class GameController : MonoBehaviour
         state = GameState.START;
         battleSystem.OnBattleOver += EndBattle;
         shopSystem.OnShopOver += StartBattle;
+        currentLocale = locales[0];
+        LocaleID[] idValues = (LocaleID[])System.Enum.GetValues(typeof(LocaleID));
+        for (int i = 0; i < locales.Count; i++) {
+            locales[i].localeID = idValues[i];
+        }
         StartBattle();
     }
     void StartBattle() {
@@ -30,10 +40,23 @@ public class GameController : MonoBehaviour
         battleSystem.gameObject.SetActive(true);
         shopSystem.gameObject.SetActive(false);
 
-        var playerParty = FindObjectOfType<BattleArea>().GetComponent<DevilParty>();
-        var wildDevil = FindObjectOfType<BattleArea>().GetComponent<BattleArea>().GetRandomWildDevil(difficultyModifier);
+        //establish units
+        var playerParty = GetComponent<DevilParty>();
+        var wildDevil = currentLocale.GetRandomWildDevil(currentLocale.CommonDevilBases, difficultyModifier);
 
+        //Try chance for uncommon or rare wild encounter
+        int randomNumber = Random.Range(1, 101);
+        Debug.Log("Random encounter number = " + randomNumber);
+        if (randomNumber < 6 && currentLocale.RareDevilBases.Count > 0) {
+            wildDevil = currentLocale.GetRandomWildDevil(currentLocale.RareDevilBases, difficultyModifier);
+        }
+        else if (randomNumber < 21 && currentLocale.UncommonDevilBases.Count > 0) {
+            wildDevil = currentLocale.GetRandomWildDevil(currentLocale.UncommonDevilBases, difficultyModifier);
+        }
+
+        //Copy encounter to allow capture
         var wildDevilCopy = new Devil(wildDevil.Base, wildDevil.Level);
+
         battleSystem.StartBattle(playerParty, wildDevilCopy);
     }
 
@@ -44,6 +67,10 @@ public class GameController : MonoBehaviour
         battleSystem.gameObject.SetActive(false);
         shopSystem.gameObject.SetActive(true);
         shopSystem.StartShop();
+
+        if (difficultyModifier == 5) {
+            GetRandomNewLocale();
+        }
     }
 
 }

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Deluge
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
-  accuracy: 0
+  name: Deluge
+  description: Barrage the opponent with a torrent of fluid.
+  brand: 2
+  power: 70
+  accuracy: 90
   alwaysHits: 0
-  ap: 0
+  ap: 15
   priority: 0
   moveCategory: 0
   effects: []

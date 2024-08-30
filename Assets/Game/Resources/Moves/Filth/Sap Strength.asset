@@ -17,8 +17,8 @@ MonoBehaviour:
   brand: 4
   power: 0
   accuracy: 100
-  alwaysHits: 0
-  pp: 20
+  alwaysHits: 1
+  ap: 20
   priority: 0
   moveCategory: 2
   effects:

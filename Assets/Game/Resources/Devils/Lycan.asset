@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Lycan
   m_EditorClassIdentifier: 
   name: Lycan
+  rank: Devil
+  domain: the Moon
   description: 
   model: {fileID: 982405307309655834, guid: 19fb212eae49c9d47a4c3c76646e8f2d, type: 3}
-  brand1: 0
-  brand2: 3
+  brand1: 7
+  brand2: 0
   maxHP: 80
   strength: 90
   discipline: 20

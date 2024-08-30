@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Sudden Burst
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
+  name: Sudden Burst
+  description: Fire out a fast burst of flame, always striking first.
+  brand: 1
+  power: 40
   accuracy: 100
   alwaysHits: 0
-  ap: 10
-  priority: 0
+  ap: 20
+  priority: 1
   moveCategory: 0
   effects: []

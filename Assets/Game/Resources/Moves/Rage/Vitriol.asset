@@ -15,10 +15,10 @@ MonoBehaviour:
   name: Vitriol
   description: Spite your enemy with your boiling hatred.
   brand: 5
-  power: 60
+  power: 80
   accuracy: 100
   alwaysHits: 0
-  ap: 20
+  ap: 10
   priority: 0
   moveCategory: 1
   effects: []

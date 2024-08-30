@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Hit and Run
   description: Attack, then return to the party (not implemented)
   brand: 3
-  power: 60
-  accuracy: 95
+  power: 55
+  accuracy: 100
   alwaysHits: 0
   ap: 10
   priority: 0
