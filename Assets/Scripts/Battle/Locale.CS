@@ -13,7 +13,12 @@ public class Locale : ScriptableObject {
     public List<DevilBase> RareDevilBases => rareDevilBases;
     [SerializeField] List<LocaleID> nextAvailableLocales;
     public List<LocaleID> NextAvailableLocales => nextAvailableLocales;
-    public LocaleID localeID { get; set; }
+
+    LocaleID localeID;
+    public LocaleID LocaleID {
+        get  { return localeID; }
+        set { localeID = value; }
+    }
 
     public Devil GetRandomWildDevil(List<DevilBase> devilBases, int difficulty) {
         var dBase = devilBases[Random.Range(0, devilBases.Count)];

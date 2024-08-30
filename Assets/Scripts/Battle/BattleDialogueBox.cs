@@ -73,7 +73,7 @@ public class BattleDialogueBox : MonoBehaviour
 
         if (move.AP == 0)
             apText.color = new Color(0.75f, 0f, 0f);
-        else if (move.AP <= move.Base.AP*(3f/4f))
+        else if (move.AP <= move.Base.AP*(1f/4f))
             apText.color = new Color(1f, 0.5f, 0f);
         else
             apText.color = Color.black;
