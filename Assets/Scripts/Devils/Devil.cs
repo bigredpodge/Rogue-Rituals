@@ -291,14 +291,13 @@ public class Devil
         for (int i = 0; i < Statuses.Count; i++) {
             var condition = Statuses.ElementAt(i).Key;
             if(condition?.OnAfterTurn != null) {
+                condition?.OnAfterTurn?.Invoke(this);
 
                 Statuses[condition] -= 1;
                 if (Statuses[condition] <= 0) {
                     CureStatus(condition.Id);
                     break;
                 }
-
-                condition?.OnAfterTurn?.Invoke(this);
             }
         }
     }
