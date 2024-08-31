@@ -288,16 +288,20 @@ public class BattleSystem : MonoBehaviour
 
         bool canRunMove = sourceUnit.Devil.OnBeforeMove();
         if (!canRunMove) {
-            yield return ShowStatusChanges(sourceUnit.Devil);
+            yield return ShowStatusChanges(sourceUnit);
             yield return sourceUnit.Hud.UpdateHP();
             sourceUnit.Hud.SetStatuses();
             yield return CheckFelled(sourceUnit);
             yield break;
         }
-        yield return ShowStatusChanges(sourceUnit.Devil);
-
+        yield return ShowStatusChanges(sourceUnit);
         move.AP--;
-        yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name + " uses " + move.Base.Name + "!");
+
+        if (sourceUnit.IsPlayerUnit)
+            yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name + " uses " + move.Base.Name + "!");
+        else
+            yield return dialogueBox.TypeDialogue("The enemy "+sourceUnit.Devil.Base.Name + " uses " + move.Base.Name + "!");
+
         yield return new WaitForSeconds(1f);
 
         if (CheckIfMoveHits(move, sourceUnit.Devil, targetUnit.Devil)) {
@@ -308,12 +312,16 @@ public class BattleSystem : MonoBehaviour
             }
 
             if (move.Base.Effects != null && move.Base.Effects.Count > 0 && targetUnit.Devil.HP > 0)
-                yield return RunMoveEffects(sourceUnit.Devil, targetUnit.Devil, move);
+                yield return RunMoveEffects(sourceUnit, targetUnit, move);
 
             yield return CheckFelled(targetUnit);
         }
         else {
-            yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name+" missed!");
+            if (sourceUnit.IsPlayerUnit)
+                yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name+" missed!");
+            else
+                yield return dialogueBox.TypeDialogue("The enemy "+sourceUnit.Devil.Base.Name+" missed!");
+                
             yield return new WaitForSeconds(1f);
         }
     }
@@ -323,7 +331,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitUntil(() => state == BattleState.RUNNINGTURN);
 
         sourceUnit.Devil.OnAfterTurn();
-        yield return ShowStatusChanges(sourceUnit.Devil);
+        yield return ShowStatusChanges(sourceUnit);
         sourceUnit.Hud.SetStatuses();
         yield return sourceUnit.Hud.UpdateHP();
         yield return CheckFelled(sourceUnit);
@@ -339,7 +347,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator RunMoveEffects(Devil source, Devil target, Move move) {
+    IEnumerator RunMoveEffects(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
         var effects = move.Base.Effects;
         foreach (var effect in effects) {
             var rnd = UnityEngine.Random.Range(1, 101);
@@ -349,23 +357,23 @@ public class BattleSystem : MonoBehaviour
             // Stat Boost
             if (effect.Boosts != null) {
                 if (effect.Target == MoveTarget.Self)
-                    source.ApplyBoosts(effect.Boosts);
+                    sourceUnit.Devil.ApplyBoosts(effect.Boosts);
                 else
-                    target.ApplyBoosts(effect.Boosts);
+                    targetUnit.Devil.ApplyBoosts(effect.Boosts);
             }
 
             // Status Cond
             if (effect.Status != ConditionID.none) {
                 if (effect.Target == MoveTarget.Self) {
-                    source.SetStatus(effect.Status, effect.StatusTime);
+                    sourceUnit.Devil.SetStatus(effect.Status, effect.StatusTime);
                 }
                 else {
-                    target.SetStatus(effect.Status, effect.StatusTime);
+                    targetUnit.Devil.SetStatus(effect.Status, effect.StatusTime);
                 }
             }
         }
-        yield return ShowStatusChanges(source);
-        yield return ShowStatusChanges(target);
+        yield return ShowStatusChanges(sourceUnit);
+        yield return ShowStatusChanges(targetUnit);
     }
 
     bool CheckIfMoveHits(Move move, Devil source, Devil target) {
@@ -392,11 +400,15 @@ public class BattleSystem : MonoBehaviour
         return UnityEngine.Random.Range(1, 101) <= moveAccuracy;
     }
 
-    IEnumerator ShowStatusChanges(Devil devil) {
-        while (devil.StatusChanges.Count > 0)
+    IEnumerator ShowStatusChanges(BattleUnit sourceUnit) {
+        while (sourceUnit.Devil.StatusChanges.Count > 0)
         {
-            var message = devil.StatusChanges.Dequeue();
-            yield return dialogueBox.TypeDialogue(message);
+            var message = sourceUnit.Devil.StatusChanges.Dequeue();
+            if (sourceUnit.IsPlayerUnit)
+                yield return dialogueBox.TypeDialogue(message);
+            else 
+                yield return dialogueBox.TypeDialogue("The enemy "+message);
+
             yield return new WaitForSeconds(1f);
         }
     }
@@ -514,7 +526,6 @@ public class BattleSystem : MonoBehaviour
                 yield return playerUnit.Hud.ShowStatGrowth();
                 yield return playerUnit.Hud.SetExpSmooth(true);
             }
-            yield return new WaitForSeconds (1f);
             playerUnit.RemoveUnit();
             OnBattleOver(true);
         }
