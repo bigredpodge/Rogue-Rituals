@@ -128,7 +128,7 @@ public class GameController : MonoBehaviour
                 localeTexts[i].text = newLocales[i].LocaleID.ToString();
 
             localeChoiceUI.SetActive(true);
-            yield return dialogueBox.TypeDialogue("The park forks in two. Which road?");
+            yield return dialogueBox.TypeDialogue("The path forks in two. Which road?");
             
 
             //unlock player choice
