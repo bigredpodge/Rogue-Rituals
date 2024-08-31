@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
 
     [Header("Locale References")]
     [SerializeField] int localeLength;
+    [SerializeField] Renderer ground;
     private Locale currentLocale;
     [SerializeField] public List<Locale> locales;
     private List<Locale> newLocales;
@@ -153,6 +154,7 @@ public class GameController : MonoBehaviour
         currentLocale = newLocales[selection];
         yield return dialogueBox.TypeDialogue("Taking the road to the "+currentLocale.LocaleID.ToString())+".";
         yield return new WaitForSeconds(1f);
+        ground.material = currentLocale.Material;
 
         StartBattle();
     }

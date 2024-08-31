@@ -13,6 +13,8 @@ public class Locale : ScriptableObject {
     public List<DevilBase> RareDevilBases => rareDevilBases;
     [SerializeField] List<LocaleID> nextAvailableLocales;
     public List<LocaleID> NextAvailableLocales => nextAvailableLocales;
+    [SerializeField] Material material;
+    public Material Material => material;
 
     LocaleID localeID;
     public LocaleID LocaleID {
