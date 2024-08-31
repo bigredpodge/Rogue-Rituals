@@ -59,11 +59,13 @@ public class GameController : MonoBehaviour
 
         //Try chance for uncommon or rare wild encounter
         int randomNumber = Random.Range(1, 101);
-        
-        if (randomNumber < 6 && currentLocale.RareDevilBases.Count > 0) {
+        int difficultyChance = (difficultyModifier - 1) % 10;
+
+
+        if (randomNumber < difficultyChance && currentLocale.RareDevilBases.Count > 0) {
             wildDevil = currentLocale.GetRandomWildDevil(currentLocale.RareDevilBases, difficultyModifier);
         }
-        else if (randomNumber < 21 && currentLocale.UncommonDevilBases.Count > 0) {
+        else if (randomNumber < (15 + difficultyChance) && currentLocale.UncommonDevilBases.Count > 0) {
             wildDevil = currentLocale.GetRandomWildDevil(currentLocale.UncommonDevilBases, difficultyModifier);
         }
 
@@ -158,5 +160,7 @@ public class GameController : MonoBehaviour
 
         StartBattle();
     }
+
+    //todo: keep track of visited locales and strike them from possible routes. 
 
 }
