@@ -236,10 +236,10 @@ public class Devil
 
     public Move GetRandomMove() {
 
-        var movesWithPP = Moves.Where(x => x.AP > 0).ToList();
+        var movesWithAP = Moves.Where(x => x.AP > 0).ToList();
 
-        int r = Random.Range(0, movesWithPP.Count);
-        return movesWithPP[r];
+        int r = Random.Range(0, movesWithAP.Count);
+        return movesWithAP[r];
     }
 
     public void SetStatus(ConditionID conditionId, int time) {

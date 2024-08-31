@@ -72,14 +72,10 @@ public class GameController : MonoBehaviour
         battleSystem.StartBattle(playerParty, wildDevilCopy);
     }
 
-    void EndBattle(bool won) {
-        state = GameState.LOCALECHOICE;
-        
+    void EndBattle(bool won) {        
         battleSystem.gameObject.SetActive(false);
         shopSystem.gameObject.SetActive(true);
         shopSystem.StartShop();
-
-
     }
     
     void Update()
