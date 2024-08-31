@@ -84,6 +84,7 @@ public class ShopSystem : MonoBehaviour
     }
 
     IEnumerator EndSelection() {
+        state = ShopState.END;
         itemsUI.SetActive(false);
         yield return dialogueBox.TypeDialogue("The kobold thanks you for your custom.");
         yield return new WaitForSeconds(1f);
