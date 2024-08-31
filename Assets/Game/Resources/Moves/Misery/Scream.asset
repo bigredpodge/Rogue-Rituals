@@ -20,7 +20,7 @@ MonoBehaviour:
   alwaysHits: 1
   ap: 10
   priority: 0
-  moveCategory: 0
+  moveCategory: 2
   effects:
   - boosts:
     - stat: 4

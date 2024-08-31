@@ -12,7 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f25bdd2c54a3e94c91a7d2958177a7a, type: 3}
   m_Name: Library
   m_EditorClassIdentifier: 
-  commonDevilBases: []
-  uncommonDevilBases: []
+  commonDevilBases:
+  - {fileID: 11400000, guid: a8bc37b13542b7e4da3eb413153f8488, type: 2}
+  - {fileID: 11400000, guid: f365bbc947ba2b94d956d094030ba3cb, type: 2}
+  - {fileID: 11400000, guid: d52d41b48a88fc5429cc06c8ac5e5a30, type: 2}
+  - {fileID: 11400000, guid: e45404bfd72dcc448ac12cd8a31077c4, type: 2}
+  - {fileID: 11400000, guid: 48ca0fa06a9261c47b7d9e528cd93b31, type: 2}
+  - {fileID: 11400000, guid: bc14d14f6a18ee04f8661e781721a7dd, type: 2}
+  uncommonDevilBases:
+  - {fileID: 11400000, guid: 3d7b8f6a31fa726448c38bdc1ea1f4d6, type: 2}
+  - {fileID: 11400000, guid: 401c90b38efa75b4ab79bf0796af98f5, type: 2}
   rareDevilBases: []
-  nextAvailableLocales: 
+  nextAvailableLocales: 0100000003000000
+  material: {fileID: 2100000, guid: c52a00f0237e2534a9a065c335409e84, type: 2}

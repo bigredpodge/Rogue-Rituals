@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Grandstand
   description: Inflict more damage the greater your discipline disparity.
-  brand: 5
+  brand: 3
   power: 80
   accuracy: 100
   alwaysHits: 0

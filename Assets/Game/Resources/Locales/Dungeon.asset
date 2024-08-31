@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f25bdd2c54a3e94c91a7d2958177a7a, type: 3}
   m_Name: Dungeon
   m_EditorClassIdentifier: 
-  commonDevilBases: []
-  uncommonDevilBases: []
+  commonDevilBases:
+  - {fileID: 11400000, guid: 0d1009f38824cd3498984e567b05df21, type: 2}
+  - {fileID: 11400000, guid: bc14d14f6a18ee04f8661e781721a7dd, type: 2}
+  - {fileID: 11400000, guid: f365bbc947ba2b94d956d094030ba3cb, type: 2}
+  - {fileID: 11400000, guid: eba916d01a2abcb4199a0922e6c54802, type: 2}
+  - {fileID: 11400000, guid: f8896165b72f5364fb504947e4a035ba, type: 2}
+  - {fileID: 11400000, guid: a8bc37b13542b7e4da3eb413153f8488, type: 2}
+  uncommonDevilBases:
+  - {fileID: 11400000, guid: f1c8684aabbabeb4fb17ac614d801706, type: 2}
+  - {fileID: 11400000, guid: d52d41b48a88fc5429cc06c8ac5e5a30, type: 2}
+  - {fileID: 11400000, guid: d5db9fbf906d5ed4bbdfc34587bdb159, type: 2}
   rareDevilBases: []
-  nextAvailableLocales: 
+  nextAvailableLocales: 010000000200000003000000
+  material: {fileID: 2100000, guid: 614c37447f40e0c488d8026bdd55beac, type: 2}

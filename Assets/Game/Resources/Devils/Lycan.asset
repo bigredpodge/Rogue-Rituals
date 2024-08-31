@@ -29,13 +29,13 @@ MonoBehaviour:
   growthRate: 0
   catchRate: 255
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: 9b91ed993a6d2ca4cbb69af7fc83248f, type: 2}
+  - moveBase: {fileID: 11400000, guid: e5ea9e689ad492d48a1dc4fec31965ac, type: 2}
     level: 1
   - moveBase: {fileID: 11400000, guid: 67325012097e9ad46af7c146140341bb, type: 2}
     level: 3
-  - moveBase: {fileID: 11400000, guid: bd0ffc45dc81ac345bfb99100c0e873c, type: 2}
+  - moveBase: {fileID: 11400000, guid: fe94cbe736bda174c95123f0a3ca6fe9, type: 2}
     level: 7
-  - moveBase: {fileID: 11400000, guid: 43952ad89e818844191d7eda595098fc, type: 2}
+  - moveBase: {fileID: 11400000, guid: 4b69abce79790bd46899a0c6dde2e96e, type: 2}
     level: 11
   - moveBase: {fileID: 11400000, guid: 91e926744942c754f9e24783f43e5efd, type: 2}
     level: 15

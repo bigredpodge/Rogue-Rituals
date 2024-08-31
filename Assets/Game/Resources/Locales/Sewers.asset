@@ -12,7 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f25bdd2c54a3e94c91a7d2958177a7a, type: 3}
   m_Name: Sewers
   m_EditorClassIdentifier: 
-  commonDevilBases: []
-  uncommonDevilBases: []
+  commonDevilBases:
+  - {fileID: 11400000, guid: 0d1009f38824cd3498984e567b05df21, type: 2}
+  - {fileID: 11400000, guid: bc14d14f6a18ee04f8661e781721a7dd, type: 2}
+  - {fileID: 11400000, guid: eba916d01a2abcb4199a0922e6c54802, type: 2}
+  - {fileID: 11400000, guid: f1c8684aabbabeb4fb17ac614d801706, type: 2}
+  - {fileID: 11400000, guid: 3a8c13b09dd665d498ef8f8e5e88a598, type: 2}
+  - {fileID: 11400000, guid: 48ca0fa06a9261c47b7d9e528cd93b31, type: 2}
+  uncommonDevilBases:
+  - {fileID: 11400000, guid: f78503a0ac5874a47b6ac86f37033355, type: 2}
+  - {fileID: 11400000, guid: 0c759d23a8e1fde47abeeafff77b40f1, type: 2}
   rareDevilBases: []
-  nextAvailableLocales: 
+  nextAvailableLocales: 0200000003000000
+  material: {fileID: 2100000, guid: 171ecc2858366024b8df28062d236be6, type: 2}

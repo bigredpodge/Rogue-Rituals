@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f25bdd2c54a3e94c91a7d2958177a7a, type: 3}
   m_Name: Forest
   m_EditorClassIdentifier: 
-  commonDevilBases: []
-  uncommonDevilBases: []
+  commonDevilBases:
+  - {fileID: 11400000, guid: f8896165b72f5364fb504947e4a035ba, type: 2}
+  - {fileID: 11400000, guid: a8bc37b13542b7e4da3eb413153f8488, type: 2}
+  - {fileID: 11400000, guid: d5db9fbf906d5ed4bbdfc34587bdb159, type: 2}
+  - {fileID: 11400000, guid: d52d41b48a88fc5429cc06c8ac5e5a30, type: 2}
+  - {fileID: 11400000, guid: 302457f2b99453a4696e099881ebbc30, type: 2}
+  - {fileID: 11400000, guid: ebb7af55eab92374d81aee129b28eb9c, type: 2}
+  uncommonDevilBases:
+  - {fileID: 11400000, guid: 0c759d23a8e1fde47abeeafff77b40f1, type: 2}
+  - {fileID: 11400000, guid: b149422ed070ad44fb2ab570f3572bc7, type: 2}
+  - {fileID: 11400000, guid: 3129d7b15d127ab48b1773fe1c759f9f, type: 2}
   rareDevilBases: []
-  nextAvailableLocales: 
+  nextAvailableLocales: 0200000001000000
+  material: {fileID: 2100000, guid: 71f3b55422f4d64428318eada370396f, type: 2}
