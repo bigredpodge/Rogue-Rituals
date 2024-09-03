@@ -22,9 +22,4 @@ MonoBehaviour:
   ap: 10
   priority: 0
   moveCategory: 2
-  effects:
-  - boosts: []
-    status: 0
-    statusTime: 10
-    chance: 0
-    target: 0
+  effects: []
