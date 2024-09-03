@@ -25,15 +25,15 @@ MonoBehaviour:
   fortitude: 60
   willpower: 70
   initiative: 40
-  expYield: 600
+  expYield: 800
   growthRate: 1
   catchRate: 255
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: ff69caa7de81bfc4387a979df2cb61a5, type: 2}
+  - moveBase: {fileID: 0}
     level: 1
   - moveBase: {fileID: 11400000, guid: c26a4634e55a9a4449b64fa942e81a47, type: 2}
     level: 6
-  - moveBase: {fileID: 11400000, guid: 79d71ce81e70ed9449a2686909b9eeed, type: 2}
+  - moveBase: {fileID: 0}
     level: 8
   - moveBase: {fileID: 11400000, guid: 1f429b3e00eb76a458c11da2f4ad4391, type: 2}
     level: 4

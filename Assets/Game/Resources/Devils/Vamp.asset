@@ -25,7 +25,7 @@ MonoBehaviour:
   fortitude: 60
   willpower: 70
   initiative: 70
-  expYield: 600
+  expYield: 800
   growthRate: 1
   catchRate: 255
   learnableMoves:

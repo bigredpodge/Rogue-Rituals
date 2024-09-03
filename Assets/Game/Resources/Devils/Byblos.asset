@@ -17,15 +17,15 @@ MonoBehaviour:
   domain: Forbidden Knowledge
   description: 
   model: {fileID: 8118468995395705577, guid: 5018ed70bd6d60e4dbb2cdd064f79410, type: 3}
-  brand1: 3
-  brand2: 1
+  brand1: 1
+  brand2: 0
   maxHP: 50
   strength: 50
   discipline: 50
   fortitude: 50
   willpower: 50
   initiative: 50
-  expYield: 80
+  expYield: 800
   growthRate: 0
   catchRate: 200
   learnableMoves:

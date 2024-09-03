@@ -25,28 +25,28 @@ MonoBehaviour:
   fortitude: 58
   willpower: 65
   initiative: 80
-  expYield: 120
+  expYield: 800
   growthRate: 1
   catchRate: 90
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 6260ceb98ee5b4645a2549fab1e5c6da, type: 2}
     level: 1
   - moveBase: {fileID: 11400000, guid: 16855d11b771e8c4e891fa5ab0e622a0, type: 2}
-    level: 1
-  - moveBase: {fileID: 11400000, guid: 0441c98c44927aa4b83664ee172944d5, type: 2}
     level: 3
+  - moveBase: {fileID: 11400000, guid: 0441c98c44927aa4b83664ee172944d5, type: 2}
+    level: 6
   - moveBase: {fileID: 11400000, guid: 89ee07291bccbd1409774a170e61969d, type: 2}
-    level: 7
+    level: 9
   - moveBase: {fileID: 11400000, guid: d2cbb9b1615a3be4a94487dedeaa07e9, type: 2}
     level: 11
   - moveBase: {fileID: 11400000, guid: dfd54e44bd6d13b499b9c3d5c8f6b8ac, type: 2}
-    level: 16
+    level: 11
   - moveBase: {fileID: 11400000, guid: ae275c501a370d247956df3fcc4abcfd, type: 2}
-    level: 18
+    level: 11
   - moveBase: {fileID: 11400000, guid: e5ea9e689ad492d48a1dc4fec31965ac, type: 2}
-    level: 21
+    level: 11
   - moveBase: {fileID: 11400000, guid: 949de6f5210df2e48af6c43cc5ecde5c, type: 2}
-    level: 25
+    level: 11
   - moveBase: {fileID: 11400000, guid: c9b352f9b56c0174a8dfa85887e85e97, type: 2}
     level: 28
   - moveBase: {fileID: 11400000, guid: b2771133a8567e84ea6983eba054e7a0, type: 2}
