@@ -31,6 +31,8 @@ public class DevilBase : ScriptableObject
     [SerializeField] int catchRate = 255;
     [SerializeField] List<LearnableMove> learnableMoves;
 
+    public static int MaxNumOfMoves { get; set; } = 4;
+
     public int GetExpForLevel(int level) {
         if (growthRate == GrowthRate.Fast) {
             return 4 * (level * level * level) / 5;
@@ -90,18 +92,18 @@ public class DevilBase : ScriptableObject
         get { return learnableMoves; }
     }
 
-    [System.Serializable]
-    public class LearnableMove {
-        [SerializeField] MoveBase moveBase;
-        [SerializeField] int level;
-        public MoveBase Base {
-            get { return moveBase; }
-        }
-        public int Level {
-            get { return level; }
-        }
-    }
+}
 
+[System.Serializable]
+public class LearnableMove {
+    [SerializeField] MoveBase moveBase;
+    [SerializeField] int level;
+    public MoveBase Base {
+        get { return moveBase; }
+    }
+    public int Level {
+        get { return level; }
+    }
 }
 
 public enum DevilBrand {

@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     private List<Locale> newLocales;
     [SerializeField] GameObject localeChoiceUI;
     [SerializeField] TMP_Text[] localeTexts;
+    [SerializeField] DevilParty playerParty;
     private int difficultyModifier;
     private int currentSelection;
     public Locale GetRandomNewLocale() {
@@ -54,7 +55,6 @@ public class GameController : MonoBehaviour
         shopSystem.gameObject.SetActive(false);
 
         //establish units
-        var playerParty = GetComponent<DevilParty>();
         var wildDevil = currentLocale.GetRandomWildDevil(currentLocale.CommonDevilBases, difficultyModifier);
 
         //Try chance for uncommon or rare wild encounter

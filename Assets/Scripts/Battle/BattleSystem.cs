@@ -510,20 +510,29 @@ public class BattleSystem : MonoBehaviour
         if (won) {
             int expYield = enemyUnit.Devil.Base.ExpYield;
             int enemyLevel = enemyUnit.Devil.Level;
-            //Is it a trainer enemy? add 1.5x bonus
+
+            //todo: Is it a trainer enemy? add 1.5x exp bonus.
 
             int expGain = Mathf.FloorToInt((expYield * enemyLevel) / 7);
             playerUnit.Devil.Exp += expGain;
-            //make it the whole party and show this
+
+            //todo: give the whole party exp and show this. bonus for finishing blow
 
             yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name+" gained "+expGain+" exp!");
             yield return playerUnit.Hud.SetExpSmooth(false);
             yield return new WaitForSeconds(1f); 
+
             //Check Levelup
             while (playerUnit.Devil.CheckForLevelUp()) {
                 playerUnit.Hud.SetLevel();
                 yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name+" grew to level "+playerUnit.Devil.Level+"!");
                 yield return playerUnit.Hud.ShowStatGrowth();
+
+                //Check for new move
+                var newMoves = playerUnit.Devil.GetLearnableMoveAtCurrentLevel();
+                if (newMoves != null)
+                    yield return LearnNewMoves(newMoves);
+
                 yield return playerUnit.Hud.SetExpSmooth(true);
             }
             playerUnit.RemoveUnit();
@@ -533,6 +542,21 @@ public class BattleSystem : MonoBehaviour
             yield return dialogueBox.TypeDialogue("you lost...");
             yield return new WaitForSeconds(2f);
             OnBattleOver(false);
+        }
+    }
+
+    IEnumerator LearnNewMoves(List<LearnableMove> newMoves) {
+        for (int i = 0; i < newMoves.Count; i++) {
+            if (playerUnit.Devil.Moves.Count < DevilBase.MaxNumOfMoves) {
+                playerUnit.Devil.LearnMove(newMoves[i]);
+                yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name + " learned " + newMoves[i].Base.Name + "!");
+                dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
+            }
+            else {
+                //todo forget move
+            }
+
+            yield return new WaitForSeconds(1f);
         }
     }
 

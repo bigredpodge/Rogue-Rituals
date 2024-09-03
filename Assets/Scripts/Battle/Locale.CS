@@ -32,7 +32,7 @@ public class Locale : ScriptableObject {
 }
 
 public enum LocaleID {
-    //enum list must be in the same order as the locales list in the game controller.
+    //below enum list must be in the same order as the Game Controller's locales list in inspector.
     Dungeon,
     Sewers,
     Library,

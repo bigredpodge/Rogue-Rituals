@@ -61,7 +61,7 @@ public class Devil
                 Moves.Add(new Move(move.Base));
             }
 
-            if (Moves.Count >= 4)
+            if (Moves.Count >= DevilBase.MaxNumOfMoves)
                 break;
         }
 
@@ -149,6 +149,17 @@ public class Devil
         }
 
         return false;
+    }
+
+    public void LearnMove(LearnableMove newMove) {
+        if (Moves.Count > DevilBase.MaxNumOfMoves)
+            return;
+        
+        Moves.Add(new Move(newMove.Base));
+    }
+
+    public List<LearnableMove> GetLearnableMoveAtCurrentLevel() {
+        return new List<LearnableMove>(Base.LearnableMoves.Where(x => x.Level == level));
     }
 
     public Dictionary<Stat, int> BoostStatsAfterLevelUp() {
