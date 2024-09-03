@@ -115,6 +115,7 @@ public class BattleSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z)) {
             if (currentAction == 0) {
+                dialogueBox.UpdateMoveSelection(currentMove, playerUnit.Devil.Moves[currentMove]);
                 MoveSelection();
             }
             else if (currentAction == 1) {
@@ -285,7 +286,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator BufferSelection() {
         prevState = state;
         state = BattleState.BUSY;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.01f);
         state = prevState;
     }
 
