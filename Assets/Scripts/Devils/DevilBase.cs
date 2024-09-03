@@ -140,7 +140,7 @@ public class BrandChart {
         static float[][] chart = 
         {
             //                   HEA SQU INS FIL RAG ALL LUN DIS MIS
-            /*HEA*/ new float[] {.5f,.5f, 2f,.5f, 1f, 2f, 1f, 1f, 1f },
+            /*HEA*/ new float[] {.5f,.5f, 2f, 2f, 1f, 2f, 1f, 1f, 1f },
             /*SQU*/ new float[] { 2f, 1f, 1f, 2f, 1f, 1f, 1f,.5f, 2f },
             /*INS*/ new float[] { 1f, 1f, 1f, 2f,.5f,.5f, 2f, 1f, 1f },
             /*FIL*/ new float[] { 2f,.5f, 1f,.5f,.5f, 1f, 2f, 1f, 2f },
