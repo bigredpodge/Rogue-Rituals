@@ -209,7 +209,7 @@ public class Devil
         get { return GetStat(Stat.Initiative); }
     }
 
-    public DamageDetails TakeDamage(Move move, Devil attacker) {
+    public DamageDetails TakeDamage(Move move, Devil attacker, bool debugModifier) {
 
         float critical = 1f;
         if (Random.value * 100f <= 6.25f)
@@ -230,7 +230,11 @@ public class Devil
         float attack = (move.Base.Category == MoveCategory.Discipline) ? attacker.Discipline : attacker.Strength;
         float defense = (move.Base.Category == MoveCategory.Discipline) ? Willpower : Fortitude;
 
-        float modifiers = Random.Range(0.8f, 1f) * brand * critical * stab;
+        float debug = 1f;
+        if (debugModifier)
+            debug = 100f;
+
+        float modifiers = Random.Range(0.8f, 1f) * brand * critical * stab * debug;
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);

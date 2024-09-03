@@ -8,6 +8,7 @@ using TMPro;
 using DG.Tweening;
 using Unity.VisualScripting;
 using JetBrains.Annotations;
+using UnityEngine.Rendering;
 
 public enum BattleState { START, ACTIONSELECTION, MOVESELECTION, RUNNINGTURN, PARTYSCREEN, ITEMSELECTION, BATTLEOVER, CHOOSETOFORGET, FORGETMOVE, MOVEFORGOTTEN, BUSY }
 public enum BattleAction { MOVE, SWITCHDEVIL, CATCHDEVIL, USEITEM }
@@ -25,9 +26,10 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] Inventory inventory;
     //choice texts for now here, but should be consolidated into battledialoguebox script...
     [SerializeField] TMP_Text[] choiceTexts;
-    [SerializeField] GameObject choiceTextUI, moveToForgetUI;
+    [SerializeField] GameObject choiceTextUI, moveToForgetUI, debugUI;
     private int currentAction, currentMove, currentMemberSelection, currentItemSelection, currentChoiceSelection, currentMoveForgetSelection;
     private MoveBase moveToLearn;
+    private bool debugMode = false;
 
     public event Action<bool> OnBattleOver;
 
@@ -131,6 +133,10 @@ public class BattleSystem : MonoBehaviour
             }
 
             StartCoroutine(BufferSelection());
+        }
+
+        if (Input.GetKeyDown(KeyCode.D)) {
+            ToggleDebugMode(debugMode);
         }
     }
 
@@ -295,6 +301,9 @@ public class BattleSystem : MonoBehaviour
             int playerMovePriority = playerUnit.Devil.CurrentMove.Base.Priority;
             int enemyMovePriority = enemyUnit.Devil.CurrentMove.Base.Priority;
 
+            if (debugMode)
+                playerMovePriority = 3;
+
             //Check who goes first
             bool playerGoesFirst = true;
             if (enemyMovePriority > playerMovePriority) {
@@ -369,7 +378,11 @@ public class BattleSystem : MonoBehaviour
 
         if (CheckIfMoveHits(move, sourceUnit.Devil, targetUnit.Devil)) {
             if (move.Base.Category != MoveCategory.Status) {
-                var damageDetails = targetUnit.Devil.TakeDamage(move, sourceUnit.Devil);
+                bool debugModifier = debugMode;
+                if (!sourceUnit.IsPlayerUnit)
+                    debugModifier = false;
+
+                var damageDetails = targetUnit.Devil.TakeDamage(move, sourceUnit.Devil, debugModifier);
                 yield return targetUnit.Hud.UpdateHP();
                 yield return ShowDamageDetails(damageDetails);
             }
@@ -566,6 +579,11 @@ public class BattleSystem : MonoBehaviour
         dialogueBox.EnableMoveSelector(true);
     }
 
+    void ToggleDebugMode(bool enabled) {
+        debugMode = !debugMode;
+        debugUI.SetActive(debugMode);
+    }
+
 
     IEnumerator EndBattle(bool won) {
         state = BattleState.BATTLEOVER;
@@ -575,8 +593,11 @@ public class BattleSystem : MonoBehaviour
             int enemyLevel = enemyUnit.Devil.Level;
 
             //todo: Is it a trainer enemy? add 1.5x exp bonus.
+            float expModifier = 1f;
+            if (debugMode)
+                expModifier = 25f;
 
-            int expGain = Mathf.FloorToInt((expYield * enemyLevel) / 7);
+            int expGain = Mathf.FloorToInt(((expYield * enemyLevel) / 7) * expModifier);
             playerUnit.Devil.Exp += expGain;
 
             //todo: give the whole party exp and show this. bonus for finishing blow
