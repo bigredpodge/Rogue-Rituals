@@ -9,7 +9,7 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using JetBrains.Annotations;
 
-public enum BattleState { START, ACTIONSELECTION, MOVESELECTION, RUNNINGTURN, PARTYSCREEN, ITEMSELECTION, BATTLEOVER, BUSY }
+public enum BattleState { START, ACTIONSELECTION, MOVESELECTION, RUNNINGTURN, PARTYSCREEN, ITEMSELECTION, BATTLEOVER, CHOOSETOFORGET, FORGETMOVE, MOVEFORGOTTEN, BUSY }
 public enum BattleAction { MOVE, SWITCHDEVIL, CATCHDEVIL, USEITEM }
 
 
@@ -19,10 +19,15 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] BattleUnit playerUnit, enemyUnit;
     [SerializeField] PartyScreen partyScreen;
+    [SerializeField] LearnMoveUI learnMoveUI;
     [SerializeField] ItemMenu itemMenu;
     [SerializeField] GameObject captureBallPrefab;
     [SerializeField] Inventory inventory;
-    private int currentAction, currentMove, currentMemberSelection, currentItemSelection;
+    //choice texts for now here, but should be consolidated into battledialoguebox script...
+    [SerializeField] TMP_Text[] choiceTexts;
+    [SerializeField] GameObject choiceTextUI, moveToForgetUI;
+    private int currentAction, currentMove, currentMemberSelection, currentItemSelection, currentChoiceSelection, currentMoveForgetSelection;
+    private MoveBase moveToLearn;
 
     public event Action<bool> OnBattleOver;
 
@@ -84,6 +89,12 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.ITEMSELECTION) {
             HandleItemSelection();
         }
+        if (state == BattleState.CHOOSETOFORGET) {
+            HandleChoiceSelection();
+        }
+        if (state == BattleState.FORGETMOVE) {
+            HandleMoveForgetSelection();
+        }
     }
 
     void HandleActionSelection() {
@@ -122,6 +133,23 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(BufferSelection());
         }
     }
+
+    void HandleChoiceSelection() {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            ++currentChoiceSelection;
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+            --currentChoiceSelection;
+
+        UpdateChoiceSelection();
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            choiceTextUI.SetActive(false);
+                if(currentChoiceSelection == 0)
+                    StartCoroutine(ForgetMoves());
+                else
+                    StartCoroutine(DontForgetMoves());
+        }
+    }
+
     void HandleItemSelection() {
         if (Input.GetKeyDown(KeyCode.RightArrow))
                 ++currentItemSelection;
@@ -143,6 +171,16 @@ public class BattleSystem : MonoBehaviour
             ActionSelection();
         }
     }
+
+    public void UpdateChoiceSelection() {
+        for (int i=0; i<choiceTexts.Length; i++) {
+            if (i == currentChoiceSelection)
+                choiceTexts[i].color = Color.blue;
+            else 
+                choiceTexts[i].color = Color.black;
+        }
+    }
+
 
     void HandlePartySelection() {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -210,6 +248,31 @@ public class BattleSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.X)) {
             ActionSelection();
+        }
+    }
+
+    void HandleMoveForgetSelection() {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+                ++currentMoveForgetSelection;
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+                currentMoveForgetSelection += 2;
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+                --currentMoveForgetSelection;
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+                currentMoveForgetSelection -= 2;
+
+        currentMoveForgetSelection = Mathf.Clamp(currentMoveForgetSelection, 0, DevilBase.MaxNumOfMoves);
+
+        learnMoveUI.UpdateMoveSelection(currentMoveForgetSelection);
+
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            Debug.Log(currentMoveForgetSelection);
+            if (currentMoveForgetSelection == 0) {
+                StartCoroutine(DontForgetMoves());
+            }
+            else {
+                StartCoroutine(ForgetMove(currentMoveForgetSelection));
+            }
         }
     }
 
@@ -551,14 +614,60 @@ public class BattleSystem : MonoBehaviour
                 playerUnit.Devil.LearnMove(newMoves[i]);
                 yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name + " learned " + newMoves[i].Base.Name + "!");
                 dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
+
             }
             else {
-                //todo forget move
+                moveToLearn = newMoves[i].Base;
+                yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name + " wants to learn "+ moveToLearn.Name + ".");
+                yield return new WaitForSeconds(1f);
+                yield return dialogueBox.TypeDialogue("But they already know four moves. Forget one?");
+                choiceTexts[0].text = "Yes";
+                choiceTexts[1].text = "No";
+                choiceTextUI.SetActive(true);
+                state = BattleState.CHOOSETOFORGET;
+
+                yield return new WaitUntil(() => state == BattleState.MOVEFORGOTTEN);
             }
 
             yield return new WaitForSeconds(1f);
         }
     }
+
+    IEnumerator ForgetMoves() {
+        state = BattleState.BUSY;
+
+        yield return dialogueBox.TypeDialogue("Choose a move to forget.");
+        yield return new WaitForSeconds(1f);
+        learnMoveUI.SetMoveData(playerUnit.Devil.Moves, moveToLearn);
+        dialogueBox.EnableDialogueText(false);
+        dialogueBox.EnableMoveSelector(true);
+        moveToForgetUI.SetActive(true);
+        state = BattleState.FORGETMOVE;
+    }
+
+    IEnumerator ForgetMove(int selection) {
+        state = BattleState.BUSY;
+
+        dialogueBox.EnableDialogueText(true);
+        dialogueBox.EnableMoveSelector(false);
+        moveToForgetUI.SetActive(false);
+
+        var selectedMove = playerUnit.Devil.Moves[selection-1].Base;
+        playerUnit.Devil.Moves[selection-1] = new Move(moveToLearn);
+        yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name + " forgot " + selectedMove.Name + " and learned " + moveToLearn.Name + ".");
+        state = BattleState.MOVEFORGOTTEN;
+    }
+
+    IEnumerator DontForgetMoves() {
+        state = BattleState.BUSY;
+
+        dialogueBox.EnableDialogueText(true);
+        dialogueBox.EnableMoveSelector(false);
+        moveToForgetUI.SetActive(false);
+
+        yield return dialogueBox.TypeDialogue("Did not learn " + moveToLearn.Name + ".");
+        state = BattleState.MOVEFORGOTTEN;
+    }   
 
     IEnumerator TrapRitual(RitualItem ritualItem) {
         state = BattleState.BUSY;
