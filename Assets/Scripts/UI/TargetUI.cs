@@ -7,7 +7,7 @@ using TMPro;
 public class TargetUI : MonoBehaviour
 {
     [SerializeField] TMP_Text nameText, countText;
-    [SerializeField] Image sprite;
+    [SerializeField] Image sprite, background;
     [SerializeField] Color highlightedColor;
     public void SetDataFromDevil(Devil devil) {
         sprite.sprite = devil.Base.Sprite;
@@ -26,5 +26,11 @@ public class TargetUI : MonoBehaviour
             nameText.color = highlightedColor;
         else
             nameText.color = Color.black;
+    }
+    public void SetBackground(bool canLearn) {
+        if (!canLearn)
+            background.color = Color.red;
+        else
+            background.color = Color.gray;
     }
 }

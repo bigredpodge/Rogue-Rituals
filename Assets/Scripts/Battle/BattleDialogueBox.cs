@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 
 public class BattleDialogueBox : MonoBehaviour
 {
+    public enum DialogueState { CHOOSETOFORGET, FORGETMOVE, MOVEFORGOTTEN, BUSY }
     [SerializeField] TMP_Text dialogueText;
     [SerializeField] Color highlightedColor;
     [SerializeField] GameObject actionSelector, moveSelector, moveDetails, targetSelector;
@@ -16,11 +17,26 @@ public class BattleDialogueBox : MonoBehaviour
     [SerializeField] List<Image> shopItemSprites, battleItemSprites;
     [SerializeField] TMP_Text apText, brandText, typeText, powerText;
     [SerializeField] TargetMenu targetMenu;
+    [SerializeField] LearnMoveUI learnMoveUI;
+    [SerializeField] TMP_Text[] choiceTexts;
+    [SerializeField] GameObject choiceTextUI, moveToForgetUI;
+    private DialogueState state;
+    private MoveBase moveToLearn;
+    private Devil devilToTeach;
+    private int currentMoveForgetSelection, currentChoiceSelection;
     public TargetMenu TargetMenu {
         get { return targetMenu; }
     }
     [SerializeField] float textSpeed;
 
+    public void Update() {
+        if (state == DialogueState.CHOOSETOFORGET) {
+            HandleChoiceSelection();
+        }
+        if (state == DialogueState.FORGETMOVE) {
+            HandleMoveForgetSelection();
+        }
+    }
 
     public void SetDialogue(string dialogue) {
         dialogueText.text = dialogue;
@@ -32,7 +48,6 @@ public class BattleDialogueBox : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(1f/textSpeed);
         }
-        
     }
 
     public void EnableDialogueText(bool enabled) {
@@ -67,6 +82,7 @@ public class BattleDialogueBox : MonoBehaviour
                 moveTexts[i].text = "-";
         }
     }
+    
 
     public void UpdateMoveSelection(int selectedMove, Move move) {
         for (int i=0; i<moveTexts.Count; i++) {
@@ -91,6 +107,120 @@ public class BattleDialogueBox : MonoBehaviour
         brandText.text = move.Base.Brand.ToString();
         brandText.color = GetBrandColor(move.Base.Brand);
     }
+
+    public void UpdateChoiceSelection() {
+        for (int i=0; i<choiceTexts.Length; i++) {
+            if (i == currentChoiceSelection)
+                choiceTexts[i].color = Color.blue;
+            else 
+                choiceTexts[i].color = Color.black;
+        }
+    }
+
+    void HandleChoiceSelection() {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            ++currentChoiceSelection;
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+            --currentChoiceSelection;
+
+        UpdateChoiceSelection();
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            choiceTextUI.SetActive(false);
+                if(currentChoiceSelection == 0)
+                    StartCoroutine(ForgetMoves(devilToTeach));
+                else
+                    StartCoroutine(DontForgetMoves());
+        }
+    }
+
+    void HandleMoveForgetSelection() {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+                ++currentMoveForgetSelection;
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+                currentMoveForgetSelection += 2;
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+                --currentMoveForgetSelection;
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+                currentMoveForgetSelection -= 2;
+
+        currentMoveForgetSelection = Mathf.Clamp(currentMoveForgetSelection, 0, DevilBase.MaxNumOfMoves);
+
+        learnMoveUI.UpdateMoveSelection(currentMoveForgetSelection);
+
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            Debug.Log(currentMoveForgetSelection);
+            if (currentMoveForgetSelection == 0) {
+                StartCoroutine(DontForgetMoves());
+            }
+            else {
+                StartCoroutine(ForgetMove(currentMoveForgetSelection, devilToTeach));
+            }
+        }
+    }
+
+    public IEnumerator LearnNewMoves(List<MoveBase> newMoves, Devil target) {
+        for (int i = 0; i < newMoves.Count; i++) {
+            yield return LearnMove(newMoves[i], target);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    public IEnumerator LearnMove(MoveBase newMove, Devil target) {
+            if (target.Moves.Count < DevilBase.MaxNumOfMoves) {
+                target.LearnMove(newMove);
+                yield return TypeDialogue(target.Base.Name + " learned " + newMove.Name + "!");
+                SetMoveNames(target.Moves);
+
+            }
+            else {
+                moveToLearn = newMove;
+                devilToTeach = target;
+                yield return TypeDialogue(devilToTeach.Base.Name + " wants to learn "+ moveToLearn.Name + ".");
+                yield return new WaitForSeconds(1f);
+                yield return TypeDialogue("But they already know four moves. Forget one?");
+                choiceTexts[0].text = "Yes";
+                choiceTexts[1].text = "No";
+                choiceTextUI.SetActive(true);
+                state = DialogueState.CHOOSETOFORGET;
+
+                yield return new WaitUntil(() => state == DialogueState.MOVEFORGOTTEN);
+            }
+    }
+
+    public IEnumerator ForgetMoves(Devil target) {
+        state = DialogueState.BUSY;
+
+        yield return TypeDialogue("Choose a move to forget.");
+        yield return new WaitForSeconds(1f);
+        learnMoveUI.SetMoveData(target.Moves, moveToLearn);
+        EnableDialogueText(false);
+        EnableMoveSelector(true);
+        moveToForgetUI.SetActive(true);
+        state = DialogueState.FORGETMOVE;
+    }
+
+    public IEnumerator ForgetMove(int selection, Devil target) {
+        state = DialogueState.BUSY;
+
+        EnableDialogueText(true);
+        EnableMoveSelector(false);
+        moveToForgetUI.SetActive(false);
+
+        var selectedMove = target.Moves[selection-1].Base;
+        target.Moves[selection-1] = new Move(moveToLearn);
+        yield return TypeDialogue(target.Base.Name + " forgot " + selectedMove.Name + " and learned " + moveToLearn.Name + ".");
+        state = DialogueState.MOVEFORGOTTEN;
+    }
+
+    public IEnumerator DontForgetMoves() {
+        state = DialogueState.BUSY;
+
+        EnableDialogueText(true);
+        EnableMoveSelector(false);
+        moveToForgetUI.SetActive(false);
+
+        yield return TypeDialogue("Did not learn " + moveToLearn.Name + ".");
+        state = DialogueState.MOVEFORGOTTEN;
+    }  
 
 
     Color GetBrandColor(DevilBrand brand) {

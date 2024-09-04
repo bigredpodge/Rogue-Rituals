@@ -31,6 +31,7 @@ public class DevilBase : ScriptableObject
 
     [SerializeField] int catchRate = 255;
     [SerializeField] List<LearnableMove> learnableMoves;
+    [SerializeField] List<MoveBase> teachableMoves;
 
     public static int MaxNumOfMoves { get; set; } = 4;
 
@@ -94,6 +95,9 @@ public class DevilBase : ScriptableObject
     public int CatchRate => catchRate;
     public List<LearnableMove> LearnableMoves {
         get { return learnableMoves; }
+    }
+    public List<MoveBase> TeachableMoves {
+        get { return teachableMoves; }
     }
 
 }

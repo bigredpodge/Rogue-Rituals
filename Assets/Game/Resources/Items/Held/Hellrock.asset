@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hellrock
   m_EditorClassIdentifier: 
   name: Hellrock
-  description: 
+  description: Boosts the power of Heat moves.
   sprite: {fileID: 0}
   brandDamageModifier:
     brand: 1

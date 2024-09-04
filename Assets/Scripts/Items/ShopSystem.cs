@@ -19,6 +19,7 @@ public class ShopSystem : MonoBehaviour
     private int currentSelection, currentTargetSelection;
     private ItemSlot selectedItem;
     private DevilParty targetParty;
+    private Dictionary<Devil, bool> DevilsToTeach;
     public event Action OnShopOver;
 
     void Start() {
@@ -124,6 +125,10 @@ public class ShopSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
             StartCoroutine(EndSelection());
         }
+        else if (item.Item is ScrollItem) {
+            selectedItem = item;
+            ChooseTargetDevilToTeach((ScrollItem)item.Item);
+        }
         else {
             selectedItem = item;
             ChooseTargetDevil();
@@ -136,6 +141,23 @@ public class ShopSystem : MonoBehaviour
         dialogueBox.TargetMenu.SetDevilData(targetParty.Devils);
         dialogueBox.EnableTargetSelector(true);
         dialogueBox.SetDialogue("Choose a devil to give the item.");
+    }
+
+    void ChooseTargetDevilToTeach(ScrollItem scrollItem) {
+        state = ShopState.TARGETSELECT;
+        targetParty = playerUnit.GetComponent<DevilParty>();
+        DevilsToTeach = new Dictionary<Devil, bool>();
+        for (int i = 0; i < targetParty.Devils.Count; i++) {
+            Devil devil = targetParty.Devils[i];
+            bool canLearn = false;
+            if (devil.Base.TeachableMoves.Contains(scrollItem.Move))
+                canLearn = true;
+            
+            DevilsToTeach.Add(devil, canLearn);
+        }
+        dialogueBox.TargetMenu.SetDevilToTeachData(DevilsToTeach);
+        dialogueBox.EnableTargetSelector(true);
+        dialogueBox.SetDialogue("Choose a devil to teach the move.");
     }
 
     void ReturnToItemSelect() {
@@ -157,6 +179,23 @@ public class ShopSystem : MonoBehaviour
         else if (selectedItem.Item is RecoveryItem) {
             selectedItem.Item.Use(devil);
             yield return dialogueBox.TypeDialogue(devil.Base.Name + " was healed");
+        }
+        else if (selectedItem.Item is ScrollItem) {
+            var scroll = (ScrollItem)selectedItem.Item;
+            if (!devil.Base.TeachableMoves.Contains(scroll.Move)) { 
+                dialogueBox.SetDialogue(devil.Base.Name + " cannot learn that move.");
+                yield break;
+            }
+            else if (devil.KnowsMove(scroll.Move)) {
+                dialogueBox.SetDialogue(devil.Base.Name + " cannot learn that move.");
+                yield break;
+            }
+            else { 
+                state = ShopState.BUSY;
+                itemsUI.SetActive(false);
+                dialogueBox.EnableTargetSelector(false);
+                yield return dialogueBox.LearnMove(scroll.Move, devil);
+            }      
         }
         else
             Debug.Log("Failed to use item");

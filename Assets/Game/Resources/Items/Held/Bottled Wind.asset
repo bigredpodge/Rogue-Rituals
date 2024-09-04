@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bottled Wind
   m_EditorClassIdentifier: 
   name: Bottled Wind
-  description: 
+  description: Boosts the power of Squall moves.
   sprite: {fileID: 0}
   brandDamageModifier:
     brand: 2

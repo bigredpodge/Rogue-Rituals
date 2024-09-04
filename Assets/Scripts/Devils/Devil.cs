@@ -157,15 +157,19 @@ public class Devil
         return false;
     }
 
-    public void LearnMove(LearnableMove newMove) {
+    public void LearnMove(MoveBase move) {
         if (Moves.Count > DevilBase.MaxNumOfMoves)
             return;
         
-        Moves.Add(new Move(newMove.Base));
+        Moves.Add(new Move(move));
     }
 
-    public List<LearnableMove> GetLearnableMoveAtCurrentLevel() {
-        return new List<LearnableMove>(Base.LearnableMoves.Where(x => x.Level == level));
+    public List<MoveBase> GetLearnableMoveAtCurrentLevel() {
+        List<LearnableMove> currentLearnableMoves = new List<LearnableMove>(Base.LearnableMoves.Where(x => x.Level == level));
+        List<MoveBase> moveBases = new List<MoveBase>();
+        for (int i = 0; i < currentLearnableMoves.Count; i++)
+            moveBases.Add(currentLearnableMoves[i].Base);
+        return moveBases;
     }
 
     public Dictionary<Stat, int> BoostStatsAfterLevelUp() {
@@ -260,11 +264,14 @@ public class Devil
     }
 
     public Move GetRandomMove() {
-
         var movesWithAP = Moves.Where(x => x.AP > 0).ToList();
 
         int r = Random.Range(0, movesWithAP.Count);
         return movesWithAP[r];
+    }
+
+    public bool KnowsMove(MoveBase moveBase) {
+        return Moves.Any(item => item.Base == moveBase);
     }
 
     public void SetStatus(ConditionID conditionId, int time) {

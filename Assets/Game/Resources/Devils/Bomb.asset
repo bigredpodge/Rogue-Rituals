@@ -16,6 +16,7 @@ MonoBehaviour:
   rank: Devil
   domain: Dynamite
   description: A fiend of fire and fuses. It snarls at you as it bounces about.
+  sprite: {fileID: 0}
   model: {fileID: 919132149155446097, guid: c84b846ebc16a7c49b33743896107015, type: 3}
   brand1: 1
   brand2: 0
@@ -59,3 +60,5 @@ MonoBehaviour:
     level: 49
   - moveBase: {fileID: 11400000, guid: 9e58ff5fe3fba6a4cbfeeb5213075eab, type: 2}
     level: 55
+  teachableMoves:
+  - {fileID: 11400000, guid: dfd54e44bd6d13b499b9c3d5c8f6b8ac, type: 2}

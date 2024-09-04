@@ -131,6 +131,7 @@ MonoBehaviour:
   nameText: {fileID: 2869325791610018382}
   countText: {fileID: 138137434589782570}
   sprite: {fileID: 5465630607820406847}
+  background: {fileID: 4920181742654179020}
   highlightedColor: {r: 0, g: 0.19680595, b: 1, a: 1}
 --- !u!1 &3075898956797641947
 GameObject:
