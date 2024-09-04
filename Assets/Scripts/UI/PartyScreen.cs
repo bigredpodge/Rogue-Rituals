@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PartyScreen : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class PartyScreen : MonoBehaviour
 
     public void Init() {
         memberSlots = GetComponentsInChildren<PartyMemberUI>(true);
+        for (int i = 0; i < memberSlots.Length; i++) {
+            memberSlots[i].StatusUIHandler.Init();
+        }
     }
 
     public void SetPartyData(List<Devil> devils) {

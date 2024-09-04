@@ -15,10 +15,10 @@ MonoBehaviour:
   name: Mockery
   description: Assault the enemy with vicious words.
   brand: 3
-  power: 0
+  power: 40
   accuracy: 100
   alwaysHits: 0
   ap: 30
   priority: 0
-  moveCategory: 0
+  moveCategory: 1
   effects: []

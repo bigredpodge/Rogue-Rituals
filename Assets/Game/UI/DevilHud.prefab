@@ -1217,7 +1217,6 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8672249648928553714}
-  - {fileID: 3502053174898223065}
   - {fileID: 38674779576121972}
   - {fileID: 6255196559018125245}
   - {fileID: 8336967435891793542}
@@ -1282,7 +1281,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 153790128288794130}
   levelText: {fileID: 985061849327802963}
-  hpText: {fileID: 2124588364844091653}
   hpBar: {fileID: 8931987508583709282}
   expBar: {fileID: 2628815962777509012}
   statGrowthUI: {fileID: 5671320277802808408}
@@ -1651,7 +1649,7 @@ GameObject:
   - component: {fileID: 5402173488210212049}
   - component: {fileID: 2124588364844091653}
   m_Layer: 5
-  m_Name: HPText
+  m_Name: HPAmtText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1666,14 +1664,14 @@ RectTransform:
   m_GameObject: {fileID: 5614506123900037541}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.79, y: 0.79, z: 0.79}
+  m_LocalScale: {x: 0.7900001, y: 0.4438203, z: 0.7900001}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1907926623148226673}
+  m_Father: {fileID: 6255196559018125245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -103.3, y: -34}
+  m_AnchoredPosition: {x: -189.22156, y: -3.8763905}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5402173488210212049
@@ -3020,6 +3018,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1.78, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3502053174898223065}
   - {fileID: 2078174266929399353}
   - {fileID: 8074882934899360600}
   - {fileID: 8832542783249160791}
