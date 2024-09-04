@@ -7,7 +7,6 @@ public class HPBar : MonoBehaviour
 {
     [SerializeField] GameObject health;
     [SerializeField] TMP_Text hpText;
-    [SerializeField]
 
     public void SetHP(int currentHP, int maxHP) {
         float hpNormalized = (float) currentHP / maxHP;

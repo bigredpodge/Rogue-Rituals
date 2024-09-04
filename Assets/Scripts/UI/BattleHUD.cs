@@ -9,7 +9,7 @@ using System.Linq;
 public class BattleHUD : MonoBehaviour
 {
     
-    [SerializeField] TMP_Text nameText, levelText, hpText;
+    [SerializeField] TMP_Text nameText, levelText;
     [SerializeField] HPBar hpBar;
     [SerializeField] GameObject expBar;
     
@@ -65,7 +65,6 @@ public class BattleHUD : MonoBehaviour
     public IEnumerator UpdateHP() {
         if (_devil.HpChanged) {
             yield return hpBar.SetHPSmooth(_devil.HP, _devil.MaxHP);
-            hpText.text = _devil.HP + " / " + _devil.MaxHP;
             _devil.HpChanged = false;
         }
     }
