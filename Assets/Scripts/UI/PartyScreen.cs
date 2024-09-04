@@ -8,7 +8,9 @@ public class PartyScreen : MonoBehaviour
 {
     
     [SerializeField] TMP_Text messageText;
+    [SerializeField] PartyPreviewUI partyPreviewUI;
     PartyMemberUI[] memberSlots;
+    private int currentSelection;
     List<Devil> devils;
 
     public void Init() {
@@ -33,11 +35,16 @@ public class PartyScreen : MonoBehaviour
     }
 
     public void UpdateMemberSelection(int selectedMember) {
-        for (int i = 0; i < devils.Count; i++) {
-            if (i == selectedMember)
+        for (int i = 1; i < devils.Count; i++) {
+            if (i == selectedMember) 
                 memberSlots[i].SetSelected(true);
             else
                 memberSlots[i].SetSelected(false);
+        }
+
+        if (currentSelection != selectedMember) {
+            partyPreviewUI.SetData(devils[selectedMember]);
+            currentSelection = selectedMember;
         }
     }
 

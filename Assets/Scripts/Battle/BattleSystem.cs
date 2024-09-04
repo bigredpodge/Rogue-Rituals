@@ -191,16 +191,12 @@ public class BattleSystem : MonoBehaviour
 
 
     void HandlePartySelection() {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
                 ++currentMemberSelection;
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-                currentMemberSelection += 2;
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-                --currentMemberSelection;
         else if (Input.GetKeyDown(KeyCode.UpArrow))
-                currentMemberSelection -= 2;
+                --currentMemberSelection;
 
-        currentMemberSelection = Mathf.Clamp(currentMemberSelection, 0, playerParty.Devils.Count - 1);
+        currentMemberSelection = Mathf.Clamp(currentMemberSelection, 1, playerParty.Devils.Count - 1);
 
         partyScreen.UpdateMemberSelection(currentMemberSelection);
 
@@ -556,7 +552,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     void OpenPartyScreen() {
-        currentMemberSelection = 0;
+        currentMemberSelection = 1;
         state = BattleState.PARTYSCREEN;
         partyScreen.SetPartyData(playerParty.Devils);
         partyScreen.gameObject.SetActive(true);
