@@ -4,17 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading;
+using Unity.VisualScripting;
 
 public class BattleDialogueBox : MonoBehaviour
 {
     [SerializeField] TMP_Text dialogueText;
     [SerializeField] Color highlightedColor;
-    [SerializeField] GameObject actionSelector, moveSelector, moveDetails, itemSelector;
+    [SerializeField] GameObject actionSelector, moveSelector, moveDetails, targetSelector;
+    [SerializeField] TargetUI[] targetSlots;
     [SerializeField] List<TMP_Text> actionTexts, moveTexts, shopItemTexts, battleItemTexts, battleItemCounts;
     [SerializeField] List<Image> shopItemSprites, battleItemSprites;
     [SerializeField] TMP_Text apText, brandText, typeText, powerText;
-
+    [SerializeField] TargetMenu targetMenu;
+    public TargetMenu TargetMenu {
+        get { return targetMenu; }
+    }
     [SerializeField] float textSpeed;
+
 
     public void SetDialogue(string dialogue) {
         dialogueText.text = dialogue;
@@ -38,6 +44,10 @@ public class BattleDialogueBox : MonoBehaviour
     public void EnableMoveSelector(bool enabled) {
         moveSelector.SetActive(enabled);
         moveDetails.SetActive(enabled);
+    }
+
+    public void EnableTargetSelector(bool enabled) {
+        targetMenu.gameObject.SetActive(enabled);
     }
     
     public void UpdateActionSelection(int selectedAction) {
@@ -82,38 +92,6 @@ public class BattleDialogueBox : MonoBehaviour
         brandText.color = GetBrandColor(move.Base.Brand);
     }
 
-    public void SetShopItems(List<ItemBase> items) {
-        for (int i=0; i<shopItemTexts.Count; i++) {
-            if (i < items.Count) {
-                shopItemTexts[i].text = items[i].Name;
-                shopItemSprites[i].sprite = items[i].Sprite;
-            }
-            else
-            {
-                shopItemTexts[i].text = "-";
-                shopItemSprites[i].sprite = null;
-            }
-        }
-    }
-
-
-    public void UpdateShopItemSelection(int selectedItem) {
-        for (int i=0; i<shopItemTexts.Count; i++) {
-            if (i == selectedItem)
-                shopItemTexts[i].color = highlightedColor;
-            else 
-                shopItemTexts[i].color = Color.black;
-        }
-    }
-
-    public void UpdateBattleItemSelection(int selectedItem) {
-        for (int i=0; i<battleItemTexts.Count; i++) {
-            if (i == selectedItem)
-                battleItemTexts[i].color = highlightedColor;
-            else 
-                battleItemTexts[i].color = Color.black;
-        }
-    }
 
     Color GetBrandColor(DevilBrand brand) {
         Color[] colors = {  /*Orange*/ new Color(1f, 0.5f, 0f), /*Blue*/ new Color(0f, 0f, 0.75f), /*Yellow*/ new Color(.8f, .8f, 0f), /*Green*/ new Color(0f, 0.75f, 0f), /*Red*/ new Color(0.75f, 0f, 0f), 

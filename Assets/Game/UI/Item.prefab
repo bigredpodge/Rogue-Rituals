@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 312315063165179668}
-  - component: {fileID: 5973711143233327277}
+  - component: {fileID: 6997719852340928635}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -116,7 +116,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5973711143233327277
+--- !u!114 &6997719852340928635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,13 +125,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2441580128659661248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f9f14ccd3f42c45845c6e6591e9745, type: 3}
+  m_Script: {fileID: 11500000, guid: 75528b4165c8ed54cb92b0f4e17dcbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 2869325791610018382}
   countText: {fileID: 138137434589782570}
   sprite: {fileID: 5465630607820406847}
-  highlightedColor: {r: 0.11347453, g: 0.52633, b: 0.9622642, a: 0}
+  highlightedColor: {r: 0, g: 0.19680595, b: 1, a: 1}
 --- !u!1 &3075898956797641947
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.8, y: -28.3}
+  m_AnchoredPosition: {x: -42.5, y: -28.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8857106735998956285
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: Lvl 100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

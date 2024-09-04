@@ -12,6 +12,7 @@ public class DevilBase : ScriptableObject
 
     [TextArea]
     [SerializeField] string description;
+    [SerializeField] Sprite sprite;
 
     [SerializeField] GameObject model;
 
@@ -57,6 +58,9 @@ public class DevilBase : ScriptableObject
     }
     public string Description {
         get { return description; }
+    }
+    public Sprite Sprite {
+        get { return sprite; }
     }
     public GameObject Model {
         get { return model; }

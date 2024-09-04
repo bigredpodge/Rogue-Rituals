@@ -21,7 +21,6 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleUnit playerUnit, enemyUnit;
     [SerializeField] PartyScreen partyScreen;
     [SerializeField] LearnMoveUI learnMoveUI;
-    [SerializeField] ItemMenu itemMenu;
     [SerializeField] GameObject captureBallPrefab;
     [SerializeField] Inventory inventory;
     //choice texts for now here, but should be consolidated into battledialoguebox script...
@@ -57,7 +56,7 @@ public class BattleSystem : MonoBehaviour
         enemyUnit.Setup(enemyDevil);
 
         partyScreen.Init();
-        itemMenu.Init();
+        dialogueBox.TargetMenu.Init();
 
         Debug.Log(  "Player Stats: Level - "+playerUnit.Devil.Level+" / HP - "+playerUnit.Devil.MaxHP+" / Strength - "+playerUnit.Devil.Strength+" / Discipline - "+playerUnit.Devil.Discipline+
                     " / Fortitude - "+playerUnit.Devil.Fortitude+" / Willpower - "+playerUnit.Devil.Willpower+" / Initiative - "+playerUnit.Devil.Initiative);
@@ -97,7 +96,7 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.FORGETMOVE) {
             HandleMoveForgetSelection();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.D)) {
             ToggleDebugMode(debugMode);
         }
@@ -166,16 +165,16 @@ public class BattleSystem : MonoBehaviour
 
         currentItemSelection = Mathf.Clamp(currentItemSelection, 0, 4);
 
-        dialogueBox.UpdateBattleItemSelection(currentItemSelection);
+        dialogueBox.TargetMenu.UpdateTargetSelection(currentItemSelection);
 
         if (Input.GetKeyDown(KeyCode.Z)) {
-            itemMenu.gameObject.SetActive(false);
+            dialogueBox.TargetMenu.gameObject.SetActive(false);
             inventory.UseItem(currentItemSelection, enemyUnit.Devil);
             StartCoroutine(RunTurns(BattleAction.CATCHDEVIL));
         }
 
         if(Input.GetKeyDown(KeyCode.X)) {
-            itemMenu.gameObject.SetActive(false);
+            dialogueBox.TargetMenu.gameObject.SetActive(false);
             ActionSelection();
         }
     }
@@ -547,7 +546,7 @@ public class BattleSystem : MonoBehaviour
         dialogueBox.EnableDialogueText(true);
         dialogueBox.EnableActionSelector(true);
         dialogueBox.EnableMoveSelector(false);
-        itemMenu.gameObject.SetActive(false);
+        dialogueBox.EnableTargetSelector(false);
         dialogueBox.SetDialogue("Choose an action.");
     }
 
@@ -566,11 +565,11 @@ public class BattleSystem : MonoBehaviour
 
         state = BattleState.ITEMSELECTION;
         if (isRituals)
-            itemMenu.SetItemData(inventory.RitualItemSlots);
+            dialogueBox.TargetMenu.SetItemData(inventory.RitualItemSlots);
         else
-            itemMenu.SetItemData(inventory.OfferingItemSlots);
+            dialogueBox.TargetMenu.SetItemData(inventory.OfferingItemSlots);
         
-        itemMenu.gameObject.SetActive(true);
+        dialogueBox.EnableTargetSelector(true);
         dialogueBox.SetDialogue("Choose an item.");
 
     }

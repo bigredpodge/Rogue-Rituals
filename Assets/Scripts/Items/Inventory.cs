@@ -9,7 +9,6 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] List<ItemSlot> ritualItemSlots, offeringItemSlots;
 
-    public event Action OnUpdated;
 
     public List<ItemSlot> RitualItemSlots { 
         get {

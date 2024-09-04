@@ -3,21 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ShopState { START, SELECT, END }
+public enum ShopState { START, SELECT, TARGETSELECT, BUSY, END }
 
 public class ShopSystem : MonoBehaviour
 {
     [SerializeField] BattleDialogueBox dialogueBox;
     [SerializeField] GameObject itemsUI;
-    [SerializeField] BattleHUD playerHUD;
     [SerializeField] BattleUnit playerUnit;
-    [SerializeField] ItemMenu shopMenu;
+    [SerializeField] TargetMenu shopMenu;
     [SerializeField] Inventory inventory;
 
-    ShopState state;
+    ShopState state, prevState;
     [SerializeField] List<ItemSlot> wildItems;
     List<ItemSlot> items = new List<ItemSlot>();
-    private int currentSelection;
+    private int currentSelection, currentTargetSelection;
+    private ItemSlot selectedItem;
+    private DevilParty targetParty;
     public event Action OnShopOver;
 
     void Start() {
@@ -61,6 +62,9 @@ public class ShopSystem : MonoBehaviour
         if (state == ShopState.SELECT) {
             HandleSelection();
         }
+        if (state == ShopState.TARGETSELECT) {
+            HandleTargetSelection();
+        }
     }
 
     void HandleSelection() {
@@ -75,10 +79,41 @@ public class ShopSystem : MonoBehaviour
             }
         }
 
-        dialogueBox.UpdateShopItemSelection(currentSelection);
+        currentSelection = Mathf.Clamp(currentSelection, 0, items.Count-1);
+        shopMenu.UpdateTargetSelection(currentSelection);
 
         if (Input.GetKeyDown(KeyCode.Z)) {
             StartCoroutine(HandleItem(items[currentSelection]));
+            StartCoroutine(BufferSelection());
+        }
+    }
+    IEnumerator BufferSelection() {
+        prevState = state;
+        state = ShopState.BUSY;
+        yield return new WaitForSeconds(0.01f);
+        state = prevState;
+    }
+
+    void HandleTargetSelection() {
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            if (currentTargetSelection < targetParty.Devils.Count) {
+                ++currentTargetSelection;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            if (currentTargetSelection > 0) {
+                --currentTargetSelection;
+            }
+        }
+
+        currentTargetSelection = Mathf.Clamp(currentTargetSelection, 0, targetParty.Devils.Count-1);
+        dialogueBox.TargetMenu.UpdateTargetSelection(currentTargetSelection);
+
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            StartCoroutine(TargetItem(targetParty.Devils[currentTargetSelection]));
+        }
+        if (Input.GetKeyDown(KeyCode.X)) {
+            ReturnToItemSelect();
         }
     }
 
@@ -86,25 +121,55 @@ public class ShopSystem : MonoBehaviour
         if (item.Item is RitualItem) {
             inventory.StockItem((RitualItem)item.Item, item.Count);
             yield return dialogueBox.TypeDialogue("Stocked " + item.Count + " " + item.Item.Name);
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(EndSelection());
         }
-        else if (item.Item is HeldItem) {
-            playerUnit.Devil.HeldItem = (HeldItem)item.Item;
-            yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name + " held the " + item.Item.Name);
+        else {
+            selectedItem = item;
+            ChooseTargetDevil();
         }
-        else if (item.Item is RecoveryItem) {
-            item.Item.Use(playerUnit.Devil);
-            yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name + " was healed");
+    }
+
+    void ChooseTargetDevil() {
+        state = ShopState.TARGETSELECT;
+        targetParty = playerUnit.GetComponent<DevilParty>();
+        dialogueBox.TargetMenu.SetDevilData(targetParty.Devils);
+        dialogueBox.EnableTargetSelector(true);
+        dialogueBox.SetDialogue("Choose a devil to give the item.");
+    }
+
+    void ReturnToItemSelect() {
+        state = ShopState.SELECT;
+        dialogueBox.EnableTargetSelector(false);
+        dialogueBox.SetDialogue("Choose an item to take with you.");
+    }
+
+    IEnumerator TargetItem(Devil devil) {
+        if (selectedItem.Item is HeldItem) {
+            if (devil.HeldItem != null) {
+                dialogueBox.SetDialogue(devil.Base.Name + " already has an item.");
+                yield break;
+            }
+
+            devil.HeldItem = (HeldItem)selectedItem.Item;
+            yield return dialogueBox.TypeDialogue(devil.Base.Name + " held the " + selectedItem.Item.Name);
         }
-        else 
+        else if (selectedItem.Item is RecoveryItem) {
+            selectedItem.Item.Use(devil);
+            yield return dialogueBox.TypeDialogue(devil.Base.Name + " was healed");
+        }
+        else
             Debug.Log("Failed to use item");
 
         yield return new WaitForSeconds(1f);
         StartCoroutine(EndSelection());
     }
+    
 
     IEnumerator EndSelection() {
         state = ShopState.END;
         itemsUI.SetActive(false);
+        dialogueBox.EnableTargetSelector(false);
         yield return dialogueBox.TypeDialogue("The kobold thanks you for your custom.");
         yield return new WaitForSeconds(1f);
         OnShopOver();

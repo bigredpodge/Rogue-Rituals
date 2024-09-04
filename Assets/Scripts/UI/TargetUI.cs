@@ -4,20 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ItemUI : MonoBehaviour
+public class TargetUI : MonoBehaviour
 {
     [SerializeField] TMP_Text nameText, countText;
     [SerializeField] Image sprite;
     [SerializeField] Color highlightedColor;
-
-    ItemSlot _item;
-
-    public void Setup(ItemSlot item) {
-        _item = item;
-        nameText.text = item.Item.Name;
-        sprite.sprite = item.Item.Sprite;
-        countText.text = item.Count+"";
+    public void SetDataFromDevil(Devil devil) {
+        sprite.sprite = devil.Base.Sprite;
+        nameText.text = devil.Base.Name;
+        countText.text = "Lvl"+devil.Level;
     }
+
+    public void SetDataFromItem(ItemSlot item) {
+        sprite.sprite = item.Item.Sprite;
+        nameText.text = item.Item.Name;
+        countText.text = ""+item.Count;
+    }
+
     public void SetSelected(bool selected) {
         if (selected)
             nameText.color = highlightedColor;
