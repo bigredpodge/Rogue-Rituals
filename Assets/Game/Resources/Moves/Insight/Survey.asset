@@ -18,7 +18,14 @@ MonoBehaviour:
   power: 0
   accuracy: 100
   alwaysHits: 0
-  ap: 10
+  ap: 30
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 2
+  effects:
+  - boosts:
+    - stat: 7
+      boost: -1
+    status: 0
+    statusTime: 0
+    chance: 100
+    target: 0
