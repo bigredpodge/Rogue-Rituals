@@ -115,6 +115,7 @@ public class BattleSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z)) {
             if (currentAction == 0) {
+                currentMove = 0;
                 dialogueBox.UpdateMoveSelection(currentMove, playerUnit.Devil.Moves[currentMove]);
                 MoveSelection();
             }
@@ -222,7 +223,7 @@ public class BattleSystem : MonoBehaviour
             }
             else {
                 state = BattleState.BUSY;
-                StartCoroutine(SwitchDevil(selectedMember));
+                StartCoroutine(SwitchDevil(selectedMember, currentMemberSelection));
             }
             StartCoroutine(BufferSelection());
         }
@@ -336,7 +337,7 @@ public class BattleSystem : MonoBehaviour
             if (playerAction == BattleAction.SWITCHDEVIL) {
                 var selectedMember = playerParty.Devils[currentMemberSelection];
                 state = BattleState.BUSY;
-                yield return SwitchDevil(selectedMember);
+                yield return SwitchDevil(selectedMember, currentMemberSelection);
             }
             else if (playerAction == BattleAction.CATCHDEVIL) {
                 dialogueBox.EnableActionSelector(false);
@@ -354,6 +355,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         if (state != BattleState.BATTLEOVER)
+            currentAction = 0;
             ActionSelection();
     }
 
@@ -522,7 +524,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    IEnumerator SwitchDevil(Devil newDevil) {
+    IEnumerator SwitchDevil(Devil newDevil, int currentMemberSelection) {
 
         dialogueBox.EnableActionSelector(false);
         playerUnit.Devil.OnRecall();
@@ -533,6 +535,9 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         dialogueBox.SetMoveNames(newDevil.Moves);
+
+        playerParty.Devils[0] = newDevil;
+        playerParty.Devils[currentMemberSelection] = playerUnit.Devil;
 
         yield return dialogueBox.TypeDialogue("Fight for me, " + newDevil.Base.Name + "!");
         playerUnit.Setup(newDevil);
@@ -551,6 +556,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     void OpenPartyScreen() {
+        currentMemberSelection = 0;
         state = BattleState.PARTYSCREEN;
         partyScreen.SetPartyData(playerParty.Devils);
         partyScreen.gameObject.SetActive(true);
