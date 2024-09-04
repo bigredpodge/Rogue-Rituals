@@ -24,7 +24,7 @@ public class Locale : ScriptableObject {
 
     public Devil GetRandomWildDevil(List<DevilBase> devilBases, int difficulty) {
         var dBase = devilBases[Random.Range(0, devilBases.Count)];
-        var dLevel = Mathf.FloorToInt(difficulty / 3 + 6 * Random.Range(0.75f, 1.25f));
+        var dLevel = Mathf.FloorToInt(((difficulty * 5) / 8) + 4 + Mathf.FloorToInt(difficulty / 10) * Random.Range(0.75f, 1.25f));
         var wildDevil = new Devil(dBase, dLevel);
         return wildDevil;
     }
