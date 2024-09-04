@@ -27,9 +27,8 @@ public class BattleHUD : MonoBehaviour
     public void SetData(Devil devil) {
         _devil = devil;
         nameText.text = devil.Base.Name;
-        
-        hpText.text = devil.HP + " / " + devil.MaxHP;
-        hpBar.SetHP((float) devil.HP / devil.MaxHP);
+    
+        hpBar.SetHP(devil.HP, devil.MaxHP);
         SetExp();
         SetLevel();
 
@@ -65,7 +64,7 @@ public class BattleHUD : MonoBehaviour
 
     public IEnumerator UpdateHP() {
         if (_devil.HpChanged) {
-            yield return hpBar.SetHPSmooth((float) _devil.HP / _devil.MaxHP);
+            yield return hpBar.SetHPSmooth(_devil.HP, _devil.MaxHP);
             hpText.text = _devil.HP + " / " + _devil.MaxHP;
             _devil.HpChanged = false;
         }

@@ -1283,7 +1283,6 @@ MonoBehaviour:
   nameText: {fileID: 153790128288794130}
   levelText: {fileID: 985061849327802963}
   hpText: {fileID: 2124588364844091653}
-  statusText: {fileID: 0}
   hpBar: {fileID: 8931987508583709282}
   expBar: {fileID: 2628815962777509012}
   statGrowthUI: {fileID: 5671320277802808408}
@@ -3082,6 +3081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 7010250929127997911}
+  hpText: {fileID: 2124588364844091653}
 --- !u!1 &8432162997017151004
 GameObject:
   m_ObjectHideFlags: 0
