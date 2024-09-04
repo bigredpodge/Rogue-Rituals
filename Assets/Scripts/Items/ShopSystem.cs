@@ -78,9 +78,28 @@ public class ShopSystem : MonoBehaviour
         dialogueBox.UpdateShopItemSelection(currentSelection);
 
         if (Input.GetKeyDown(KeyCode.Z)) {
-            inventory.StockItem(items[currentSelection].Item, items[currentSelection].Count);
-            StartCoroutine(EndSelection());
+            StartCoroutine(HandleItem(items[currentSelection]));
         }
+    }
+
+    IEnumerator HandleItem(ItemSlot item) {
+        if (item.Item is RitualItem) {
+            inventory.StockItem((RitualItem)item.Item, item.Count);
+            yield return dialogueBox.TypeDialogue("Stocked " + item.Count + " " + item.Item.Name);
+        }
+        else if (item.Item is HeldItem) {
+            playerUnit.Devil.HeldItem = (HeldItem)item.Item;
+            yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name + " held the " + item.Item.Name);
+        }
+        else if (item.Item is RecoveryItem) {
+            item.Item.Use(playerUnit.Devil);
+            yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name + " was healed");
+        }
+        else 
+            Debug.Log("Failed to use item");
+
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(EndSelection());
     }
 
     IEnumerator EndSelection() {

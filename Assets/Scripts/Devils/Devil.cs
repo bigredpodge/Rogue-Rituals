@@ -10,6 +10,7 @@ public class Devil
 {
     [SerializeField] DevilBase _base;
     [SerializeField] int level;
+    [SerializeField] HeldItem heldItem;
 
     public Devil(DevilBase dBase, int dLevel) {
         _base = dBase;
@@ -35,6 +36,14 @@ public class Devil
             level = value;
         } 
     }
+    public HeldItem HeldItem { 
+        get {
+            return heldItem;
+        }
+        set {
+            heldItem = value;
+        } 
+    }
 
     public int Exp { get; set; }
     public int HP { get; set; }
@@ -43,11 +52,8 @@ public class Devil
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> IVs { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
-    public Condition Status { get; private set; }
     public Dictionary<Condition, int> Statuses{ get; set;}
     public int StatusTime { get; set; }
-    public Condition VolatileStatus { get; private set; }
-    public int VolatileStatusTime { get; set; }
     public Queue<string> StatusChanges { get; private set; }
     public bool HpChanged { get; set; }
     public event System.Action OnStatusChanged;
@@ -215,6 +221,10 @@ public class Devil
         if (Random.value * 100f <= 6.25f)
             critical = 1.5f;
 
+        float item = 1f;
+        if (attacker.heldItem != null)
+            item = attacker.heldItem.GetDamageModifiers(move);
+
         float brand = BrandChart.GetEffectivness(move.Base.Brand, this.Base.Brand1) * BrandChart.GetEffectivness(move.Base.Brand, this.Base.Brand2);
 
         float stab = 1f;
@@ -234,7 +244,7 @@ public class Devil
         if (debugModifier)
             debug = 100f;
 
-        float modifiers = Random.Range(0.8f, 1f) * brand * critical * stab * debug;
+        float modifiers = Random.Range(0.8f, 1f) * brand * critical * stab * item * debug;
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
