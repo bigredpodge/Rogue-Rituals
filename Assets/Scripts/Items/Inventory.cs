@@ -34,7 +34,8 @@ public class Inventory : MonoBehaviour
     }
 
     public void StockItem(ItemBase item, int stock) {
-        var itemSlot = ritualItemSlots.First(slot => slot.Item == item);
+        var itemSlot = ritualItemSlots.FirstOrDefault(slot => slot.Item == item);
+        Debug.Log(itemSlot);
         if (itemSlot == null) {
             ritualItemSlots.Add(
                 new ItemSlot {

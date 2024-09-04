@@ -27,7 +27,7 @@ public class ShopSystem : MonoBehaviour
     public void StartShop()
     {
         state = ShopState.START;
-        GenerateItems();
+        GenerateItems(3);
         StartCoroutine(SetupShop());
     }
 
@@ -38,9 +38,9 @@ public class ShopSystem : MonoBehaviour
         PlayerChoice();
     }
 
-    void GenerateItems() {
+    void GenerateItems(int numItems) {
         items.Clear();
-        for (int i=0; i<3; i++) {
+        for (int i=0; i<numItems; i++) {
             var newItem = GetRandomItem();
             items.Add(newItem);
         }
@@ -65,7 +65,7 @@ public class ShopSystem : MonoBehaviour
 
     void HandleSelection() {
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            if (currentSelection < 2) {
+            if (currentSelection < items.Count) {
                 ++currentSelection;
             }
         }
