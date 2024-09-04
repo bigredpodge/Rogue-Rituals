@@ -97,6 +97,10 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.FORGETMOVE) {
             HandleMoveForgetSelection();
         }
+        
+        if (Input.GetKeyDown(KeyCode.D)) {
+            ToggleDebugMode(debugMode);
+        }
     }
 
     void HandleActionSelection() {
@@ -135,10 +139,6 @@ public class BattleSystem : MonoBehaviour
             }
 
             StartCoroutine(BufferSelection());
-        }
-
-        if (Input.GetKeyDown(KeyCode.D)) {
-            ToggleDebugMode(debugMode);
         }
     }
 
