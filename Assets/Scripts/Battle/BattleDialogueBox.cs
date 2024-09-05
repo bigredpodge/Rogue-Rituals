@@ -20,7 +20,7 @@ public class BattleDialogueBox : MonoBehaviour
     [SerializeField] LearnMoveUI learnMoveUI;
     [SerializeField] TMP_Text[] choiceTexts;
     [SerializeField] GameObject choiceTextUI, moveToForgetUI;
-    private DialogueState state;
+    private DialogueState state = DialogueState.BUSY;
     private MoveBase moveToLearn;
     private Devil devilToTeach;
     private int currentMoveForgetSelection, currentChoiceSelection;
