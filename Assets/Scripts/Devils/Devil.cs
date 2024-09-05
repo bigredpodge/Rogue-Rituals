@@ -230,6 +230,8 @@ public class Devil
             item = attacker.heldItem.GetDamageModifiers(move);
 
         float brand = BrandChart.GetEffectivness(move.Base.Brand, this.Base.Brand1) * BrandChart.GetEffectivness(move.Base.Brand, this.Base.Brand2);
+        if (move.Base.AlwaysSuperEffective)
+            brand = 2f;
 
         float stab = 1f;
         if (move.Base.Brand == this.Base.Brand1 || move.Base.Brand == this.Base.Brand2)

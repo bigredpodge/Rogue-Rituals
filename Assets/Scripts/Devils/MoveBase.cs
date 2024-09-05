@@ -11,7 +11,7 @@ public class MoveBase : ScriptableObject
     [SerializeField] DevilBrand brand;
     [SerializeField] int power;
     [SerializeField] int accuracy = 100;
-    [SerializeField] bool alwaysHits;
+    [SerializeField] bool alwaysHits, alwaysSuperEffective;
     [SerializeField] int ap = 10;
     [SerializeField] int priority;
     [SerializeField] MoveCategory moveCategory;
@@ -35,6 +35,9 @@ public class MoveBase : ScriptableObject
     }
     public bool AlwaysHits {
         get { return alwaysHits; }
+    }
+    public bool AlwaysSuperEffective {
+        get { return alwaysSuperEffective; }
     }
     public int AP {
         get { return ap; }
