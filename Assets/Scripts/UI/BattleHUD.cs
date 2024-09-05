@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class BattleHUD : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class BattleHUD : MonoBehaviour
     Devil _devil;
 
     public void SetData(Devil devil) {
+        if(_devil != null) {
+            _devil.OnStatusChanged -= SetStatuses;
+            _devil.OnHPChanged -= UpdateHP;
+        }
+
         _devil = devil;
         nameText.text = devil.Base.Name;
     
@@ -34,6 +40,7 @@ public class BattleHUD : MonoBehaviour
 
         statusUIHandler.CheckStatusUI(_devil);
         _devil.OnStatusChanged += SetStatuses;
+        _devil.OnHPChanged += UpdateHP;
     }
 
     public void SetStatuses() {
@@ -62,12 +69,14 @@ public class BattleHUD : MonoBehaviour
         return Mathf.Clamp01(normalizedExp);
     }
 
-    public IEnumerator UpdateHP() {
-        if (_devil.HpChanged) {
-            yield return hpBar.SetHPSmooth(_devil.HP, _devil.MaxHP);
-            _devil.HpChanged = false;
-        }
+    public void UpdateHP() {
+        StartCoroutine(UpdateHPAsync());
     }
+
+    public IEnumerator UpdateHPAsync() {
+        yield return hpBar.SetHPSmooth(_devil.HP, _devil.MaxHP);
+    }
+
     public IEnumerator ShowStatGrowth() {
         var statGrowths = _devil.BoostStatsAfterLevelUp();
         var newStats = _devil.Stats;
@@ -84,6 +93,9 @@ public class BattleHUD : MonoBehaviour
         yield return new WaitForSeconds(1f);
         statGrowthUI.SetActive(false);
     }
-                    
+
+    public IEnumerator WaitForHPUpdate() {
+        yield return new WaitUntil(() => hpBar.IsUpdating == false);
+    }       
     
 }

@@ -55,8 +55,8 @@ public class Devil
     public Dictionary<Condition, int> Statuses{ get; set;}
     public int StatusTime { get; set; }
     public Queue<string> StatusChanges { get; private set; }
-    public bool HpChanged { get; set; }
     public event System.Action OnStatusChanged;
+    public event System.Action OnHPChanged;
     
 
     public void Init() {
@@ -194,7 +194,7 @@ public class Devil
         };
 
         HP = HP + statGrowths[Stat.MaxHP];
-        HpChanged = true;
+        OnHPChanged?.Invoke();
 
         return statGrowths;
     }
@@ -263,14 +263,19 @@ public class Devil
 
         var damageDetails = CalculateDamage(move, attacker, debugModifier);
 
-        UpdateHP(damageDetails.Damage);
+        DamageHP(damageDetails.Damage);
         
         return damageDetails;
     }
 
-    public void UpdateHP(int damage) {
+    public void DamageHP(int damage) {
         HP = Mathf.Clamp(HP - damage, 0, MaxHP);
-        HpChanged = true;
+        OnHPChanged?.Invoke();
+    }
+
+    public void HealHP(int value) {
+        HP = Mathf.Clamp(HP + value, 0, MaxHP);
+        OnHPChanged?.Invoke();
     }
 
     public Move GetRandomMove() {

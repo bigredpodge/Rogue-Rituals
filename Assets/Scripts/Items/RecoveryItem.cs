@@ -26,7 +26,7 @@ public class RecoveryItem : ItemBase
             if (devil.HP == devil.MaxHP)
                 return false;
 
-            devil.UpdateHP(-hpAmount);
+            devil.DamageHP(-hpAmount);
         }
 
         return true;

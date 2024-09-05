@@ -30,7 +30,7 @@ public class BattleSystem : MonoBehaviour
     DevilParty playerParty;
     Devil enemyDevil;
     bool isTrainerBattle = false;
-
+    private int lastDamage;
     BattleState? state;
     BattleState? prevState;
     // Start is called before the first frame update
@@ -301,7 +301,7 @@ public class BattleSystem : MonoBehaviour
         bool canRunMove = sourceUnit.Devil.OnBeforeMove();
         if (!canRunMove) {
             yield return ShowStatusChanges(sourceUnit);
-            yield return sourceUnit.Hud.UpdateHP();
+            yield return sourceUnit.Hud.WaitForHPUpdate();
             sourceUnit.Hud.SetStatuses();
             yield return CheckFelled(sourceUnit);
             yield break;
@@ -323,11 +323,21 @@ public class BattleSystem : MonoBehaviour
                     debugModifier = false;
 
                 var damageDetails = targetUnit.Devil.TakeDamage(move, sourceUnit.Devil, debugModifier);
-                yield return targetUnit.Hud.UpdateHP();
+                yield return targetUnit.Hud.WaitForHPUpdate();
                 yield return ShowDamageDetails(damageDetails);
+                lastDamage = damageDetails.Damage;
 
+                //Recoil
                 if (move.Base.TakeRecoil == TakeRecoil.OnHit)
                     yield return TakeRecoilDamage(sourceUnit, move, damageDetails.Damage);
+
+                //Drain
+                foreach (var effect in move.Base.Effects) {
+                    if (effect.HealSource == HealSource.Damage) {
+                        yield return RunHeal(sourceUnit, effect);
+                    }
+                }
+            
             }
 
             if (move.Base.Effects != null && move.Base.Effects.Count > 0 && targetUnit.Devil.HP > 0)
@@ -355,7 +365,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator TakeRecoilDamage(BattleUnit sourceUnit, Move move, int damage) {
         yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name+" crashed and hurt themselves!");
-        sourceUnit.Devil.UpdateHP(Mathf.FloorToInt(damage * (move.Base.RecoilMultiplier / 4)));
+        sourceUnit.Devil.DamageHP(Mathf.FloorToInt(damage * (move.Base.RecoilMultiplier / 4)));
         yield return new WaitForSeconds(1f);
     }
 
@@ -366,7 +376,7 @@ public class BattleSystem : MonoBehaviour
         sourceUnit.Devil.OnAfterTurn();
         yield return ShowStatusChanges(sourceUnit);
         sourceUnit.Hud.SetStatuses();
-        yield return sourceUnit.Hud.UpdateHP();
+        yield return sourceUnit.Hud.WaitForHPUpdate();
         yield return CheckFelled(sourceUnit);
     }
 
@@ -404,9 +414,34 @@ public class BattleSystem : MonoBehaviour
                     targetUnit.Devil.SetStatus(effect.Status, effect.StatusTime);
                 }
             }
+
+            //Heals
+            if (effect.HealSource == HealSource.Discipline)
+                yield return RunHeal(sourceUnit, effect);
+
         }
         yield return ShowStatusChanges(sourceUnit);
         yield return ShowStatusChanges(targetUnit);
+    }
+
+    IEnumerator RunHeal(BattleUnit sourceUnit, MoveEffects effect) {
+        if (effect.HealSource == HealSource.Discipline) {
+            float a = (2 * sourceUnit.Devil.Level + 10) / 250f;
+            int heal = Mathf.FloorToInt(a * 20 * (sourceUnit.Devil.Discipline / 4) * (effect.HealMultiplier / 3) + 2);
+            Debug.Log("Heal amount: "+heal);
+            sourceUnit.Devil.HealHP(heal);
+
+            yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name + " healed.");
+            yield return new WaitForSeconds(1f);
+        }
+        else if (effect.HealSource == HealSource.Damage) {
+            int heal = Mathf.FloorToInt(lastDamage * (effect.HealMultiplier / 3));
+            Debug.Log("Heal amount: "+heal);
+            sourceUnit.Devil.HealHP(heal);
+
+            yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name + " drained the opponent's health.");
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     bool CheckIfMoveHits(Move move, Devil source, Devil target) {

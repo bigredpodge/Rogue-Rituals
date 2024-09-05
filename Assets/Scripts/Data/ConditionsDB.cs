@@ -19,7 +19,7 @@ public class ConditionsDB
                 Name = "Poison",
                 StartMessage = " has been poisoned.",
                 OnAfterTurn = (Devil devil) => {
-                    devil.UpdateHP(devil.MaxHP / 8);
+                    devil.DamageHP(devil.MaxHP / 8);
                     devil.StatusChanges.Enqueue(devil.Base.Name + " was hurt by poison.");
                 }
             }
@@ -28,7 +28,7 @@ public class ConditionsDB
                 Name = "Burn",
                 StartMessage = " is now burning.",
                 OnAfterTurn = (Devil devil) => {
-                    devil.UpdateHP(devil.MaxHP / 8);
+                    devil.DamageHP(devil.MaxHP / 8);
                     devil.StatusChanges.Enqueue(devil.Base.Name + " is burning.");
                 }
             }

@@ -64,11 +64,28 @@ public class MoveBase : ScriptableObject
 
 [System.Serializable]
 public class MoveEffects {
-    [SerializeField] List<StatBoost> boosts;
-    [SerializeField] ConditionID status;
-    [SerializeField] int statusTime = 10;
+
+    [Header("General")]
     [SerializeField] int chance = 100;
     [SerializeField] MoveTarget target;
+
+    [Header("Boosts")]
+    [SerializeField] List<StatBoost> boosts;
+
+    [Header("Status")]
+    [SerializeField] ConditionID status;
+    [SerializeField] int statusTime = 10;
+
+    [Header("Heals")]
+    [SerializeField] HealSource healSource;
+    [SerializeField] float healMultiplier = 1f;
+
+    public int Chance {
+        get { return chance; }
+    }
+    public MoveTarget Target {
+        get { return target; }
+    }
 
     public List<StatBoost> Boosts {
         get { return boosts; }
@@ -79,11 +96,11 @@ public class MoveEffects {
     public int StatusTime {
         get { return statusTime; }
     }
-    public int Chance {
-        get { return chance; }
+    public HealSource HealSource {
+        get { return healSource; }
     }
-    public MoveTarget Target {
-        get { return target; }
+    public float HealMultiplier {
+        get { return healMultiplier; }
     }
 
 }
@@ -105,4 +122,8 @@ public enum MoveTarget {
 
 public enum TakeRecoil {
     None, OnHit, OnMiss
+}
+
+public enum HealSource {
+    None, Discipline, Damage
 }
