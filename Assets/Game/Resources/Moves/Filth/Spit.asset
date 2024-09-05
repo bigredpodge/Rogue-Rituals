@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Spit
   description: Launch a ball of filth at the opponent.
-  brand: 4
+  brand: 3
   power: 40
   accuracy: 100
   alwaysHits: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Chromatic Blast
   description: '(not implemented: move is always super effective)'
-  brand: 3
+  brand: 4
   power: 0
   accuracy: 100
   alwaysHits: 0

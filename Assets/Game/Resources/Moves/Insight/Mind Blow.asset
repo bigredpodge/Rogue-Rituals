@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mind Blow
   description: Assault the opponent with psychic power.
-  brand: 3
+  brand: 4
   power: 0
   accuracy: 100
   alwaysHits: 0

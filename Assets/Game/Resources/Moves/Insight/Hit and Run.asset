@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Hit and Run
   description: Attack, then return to the party (not implemented)
-  brand: 3
+  brand: 4
   power: 55
   accuracy: 100
   alwaysHits: 0

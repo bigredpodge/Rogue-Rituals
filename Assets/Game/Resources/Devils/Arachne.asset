@@ -17,8 +17,9 @@ MonoBehaviour:
   domain: Eyes
   description: A tiny spider. Its watchful gaze and meticulous cunning suggests it
     is more than it seems.
+  sprite: {fileID: 0}
   model: {fileID: 7808496003167887087, guid: ba1560cc66cb5f44ab2160a3e84f5103, type: 3}
-  brand1: 3
+  brand1: 4
   brand2: 0
   maxHP: 59
   strength: 52
@@ -56,3 +57,4 @@ MonoBehaviour:
     level: 51
   - moveBase: {fileID: 11400000, guid: 5ca5dfcd5eff6094da2abac842b1e68c, type: 2}
     level: 58
+  teachableMoves: []

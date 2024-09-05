@@ -118,8 +118,8 @@ public enum DevilBrand {
         None,
         Heat,
         Squall,
-        Insight,
         Filth,
+        Insight,
         Rage,
         Allure,
         Lunacy,
@@ -147,16 +147,16 @@ public enum Stat {
 public class BrandChart {
         static float[][] chart = 
         {
-            //                   HEA SQU INS FIL RAG ALL LUN DIS MIS
+            //                   HEA SQU FIL INS RAG ALL LUN DIS MIS
             /*HEA*/ new float[] {.5f,.5f, 2f, 2f, 1f, 2f, 1f, 1f, 1f },
-            /*SQU*/ new float[] { 2f, 1f, 1f, 2f, 1f, 1f, 1f,.5f, 2f },
-            /*INS*/ new float[] { 1f, 1f, 1f, 2f,.5f,.5f, 2f, 1f, 1f },
-            /*FIL*/ new float[] { 2f,.5f, 1f,.5f,.5f, 1f, 2f, 1f, 2f },
-            /*RAG*/ new float[] { 1f, 1f, 2f,.5f, 1f, 1f, 1f, 2f, 1f },
-            /*ALL*/ new float[] { 1f, 1f, 2f,.5f,.5f, 2f, 2f, 1f,.5f },
-            /*LUN*/ new float[] { 1f, 1f, 2f, 2f, 1f,.5f, 2f, 1f, 1f },
-            /*DIS*/ new float[] { 1f, 2f, 2f, 2f, 1f, 1f, 2f,.5f,.5f },
-            /*MIS*/ new float[] { 1f,.5f, 1f, 1f, 2f,.5f,.5f, 2f, 2f }
+            /*SQU*/ new float[] { 2f, 1f, 1f, 1f, 1f, 1f, 1f,.5f, 2f },
+            /*FIL*/ new float[] { 2f, 2f,.5f, 1f,.5f, 1f, 2f, 1f, 2f },
+            /*INS*/ new float[] { 1f, 1f, 2f, 1f,.5f,.5f, 2f, 1f, 1f },
+            /*RAG*/ new float[] { 1f, 1f,.5f, 2f, 1f, 1f, 1f, 2f, 1f },
+            /*ALL*/ new float[] { 1f,.5f, 1f,.5f, 2f, 2f, 2f, 1f,.5f },
+            /*LUN*/ new float[] { 1f, 2f, 1f, 1f, 2f,.5f, 2f, 1f, 1f },
+            /*DIS*/ new float[] { 1f, 2f, 2f, 1f, 2f, 1f, 2f,.5f,.5f },
+            /*MIS*/ new float[] { 1f, 1f,.5f, 2f, 1f,.5f,.5f, 2f, 2f }
         };
 
         public static float GetEffectivness(DevilBrand attackBrand, DevilBrand defenseBrand) {

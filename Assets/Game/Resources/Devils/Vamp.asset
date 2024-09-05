@@ -16,9 +16,10 @@ MonoBehaviour:
   rank: Devil
   domain: Blood
   description: 
+  sprite: {fileID: 0}
   model: {fileID: 3039207374650124178, guid: bb1b4b290c85b9e45b8652c2a813e680, type: 3}
   brand1: 6
-  brand2: 3
+  brand2: 4
   maxHP: 40
   strength: 60
   discipline: 60
@@ -31,3 +32,4 @@ MonoBehaviour:
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: b4b6cab1929005941a0aff9cbb262757, type: 2}
     level: 1
+  teachableMoves: []

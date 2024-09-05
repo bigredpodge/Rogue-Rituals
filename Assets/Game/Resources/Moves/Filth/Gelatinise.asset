@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Gelatinise
   description: Form your body like jelly, raising resistance to all attacks.
-  brand: 4
+  brand: 3
   power: 0
   accuracy: 100
   alwaysHits: 1

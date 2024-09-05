@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Stratagem
   description: Ready a trap for the opponent, attempting to reduce their initiative
-  brand: 3
+  brand: 4
   power: 0
   accuracy: 100
   alwaysHits: 0

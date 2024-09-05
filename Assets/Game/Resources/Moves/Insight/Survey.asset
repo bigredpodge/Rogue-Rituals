@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Survey
   description: Closely survey your opponent, studying its movements.
-  brand: 3
+  brand: 4
   power: 0
   accuracy: 100
   alwaysHits: 0

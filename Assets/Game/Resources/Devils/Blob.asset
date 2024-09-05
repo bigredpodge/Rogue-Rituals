@@ -16,8 +16,9 @@ MonoBehaviour:
   rank: Devil
   domain: the Sludge
   description: A sentient blob of ooze. It shifts its body around with defiant determination.
+  sprite: {fileID: 0}
   model: {fileID: 919132149155446097, guid: 79b031a1286cb944ea4049cb032007aa, type: 3}
-  brand1: 4
+  brand1: 3
   brand2: 0
   maxHP: 50
   strength: 50
@@ -55,3 +56,4 @@ MonoBehaviour:
     level: 51
   - moveBase: {fileID: 11400000, guid: 03d14e36b63f8c949afb27782f6b1c2d, type: 2}
     level: 75
+  teachableMoves: []

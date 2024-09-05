@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sap Strength
   description: Suck the strength from an enemy, reducing its attack power.
-  brand: 4
+  brand: 3
   power: 0
   accuracy: 100
   alwaysHits: 1

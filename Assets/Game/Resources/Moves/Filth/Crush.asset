@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Crush
   description: Smother the opponent with the weight of your form.
-  brand: 4
+  brand: 3
   power: 80
   accuracy: 95
   alwaysHits: 0

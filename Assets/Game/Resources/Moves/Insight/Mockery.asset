@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mockery
   description: Assault the enemy with vicious words.
-  brand: 3
+  brand: 4
   power: 40
   accuracy: 100
   alwaysHits: 0

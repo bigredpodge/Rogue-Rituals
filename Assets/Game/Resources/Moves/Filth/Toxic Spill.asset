@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Toxic Spill
   description: Inflict deadly toxins on the opponent, with a chance to burn them
     with acid.
-  brand: 4
+  brand: 3
   power: 60
   accuracy: 100
   alwaysHits: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Mind Blast
   description: A wave of psychic power blasts the opponent's entire body.
-  brand: 3
+  brand: 4
   power: 0
   accuracy: 100
   alwaysHits: 0

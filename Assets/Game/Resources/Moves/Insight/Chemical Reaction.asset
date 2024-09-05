@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Chemical Reaction
   description: 'An explosion of chemicals, (effect not implemented: dealing extra
     damage per status effect currently on the user)'
-  brand: 3
+  brand: 4
   power: 0
   accuracy: 100
   alwaysHits: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Body Throw
   description: 'Launch your body at the enemy for massive damage, (not implemented:
     deal recoil damage to self.)'
-  brand: 4
+  brand: 3
   power: 100
   accuracy: 80
   alwaysHits: 0

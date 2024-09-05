@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Slap
   description: Form a slapping surface and apply it to the enemy with force.
-  brand: 4
+  brand: 3
   power: 40
   accuracy: 100
   alwaysHits: 0
