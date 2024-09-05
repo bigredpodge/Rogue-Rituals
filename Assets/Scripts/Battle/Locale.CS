@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class Locale : ScriptableObject {
     public List<DevilBase> RareDevilBases => rareDevilBases;
     [SerializeField] List<LocaleID> nextAvailableLocales;
     public List<LocaleID> NextAvailableLocales => nextAvailableLocales;
+    [SerializeField] List<GenericSummoner> genericSummoners;
+    public List<GenericSummoner> GenericSummoners => genericSummoners;
     [SerializeField] Material material;
     public Material Material => material;
 
@@ -23,10 +26,14 @@ public class Locale : ScriptableObject {
     }
 
     public Devil GetRandomWildDevil(List<DevilBase> devilBases, int difficulty) {
-        var dBase = devilBases[Random.Range(0, devilBases.Count)];
-        var dLevel = Mathf.FloorToInt(((difficulty * 5) / 8) + 4 + Mathf.FloorToInt(difficulty / 10) * Random.Range(0.75f, 1.25f));
+        var dBase = devilBases[UnityEngine.Random.Range(0, devilBases.Count)];
+        var dLevel = Mathf.FloorToInt(((difficulty * 5) / 8) + 4 + Mathf.FloorToInt(difficulty / 10) * UnityEngine.Random.Range(0.75f, 1.25f));
         var wildDevil = new Devil(dBase, dLevel);
         return wildDevil;
+    }
+
+    public GenericSummoner GetGenericSummoner() {
+        return genericSummoners[UnityEngine.Random.Range(0, genericSummoners.Count)];
     }
 
 }

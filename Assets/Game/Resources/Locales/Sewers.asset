@@ -23,4 +23,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c759d23a8e1fde47abeeafff77b40f1, type: 2}
   rareDevilBases: []
   nextAvailableLocales: 0200000003000000
+  genericSummoners:
+  - {fileID: 11400000, guid: a0d7c533e63998740b40c3fd5f43635e, type: 2}
   material: {fileID: 2100000, guid: 171ecc2858366024b8df28062d236be6, type: 2}

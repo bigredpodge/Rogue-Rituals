@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 
 
 public enum GameState { START, BATTLE, SHOP, LOCALECHOICE, BUSY }
@@ -24,9 +25,10 @@ public class GameController : MonoBehaviour
     private List<Locale> newLocales;
     [SerializeField] GameObject localeChoiceUI;
     [SerializeField] TMP_Text[] localeTexts;
-    [SerializeField] DevilParty playerParty;
+    [SerializeField] DevilParty playerParty, enemyParty;
     private int difficultyModifier;
     private int currentSelection;
+    private bool allowSummonerBattle = true;
     public Locale GetRandomNewLocale() {
         return locales[(int)currentLocale.NextAvailableLocales[Random.Range(0, currentLocale.NextAvailableLocales.Count)]];
     }
@@ -57,9 +59,34 @@ public class GameController : MonoBehaviour
         //establish units
         var wildDevil = currentLocale.GetRandomWildDevil(currentLocale.CommonDevilBases, difficultyModifier);
 
+        //Try chance for summoner encounter
+        int difficultyChance = (difficultyModifier - 1) % localeLength;
+        int randomNumber = Random.Range(1, localeLength);
+
+        if (allowSummonerBattle && randomNumber <= difficultyChance) {
+            var summoner = currentLocale.GetGenericSummoner();
+            
+            int partyCount = 2;
+            partyCount = Random.Range(1, Mathf.FloorToInt(difficultyModifier / localeLength));
+            Mathf.Clamp(partyCount, 1, 5);
+
+            if (enemyParty != null)
+                enemyParty.Devils.Clear();
+
+            for (int i = 0; i < partyCount; i++) {
+                var newDevil = summoner.GetDevilFromSummoner(difficultyModifier);
+                enemyParty.Devils.Add(new Devil(newDevil.Base, newDevil.Level));
+            }
+
+            allowSummonerBattle = false;
+
+            battleSystem.StartGenericSummonerBattle(playerParty, enemyParty, summoner);
+            return;
+        }
+        
+
         //Try chance for uncommon or rare wild encounter
-        int randomNumber = Random.Range(1, 101);
-        int difficultyChance = (difficultyModifier - 1) % 10;
+        randomNumber = Random.Range(1, 101);
 
 
         if (randomNumber < difficultyChance && currentLocale.RareDevilBases.Count > 0) {
@@ -157,6 +184,7 @@ public class GameController : MonoBehaviour
         yield return dialogueBox.TypeDialogue("Taking the road to the "+currentLocale.LocaleID.ToString())+".";
         yield return new WaitForSeconds(1f);
         ground.material = currentLocale.Material;
+        allowSummonerBattle = true;
 
         StartBattle();
     }

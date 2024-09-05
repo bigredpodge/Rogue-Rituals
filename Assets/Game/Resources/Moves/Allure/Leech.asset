@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Leech
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
+  name: Leech
+  description: Suck the life from your opponent.
+  brand: 6
+  power: 60
   accuracy: 100
   alwaysHits: 0
   alwaysSuperEffective: 0
@@ -24,4 +24,11 @@ MonoBehaviour:
   ap: 10
   priority: 0
   moveCategory: 0
-  effects: []
+  effects:
+  - chance: 0
+    target: 0
+    boosts: []
+    status: 0
+    statusTime: 0
+    healSource: 2
+    healMultiplier: 2

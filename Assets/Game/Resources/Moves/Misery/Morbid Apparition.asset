@@ -12,16 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Morbid Apparition
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
+  name: Morbid Apparition
+  description: Take the opponent off guard with a dreadful vision, a chance to lower
+    their discipline.
+  brand: 9
+  power: 50
   accuracy: 100
   alwaysHits: 0
   alwaysSuperEffective: 0
   takeRecoil: 0
   recoilMultiplier: 1
-  ap: 10
+  ap: 20
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 1
+  effects:
+  - chance: 20
+    target: 0
+    boosts:
+    - stat: 2
+      boost: -1
+    status: 0
+    statusTime: 0
+    healSource: 0
+    healMultiplier: 0

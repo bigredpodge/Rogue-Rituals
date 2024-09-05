@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d2941aa50ccba4a9f1fddfef82b76d, type: 3}
+  m_Name: Vagrant Spirit
+  m_EditorClassIdentifier: 
+  name: Vagrant Spirit
+  possibleDevils:
+  - {fileID: 11400000, guid: f365bbc947ba2b94d956d094030ba3cb, type: 2}
+  - {fileID: 11400000, guid: 401c90b38efa75b4ab79bf0796af98f5, type: 2}
+  - {fileID: 11400000, guid: a8bc37b13542b7e4da3eb413153f8488, type: 2}
+  - {fileID: 11400000, guid: 3d7b8f6a31fa726448c38bdc1ea1f4d6, type: 2}
+  - {fileID: 11400000, guid: b149422ed070ad44fb2ab570f3572bc7, type: 2}
+  - {fileID: 11400000, guid: d52d41b48a88fc5429cc06c8ac5e5a30, type: 2}

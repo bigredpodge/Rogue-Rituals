@@ -8624,6 +8624,7 @@ MonoBehaviour:
   - {fileID: 1996169767}
   - {fileID: 147492248}
   playerParty: {fileID: 970119284}
+  enemyParty: {fileID: 2097929171}
 --- !u!4 &1993434895
 Transform:
   m_ObjectHideFlags: 0
@@ -9355,6 +9356,7 @@ GameObject:
   - component: {fileID: 2097929168}
   - component: {fileID: 2097929167}
   - component: {fileID: 2097929170}
+  - component: {fileID: 2097929171}
   m_Layer: 0
   m_Name: EnemyBattleStation
   m_TagString: Untagged
@@ -9466,6 +9468,19 @@ MonoBehaviour:
   enemyBattleStation: {fileID: 2097929166}
   maxHP: 0
   currentHP: 0
+--- !u!114 &2097929171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097929165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcfc1eca48d0d84bba70d6bef1afbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  devils: []
 --- !u!114 &2127964543 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2869325791610018382, guid: 9e80172ae1e8598438eaf7469896268f, type: 3}

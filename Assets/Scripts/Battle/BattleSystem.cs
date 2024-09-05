@@ -27,9 +27,10 @@ public class BattleSystem : MonoBehaviour
     private int currentAction, currentMove, currentMemberSelection, currentItemSelection, currentChoiceSelection, currentMoveForgetSelection;
     private bool debugMode = false;
     public event Action<bool> OnBattleOver;
-    DevilParty playerParty;
+    DevilParty playerParty, enemyParty;
     Devil enemyDevil;
-    bool isTrainerBattle = false;
+    bool isSummonerBattle = false;
+
     private int lastDamage;
     BattleState? state;
     BattleState? prevState;
@@ -42,13 +43,41 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(SetupBattle());
     }
 
-    public IEnumerator SetupBattle() {
+    public void StartGenericSummonerBattle(DevilParty playerParty, DevilParty summonerParty, GenericSummoner summoner)
+    {
+        this.enemyParty = summonerParty;
+        this.playerParty = playerParty;
+        isSummonerBattle = true;
+        state = BattleState.START; 
+        StartCoroutine(SetupSummonerBattle(summoner));
+    }
 
+    public IEnumerator SetupSummonerBattle(GenericSummoner summoner) {
         playerUnit.Hud.StatusUIHandler.Init();
         enemyUnit.Hud.StatusUIHandler.Init();
-
         playerUnit.Setup(playerParty.GetHealthyDevil());
-        enemyUnit.Setup(enemyDevil);
+        enemyUnit.Setup(enemyParty.GetHealthyDevil());
+        yield return dialogueBox.TypeDialogue(summoner.Name + " challenges you to battle!");
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(SetupBattle());
+    }
+
+
+    public IEnumerator SetupBattle() {
+
+        if (!isSummonerBattle) {
+            //Wild Battle
+            playerUnit.Hud.StatusUIHandler.Init();
+            enemyUnit.Hud.StatusUIHandler.Init();
+            playerUnit.Setup(playerParty.GetHealthyDevil());
+            enemyUnit.Setup(enemyDevil);
+            dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
+            yield return dialogueBox.TypeDialogue("Behold, you face " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
+        }
+        else {
+            //Summoner Battle
+            yield return dialogueBox.TypeDialogue("Your opponent summons " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
+        }
 
         partyScreen.Init();
         dialogueBox.TargetMenu.Init();
@@ -58,9 +87,7 @@ public class BattleSystem : MonoBehaviour
         Debug.Log("Enemy Stats: Level - "+enemyUnit.Devil.Level+" / HP - "+enemyUnit.Devil.MaxHP+" / Strength - "+enemyUnit.Devil.Strength+" / Discipline - "+enemyUnit.Devil.Discipline+
                     " / Fortitude - "+enemyUnit.Devil.Fortitude+" / Willpower - "+enemyUnit.Devil.Willpower+" / Initiative - "+enemyUnit.Devil.Initiative);
 
-        dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
-
-        yield return dialogueBox.TypeDialogue("Behold, you face " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
+       
         yield return new WaitForSeconds(1f);
         
         ActionSelection();
@@ -116,7 +143,7 @@ public class BattleSystem : MonoBehaviour
                 OpenPartyScreen();
             }
             else if (currentAction == 2) {
-                if (isTrainerBattle) {
+                if (isSummonerBattle) {
                     StartCoroutine(dialogueBox.TypeDialogue("Your opponent prevents you from stealing its summon!"));
                 }
                 else
@@ -390,6 +417,12 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    IEnumerator NextSummonerDevil(Devil newDevil) {
+        yield return dialogueBox.TypeDialogue("A fearsome " + newDevil.Base.Name + " is summoned!");
+        enemyUnit.Setup(newDevil);
+        yield return new WaitForSeconds(1f);
+    }
+
     IEnumerator RunMoveEffects(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
         var effects = move.Base.Effects;
         foreach (var effect in effects) {
@@ -489,6 +522,15 @@ public class BattleSystem : MonoBehaviour
             }
             else {
                 yield return EndBattle(false);
+            }
+        }
+        else if (isSummonerBattle) {
+            var nextDevil = enemyParty.GetHealthyDevil();
+            if (nextDevil != null) {
+                StartCoroutine(NextSummonerDevil(nextDevil));
+            }
+            else {
+                yield return EndBattle(true);
             }
         }
         else {

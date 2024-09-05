@@ -13,17 +13,29 @@ MonoBehaviour:
   m_Name: Beauty Sleep
   m_EditorClassIdentifier: 
   name: Beauty Sleep
-  description: Sleep for two turns and heal. (Heal not implemented).
+  description: Sleep and heal.
   brand: 6
   power: 0
   accuracy: 100
   alwaysHits: 0
-  ap: 10
+  alwaysSuperEffective: 0
+  takeRecoil: 0
+  recoilMultiplier: 1
+  ap: 5
   priority: 0
   moveCategory: 2
   effects:
-  - boosts: []
+  - chance: 100
+    target: 1
+    boosts: []
     status: 3
     statusTime: 4
-    chance: 100
+    healSource: 0
+    healMultiplier: 1
+  - chance: 100
     target: 1
+    boosts: []
+    status: 0
+    statusTime: 4
+    healSource: 1
+    healMultiplier: 6

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Lost Hope
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Lost Hope
+  description: (Deal more damage for each status the user is carrying)
+  brand: 9
   power: 0
   accuracy: 100
   alwaysHits: 0

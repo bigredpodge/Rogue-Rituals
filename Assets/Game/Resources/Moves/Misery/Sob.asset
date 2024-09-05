@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Sob
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
+  name: Sob
+  description: Attack the opponent's morale with a disheartening sob.
+  brand: 9
+  power: 40
   accuracy: 100
   alwaysHits: 0
   alwaysSuperEffective: 0
   takeRecoil: 0
   recoilMultiplier: 1
-  ap: 10
+  ap: 30
   priority: 0
-  moveCategory: 0
+  moveCategory: 1
   effects: []

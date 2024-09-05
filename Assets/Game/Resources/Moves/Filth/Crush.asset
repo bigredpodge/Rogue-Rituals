@@ -18,6 +18,9 @@ MonoBehaviour:
   power: 80
   accuracy: 95
   alwaysHits: 0
+  alwaysSuperEffective: 0
+  takeRecoil: 0
+  recoilMultiplier: 1
   ap: 10
   priority: 0
   moveCategory: 0

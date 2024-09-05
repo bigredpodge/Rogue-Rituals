@@ -19,12 +19,17 @@ MonoBehaviour:
   power: 60
   accuracy: 100
   alwaysHits: 0
+  alwaysSuperEffective: 0
+  takeRecoil: 0
+  recoilMultiplier: 1
   ap: 15
   priority: 0
-  moveCategory: 1
+  moveCategory: 0
   effects:
-  - boosts: []
+  - chance: 10
+    target: 0
+    boosts: []
     status: 2
     statusTime: 10
-    chance: 10
-    target: 0
+    healSource: 0
+    healMultiplier: 1

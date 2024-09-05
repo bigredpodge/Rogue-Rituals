@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Pitiful Grab
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
+  name: Pitiful Grab
+  description: Desperately bargain with the opponent, (with a chance to make them
+    flinch).
+  brand: 9
+  power: 50
   accuracy: 100
   alwaysHits: 0
   alwaysSuperEffective: 0

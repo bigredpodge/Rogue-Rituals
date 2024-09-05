@@ -23,7 +23,7 @@ MonoBehaviour:
   recoilMultiplier: 1
   ap: 5
   priority: 0
-  moveCategory: 2
+  moveCategory: 0
   effects:
   - chance: 100
     target: 1

@@ -12,16 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Reel In
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
+  name: Reel In
+  description: Draw the opponent in for a swift strike, with a chance to lower willpower.
+  brand: 6
+  power: 50
   accuracy: 100
   alwaysHits: 0
   alwaysSuperEffective: 0
   takeRecoil: 0
   recoilMultiplier: 1
-  ap: 10
+  ap: 15
   priority: 0
   moveCategory: 0
-  effects: []
+  effects:
+  - chance: 20
+    target: 0
+    boosts:
+    - stat: 4
+      boost: -1
+    status: 0
+    statusTime: 0
+    healSource: 0
+    healMultiplier: 0
