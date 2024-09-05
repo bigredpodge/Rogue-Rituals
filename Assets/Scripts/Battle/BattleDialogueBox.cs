@@ -148,7 +148,6 @@ public class BattleDialogueBox : MonoBehaviour
         learnMoveUI.UpdateMoveSelection(currentMoveForgetSelection);
 
         if(Input.GetKeyDown(KeyCode.Z)) {
-            Debug.Log(currentMoveForgetSelection);
             if (currentMoveForgetSelection == 0) {
                 StartCoroutine(DontForgetMoves());
             }
@@ -224,7 +223,7 @@ public class BattleDialogueBox : MonoBehaviour
 
 
     Color GetBrandColor(DevilBrand brand) {
-        Color[] colors = {  /*Orange*/ new Color(1f, 0.5f, 0f), /*Blue*/ new Color(0f, 0f, 0.75f), /*Yellow*/ new Color(.8f, .8f, 0f), /*Green*/ new Color(0f, 0.75f, 0f), /*Red*/ new Color(0.75f, 0f, 0f), 
+        Color[] colors = {  /*Orange*/ new Color(1f, 0.5f, 0f), /*Blue*/ new Color(0f, 0f, 0.75f), /*Green*/ new Color(0f, 0.75f, 0f), /*Yellow*/ new Color(.8f, .8f, 0f), /*Red*/ new Color(0.75f, 0f, 0f), 
                             /*Pink*/ new Color(.8f, 0f, .8f), /*Cyan*/ new Color(0f, 0.8f, 0.8f), /*Purple*/ new Color (0.5f, 0f, 0.5f), /*Gray*/ new Color(0.4f, 0.4f, 0.4f)};
         return colors[(int)brand - 1];
     }

@@ -80,6 +80,7 @@ public class MoveEffects {
     [SerializeField] HealSource healSource;
     [SerializeField] float healMultiplier = 1f;
 
+
     public int Chance {
         get { return chance; }
     }
