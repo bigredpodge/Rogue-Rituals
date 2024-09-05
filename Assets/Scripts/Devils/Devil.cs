@@ -63,12 +63,11 @@ public class Devil
         //Generate Moves
         Moves = new List<Move>();
         foreach (var move in Base.LearnableMoves) {
-            if (move.Level <= Level) {
-                Moves.Add(new Move(move.Base));
-            }
+            if (Moves.Count >= DevilBase.MaxNumOfMoves+1)
+                Moves.Remove(Moves[Random.Range(0, DevilBase.MaxNumOfMoves)]);
 
-            if (Moves.Count >= DevilBase.MaxNumOfMoves)
-                break;
+            if (move.Level <= Level)
+                Moves.Add(new Move(move.Base));
         }
 
         //Generate IVs - later we might want to specify IVs for progression.
