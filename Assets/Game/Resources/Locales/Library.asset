@@ -18,7 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d52d41b48a88fc5429cc06c8ac5e5a30, type: 2}
   - {fileID: 11400000, guid: e45404bfd72dcc448ac12cd8a31077c4, type: 2}
   - {fileID: 11400000, guid: 48ca0fa06a9261c47b7d9e528cd93b31, type: 2}
-  - {fileID: 11400000, guid: bc14d14f6a18ee04f8661e781721a7dd, type: 2}
   uncommonDevilBases:
   - {fileID: 11400000, guid: 3d7b8f6a31fa726448c38bdc1ea1f4d6, type: 2}
   - {fileID: 11400000, guid: 401c90b38efa75b4ab79bf0796af98f5, type: 2}

@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cd0971801262f409729f3601cc45b0, type: 3}
+  m_Name: Brambletoad
+  m_EditorClassIdentifier: 
+  name: Bomb
+  rank: Devil
+  domain: Dynamite
+  description: A fiend of fire and fuses. It snarls at you as it bounces about.
+  sprite: {fileID: 0}
+  model: {fileID: 919132149155446097, guid: c84b846ebc16a7c49b33743896107015, type: 3}
+  brand1: 1
+  brand2: 0
+  maxHP: 58
+  strength: 64
+  discipline: 84
+  fortitude: 58
+  willpower: 65
+  initiative: 80
+  expYield: 120
+  growthRate: 1
+  catchRate: 90
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 6260ceb98ee5b4645a2549fab1e5c6da, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 16855d11b771e8c4e891fa5ab0e622a0, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 0441c98c44927aa4b83664ee172944d5, type: 2}
+    level: 3
+  - moveBase: {fileID: 11400000, guid: 89ee07291bccbd1409774a170e61969d, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: d2cbb9b1615a3be4a94487dedeaa07e9, type: 2}
+    level: 11
+  - moveBase: {fileID: 11400000, guid: dfd54e44bd6d13b499b9c3d5c8f6b8ac, type: 2}
+    level: 16
+  - moveBase: {fileID: 11400000, guid: ae275c501a370d247956df3fcc4abcfd, type: 2}
+    level: 18
+  - moveBase: {fileID: 11400000, guid: e5ea9e689ad492d48a1dc4fec31965ac, type: 2}
+    level: 21
+  - moveBase: {fileID: 11400000, guid: 949de6f5210df2e48af6c43cc5ecde5c, type: 2}
+    level: 25
+  - moveBase: {fileID: 11400000, guid: c9b352f9b56c0174a8dfa85887e85e97, type: 2}
+    level: 28
+  - moveBase: {fileID: 11400000, guid: b2771133a8567e84ea6983eba054e7a0, type: 2}
+    level: 32
+  - moveBase: {fileID: 11400000, guid: 01901dd05edc6c54d87ac4c34f2f5413, type: 2}
+    level: 36
+  - moveBase: {fileID: 11400000, guid: 39da82a8df3d54d4da76b2213d0cf9b8, type: 2}
+    level: 43
+  - moveBase: {fileID: 11400000, guid: 03d14e36b63f8c949afb27782f6b1c2d, type: 2}
+    level: 49
+  - moveBase: {fileID: 11400000, guid: 9e58ff5fe3fba6a4cbfeeb5213075eab, type: 2}
+    level: 55
+  teachableMoves:
+  - {fileID: 11400000, guid: dfd54e44bd6d13b499b9c3d5c8f6b8ac, type: 2}
