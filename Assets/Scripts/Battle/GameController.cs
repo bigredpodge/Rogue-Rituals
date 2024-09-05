@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
     [SerializeField] DevilParty playerParty, enemyParty;
     private int difficultyModifier;
     private int currentSelection;
-    private bool allowSummonerBattle = true;
+    private bool allowSummonerBattle = false;
     public Locale GetRandomNewLocale() {
         return locales[(int)currentLocale.NextAvailableLocales[Random.Range(0, currentLocale.NextAvailableLocales.Count)]];
     }
