@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Rush
   m_EditorClassIdentifier: 
   name: Rush
-  description: Rush ahead in a great rage, and take damage if you miss (recoil not
-    implemented)
+  description: Rush ahead in a great rage, and take damage if you miss.
   brand: 5
   power: 90
   accuracy: 80
   alwaysHits: 0
+  alwaysSuperEffective: 0
+  takeRecoil: 2
+  recoilMultiplier: 2
   ap: 10
   priority: 0
   moveCategory: 0

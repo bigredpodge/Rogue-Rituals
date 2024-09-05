@@ -325,6 +325,9 @@ public class BattleSystem : MonoBehaviour
                 var damageDetails = targetUnit.Devil.TakeDamage(move, sourceUnit.Devil, debugModifier);
                 yield return targetUnit.Hud.UpdateHP();
                 yield return ShowDamageDetails(damageDetails);
+
+                if (move.Base.TakeRecoil == TakeRecoil.OnHit)
+                    yield return TakeRecoilDamage(sourceUnit, move, damageDetails.Damage);
             }
 
             if (move.Base.Effects != null && move.Base.Effects.Count > 0 && targetUnit.Devil.HP > 0)
@@ -337,9 +340,23 @@ public class BattleSystem : MonoBehaviour
                 yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name+" missed!");
             else
                 yield return dialogueBox.TypeDialogue("The enemy "+sourceUnit.Devil.Base.Name+" missed!");
-                
+            
+            if (move.Base.TakeRecoil == TakeRecoil.OnMiss) {
+                yield return new WaitForSeconds(1f);
+                var simulatedDamage = targetUnit.Devil.CalculateDamage(move, sourceUnit.Devil, false);
+                yield return TakeRecoilDamage(sourceUnit, move, simulatedDamage.Damage);
+            }
+
+            yield return CheckFelled(targetUnit); 
+
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    IEnumerator TakeRecoilDamage(BattleUnit sourceUnit, Move move, int damage) {
+        yield return dialogueBox.TypeDialogue(sourceUnit.Devil.Base.Name+" crashed and hurt themselves!");
+        sourceUnit.Devil.UpdateHP(Mathf.FloorToInt(damage * (move.Base.RecoilMultiplier / 4)));
+        yield return new WaitForSeconds(1f);
     }
 
     IEnumerator RunAfterTurn(BattleUnit sourceUnit) {

@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: Body Throw
   m_EditorClassIdentifier: 
   name: Body Throw
-  description: 'Launch your body at the enemy for massive damage, (not implemented:
-    deal recoil damage to self.)'
+  description: Launch your body at the enemy for massive damage, dealing large recoil
+    to self on hit.
   brand: 3
   power: 100
   accuracy: 80
   alwaysHits: 0
+  alwaysSuperEffective: 0
+  takeRecoil: 1
+  recoilMultiplier: 3
   ap: 10
   priority: 0
   moveCategory: 0

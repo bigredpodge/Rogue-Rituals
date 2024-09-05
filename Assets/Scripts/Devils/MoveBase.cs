@@ -12,6 +12,8 @@ public class MoveBase : ScriptableObject
     [SerializeField] int power;
     [SerializeField] int accuracy = 100;
     [SerializeField] bool alwaysHits, alwaysSuperEffective;
+    [SerializeField] TakeRecoil takeRecoil;
+    [SerializeField] float recoilMultiplier = 1f;
     [SerializeField] int ap = 10;
     [SerializeField] int priority;
     [SerializeField] MoveCategory moveCategory;
@@ -38,6 +40,12 @@ public class MoveBase : ScriptableObject
     }
     public bool AlwaysSuperEffective {
         get { return alwaysSuperEffective; }
+    }
+    public TakeRecoil TakeRecoil {
+        get { return takeRecoil; }
+    }
+    public float RecoilMultiplier {
+        get { return recoilMultiplier; }
     }
     public int AP {
         get { return ap; }
@@ -93,4 +101,8 @@ public enum MoveCategory {
 
 public enum MoveTarget {
     Foe, Self
+}
+
+public enum TakeRecoil {
+    None, OnHit, OnMiss
 }

@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: Chromatic Blast
   m_EditorClassIdentifier: 
   name: Chromatic Blast
-  description: '(not implemented: move is always super effective)'
+  description: Attack with an blast of chromatic light. It is always super effective.
   brand: 4
-  power: 0
+  power: 40
   accuracy: 100
   alwaysHits: 0
+  alwaysSuperEffective: 1
+  takeRecoil: 0
+  recoilMultiplier: 0
   ap: 10
   priority: 0
-  moveCategory: 0
+  moveCategory: 1
   effects: []

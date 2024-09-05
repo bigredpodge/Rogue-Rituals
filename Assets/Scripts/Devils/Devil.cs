@@ -219,8 +219,7 @@ public class Devil
         get { return GetStat(Stat.Initiative); }
     }
 
-    public DamageDetails TakeDamage(Move move, Devil attacker, bool debugModifier) {
-
+    public DamageDetails CalculateDamage(Move move, Devil attacker, bool debugModifier) {
         float critical = 1f;
         if (Random.value * 100f <= 6.25f)
             critical = 1.5f;
@@ -255,7 +254,16 @@ public class Devil
         float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
 
-        UpdateHP(damage);
+        damageDetails.Damage = damage;
+
+        return damageDetails;
+    }
+
+    public DamageDetails TakeDamage(Move move, Devil attacker, bool debugModifier) {
+
+        var damageDetails = CalculateDamage(move, attacker, debugModifier);
+
+        UpdateHP(damageDetails.Damage);
         
         return damageDetails;
     }
@@ -350,4 +358,5 @@ public class DamageDetails {
     public bool IsFelled { get; set; }
     public float Critical { get; set; }
     public float BrandEffectiveness { get; set; }
+    public int Damage { get; set; }
 }

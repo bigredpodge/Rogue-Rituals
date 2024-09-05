@@ -5963,7 +5963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   devils:
   - _base: {fileID: 11400000, guid: bc14d14f6a18ee04f8661e781721a7dd, type: 2}
-    level: 15
+    level: 6
     heldItem: {fileID: 11400000, guid: 54760f5fbb4c2ea498af9de6d06d2f7b, type: 2}
   - _base: {fileID: 11400000, guid: f365bbc947ba2b94d956d094030ba3cb, type: 2}
     level: 5
