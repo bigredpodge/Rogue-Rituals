@@ -5971,6 +5971,15 @@ MonoBehaviour:
   - _base: {fileID: 11400000, guid: bc14d14f6a18ee04f8661e781721a7dd, type: 2}
     level: 5
     heldItem: {fileID: 0}
+  - _base: {fileID: 11400000, guid: 401c90b38efa75b4ab79bf0796af98f5, type: 2}
+    level: 7
+    heldItem: {fileID: 0}
+  - _base: {fileID: 11400000, guid: 3129d7b15d127ab48b1773fe1c759f9f, type: 2}
+    level: 5
+    heldItem: {fileID: 0}
+  - _base: {fileID: 11400000, guid: a8bc37b13542b7e4da3eb413153f8488, type: 2}
+    level: 22
+    heldItem: {fileID: 0}
 --- !u!1 &972687946
 GameObject:
   m_ObjectHideFlags: 0
