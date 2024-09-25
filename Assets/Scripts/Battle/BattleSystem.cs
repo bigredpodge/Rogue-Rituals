@@ -53,12 +53,8 @@ public class BattleSystem : MonoBehaviour
     }
 
     public IEnumerator SetupSummonerBattle(GenericSummoner summoner) {
-        playerUnit.Hud.StatusUIHandler.Init();
-        enemyUnit.Hud.StatusUIHandler.Init();
-        playerUnit.Setup(playerParty.GetHealthyDevil());
-        yield return playerUnit.EnterBattleAnimation();
-        enemyUnit.Setup(enemyParty.GetHealthyDevil());
-        yield return enemyUnit.EnterBattleAnimation();
+        SetupUnit(enemyUnit, enemyParty.GetHealthyDevil());
+
         yield return dialogueBox.TypeDialogue(summoner.Name + " challenges you to battle!");
         yield return new WaitForSeconds(1f);
         StartCoroutine(SetupBattle());
@@ -66,22 +62,20 @@ public class BattleSystem : MonoBehaviour
 
 
     public IEnumerator SetupBattle() {
-
         if (!isSummonerBattle) {
             //Wild Battle
-            playerUnit.Hud.StatusUIHandler.Init();
-            enemyUnit.Hud.StatusUIHandler.Init();
-            playerUnit.Setup(playerParty.GetHealthyDevil());
-            yield return playerUnit.EnterBattleAnimation();
-            enemyUnit.Setup(enemyDevil);
-            yield return enemyUnit.EnterBattleAnimation();
-            dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
+            SetupUnit(enemyUnit, enemyDevil);
             yield return dialogueBox.TypeDialogue("Behold, you face " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
         }
         else {
             //Summoner Battle
             yield return dialogueBox.TypeDialogue("Your opponent summons " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
         }
+
+        yield return new WaitForSeconds(1f);
+        SetupUnit(playerUnit, playerParty.GetHealthyDevil());
+        dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
+        yield return dialogueBox.TypeDialogue("Go get em, " + playerUnit.Devil.Base.Name + "!");
 
         partyScreen.Init();
         dialogueBox.TargetMenu.Init();
@@ -95,6 +89,12 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         ActionSelection();
+    }
+
+    public void SetupUnit(BattleUnit unit, Devil devil) {
+        unit.Hud.StatusUIHandler.Init();
+        unit.Setup(devil);
+        StartCoroutine(unit.EnterBattleAnimation());
     }
 
 

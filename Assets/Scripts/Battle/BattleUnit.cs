@@ -47,6 +47,8 @@ public class BattleUnit : MonoBehaviour
     }
     
     public IEnumerator EnterBattleAnimation() {
+        Hud.SlideIn();
+
         float elapsedTime = 0f;
         float fadeDuration = .5f;
 
@@ -82,6 +84,8 @@ public class BattleUnit : MonoBehaviour
     }
 
     public IEnumerator LeaveBattleAnimation() {
+        Hud.SlideOut();
+
         float elapsedTime = 0f;
         float fadeDuration = .5f;
 

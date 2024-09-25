@@ -18,12 +18,24 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] GameObject statGrowthUI;
     [SerializeField] List<TMP_Text> statGrowthTexts;
     [SerializeField] StatusUIHandler statusUIHandler;
+    [SerializeField] bool isPlayerHud;
 
     public StatusUIHandler StatusUIHandler {
         get { return statusUIHandler; }
     }
 
+    private Vector3 originalPos;
+    private float posOffset = 500f;
+
     Devil _devil;
+
+    public void Awake() {
+        originalPos = this.transform.localPosition;
+        if (isPlayerHud)
+            this.transform.localPosition = new Vector3(originalPos.x + posOffset, originalPos.y);
+        else
+            this.transform.localPosition = new Vector3(originalPos.x - posOffset, originalPos.y);
+    }
 
     public void SetData(Devil devil) {
         if(_devil != null) {
@@ -96,6 +108,18 @@ public class BattleHUD : MonoBehaviour
 
     public IEnumerator WaitForHPUpdate() {
         yield return new WaitUntil(() => hpBar.IsUpdating == false);
-    }       
+    } 
+
+    public void SlideIn() {
+        this.transform.DOLocalMoveX(originalPos.x, 1.5f);
+    }
+
+    public void SlideOut() {
+        if (isPlayerHud)
+            this.transform.DOLocalMoveX(originalPos.x + posOffset, 1f);
+        
+        else
+            this.transform.DOLocalMoveX(originalPos.x - posOffset, 1f);
+    }   
     
 }
