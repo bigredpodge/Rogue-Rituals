@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using DG.Tweening;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class BattleUnit : MonoBehaviour
@@ -46,7 +48,7 @@ public class BattleUnit : MonoBehaviour
     
     public IEnumerator EnterBattleAnimation() {
         float elapsedTime = 0f;
-        float fadeDuration = 1f;
+        float fadeDuration = .7f;
 
         while (elapsedTime < fadeDuration)
         {
@@ -59,6 +61,24 @@ public class BattleUnit : MonoBehaviour
         }
 
         newInstance.transform.localScale = originalScale;
+    }
+
+    public void PlayAttackAnimation() {
+        var sequence = DOTween.Sequence();
+        if (isPlayerUnit) 
+            sequence.Append(newInstance.transform.DOLocalMoveX(originalPos.x + 2.5f, 0.15f));
+        else
+            sequence.Append(newInstance.transform.DOLocalMoveX(originalPos.x - 2.5f, 0.15f));
+
+        sequence.Append(newInstance.transform.DOLocalMoveX(originalPos.x, 0.35f));
+    }
+
+    public void PlaySpellAnimation() {
+        var sequence = DOTween.Sequence();
+        sequence.Append(newInstance.transform.DOLocalMoveY(originalPos.y + 1f, 0.2f));
+        sequence.Append(newInstance.transform.DOLocalMoveY(originalPos.y, 0.1f));
+        sequence.Append(newInstance.transform.DOLocalMoveY(originalPos.y + 1f, 0.2f));
+        sequence.Append(newInstance.transform.DOLocalMoveY(originalPos.y, 0.1f));
     }
 
     public void RemoveUnit() {

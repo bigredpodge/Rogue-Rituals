@@ -345,6 +345,11 @@ public class BattleSystem : MonoBehaviour
         else
             yield return dialogueBox.TypeDialogue("The enemy "+sourceUnit.Devil.Base.Name + " uses " + move.Base.Name + "!");
 
+        if (move.Base.Category == MoveCategory.Strength)
+            sourceUnit.PlayAttackAnimation();
+        else
+            sourceUnit.PlaySpellAnimation();
+
         yield return new WaitForSeconds(1f);
 
         if (CheckIfMoveHits(move, sourceUnit.Devil, targetUnit.Devil)) {
