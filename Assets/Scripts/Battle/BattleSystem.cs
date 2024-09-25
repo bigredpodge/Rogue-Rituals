@@ -419,7 +419,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator CheckFelled(BattleUnit felledUnit) {
         if (felledUnit.Devil.HP <= 0) {
             yield return dialogueBox.TypeDialogue(felledUnit.Devil.Base.Name + " has been felled!");
-            felledUnit.RemoveUnit();
+            yield return felledUnit.RemoveUnit();
             yield return new WaitForSeconds(1f);
 
             StartCoroutine(CheckForBattleOver(felledUnit));
@@ -572,7 +572,7 @@ public class BattleSystem : MonoBehaviour
         
         if (playerUnit.Devil.HP > 0) {
             yield return dialogueBox.TypeDialogue("Return whence you came.");
-            playerUnit.RemoveUnit();
+            yield return playerUnit.RemoveUnit();
             yield return new WaitForSeconds(1f);
         }
         dialogueBox.SetMoveNames(newDevil.Moves);
@@ -668,7 +668,7 @@ public class BattleSystem : MonoBehaviour
 
                 yield return playerUnit.Hud.SetExpSmooth(true);
             }
-            playerUnit.RemoveUnit();
+            yield return playerUnit.RemoveUnit();
             OnBattleOver(true);
         }
         else {
@@ -685,7 +685,7 @@ public class BattleSystem : MonoBehaviour
         yield return dialogueBox.TypeDialogue("Initiating Capture Ritual...");
         var captureObj = Instantiate(captureBallPrefab, enemyUnit.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         var ball = captureObj.GetComponent<MeshRenderer>();
-        enemyUnit.RemoveUnit();
+        yield return enemyUnit.RemoveUnit();
 
         int shakeCount = TryToCatch(enemyUnit.Devil, ritualItem); 
         

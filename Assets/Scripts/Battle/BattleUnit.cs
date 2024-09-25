@@ -48,7 +48,7 @@ public class BattleUnit : MonoBehaviour
     
     public IEnumerator EnterBattleAnimation() {
         float elapsedTime = 0f;
-        float fadeDuration = .7f;
+        float fadeDuration = .5f;
 
         while (elapsedTime < fadeDuration)
         {
@@ -81,7 +81,25 @@ public class BattleUnit : MonoBehaviour
         sequence.Append(newInstance.transform.DOLocalMoveY(originalPos.y, 0.1f));
     }
 
-    public void RemoveUnit() {
+    public IEnumerator LeaveBattleAnimation() {
+        float elapsedTime = 0f;
+        float fadeDuration = .5f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            
+            Vector3 newScale = new Vector3(Mathf.Clamp(originalScale.x - (originalScale.x * (elapsedTime / fadeDuration)), 0f, originalScale.x), Mathf.Clamp(originalScale.y - (originalScale.y * (elapsedTime / fadeDuration)), 0f, originalScale.y), Mathf.Clamp(originalScale.z - (originalScale.z * (elapsedTime / fadeDuration)), 0f, originalScale.z));
+            newInstance.transform.localScale = newScale;
+
+            yield return null; 
+        }
+
+        newInstance.transform.localScale = originalScale;
+    }
+
+    public IEnumerator RemoveUnit() {
+        yield return LeaveBattleAnimation();
         Destroy(newInstance);
     }
 
