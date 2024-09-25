@@ -10332,6 +10332,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6250755931612037627, guid: cfea06eecdcfefd419cd67e984aafaa0, type: 3}
+      propertyPath: isPlayerHud
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6645294124462418269, guid: cfea06eecdcfefd419cd67e984aafaa0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
