@@ -56,7 +56,9 @@ public class BattleSystem : MonoBehaviour
         playerUnit.Hud.StatusUIHandler.Init();
         enemyUnit.Hud.StatusUIHandler.Init();
         playerUnit.Setup(playerParty.GetHealthyDevil());
+        yield return playerUnit.EnterBattleAnimation();
         enemyUnit.Setup(enemyParty.GetHealthyDevil());
+        yield return enemyUnit.EnterBattleAnimation();
         yield return dialogueBox.TypeDialogue(summoner.Name + " challenges you to battle!");
         yield return new WaitForSeconds(1f);
         StartCoroutine(SetupBattle());
@@ -70,7 +72,9 @@ public class BattleSystem : MonoBehaviour
             playerUnit.Hud.StatusUIHandler.Init();
             enemyUnit.Hud.StatusUIHandler.Init();
             playerUnit.Setup(playerParty.GetHealthyDevil());
+            yield return playerUnit.EnterBattleAnimation();
             enemyUnit.Setup(enemyDevil);
+            yield return enemyUnit.EnterBattleAnimation();
             dialogueBox.SetMoveNames(playerUnit.Devil.Moves);
             yield return dialogueBox.TypeDialogue("Behold, you face " + enemyUnit.Devil.Base.Name + ", " + enemyUnit.Devil.Base.Rank + " of " + enemyUnit.Devil.Base.Domain + "!");
         }
@@ -420,6 +424,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator NextSummonerDevil(Devil newDevil) {
         yield return dialogueBox.TypeDialogue("A fearsome " + newDevil.Base.Name + " is summoned!");
         enemyUnit.Setup(newDevil);
+        yield return enemyUnit.EnterBattleAnimation();
         yield return new WaitForSeconds(1f);
     }
 
@@ -572,6 +577,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogueBox.TypeDialogue("Fight for me, " + newDevil.Base.Name + "!");
         playerUnit.Setup(newDevil);
+        yield return playerUnit.EnterBattleAnimation();
         yield return new WaitForSeconds(1f);
 
         state = BattleState.RUNNINGTURN;
@@ -700,6 +706,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Destroy(ball);
             enemyUnit.Setup(enemyDevil);
+            yield return enemyUnit.EnterBattleAnimation();
             yield return new WaitForSeconds(1f);
             yield return dialogueBox.TypeDialogue(enemyUnit.Devil.Base.Name + " broke out!");
             yield return new WaitForSeconds(1f);
