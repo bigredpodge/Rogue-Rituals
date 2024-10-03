@@ -22,6 +22,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] PartyScreen partyScreen;
     [SerializeField] GameObject captureBallPrefab;
     [SerializeField] Inventory inventory;
+    [SerializeField] CameraManager cameraManager;
     //choice texts for now here, but should be consolidated into battledialoguebox script...
     [SerializeField] GameObject debugUI;
     private int currentAction, currentMove, currentMemberSelection, currentItemSelection, currentChoiceSelection, currentMoveForgetSelection;
@@ -37,6 +38,7 @@ public class BattleSystem : MonoBehaviour
     // Start is called before the first frame update
     public void StartBattle(DevilParty playerParty, Devil enemyDevil)
     {
+        cameraManager.changeCamera("StaticView");
         this.enemyDevil = enemyDevil;
         this.playerParty = playerParty;
         state = BattleState.START; 
@@ -45,6 +47,7 @@ public class BattleSystem : MonoBehaviour
 
     public void StartGenericSummonerBattle(DevilParty playerParty, DevilParty summonerParty, GenericSummoner summoner)
     {
+        cameraManager.changeCamera("StaticView");
         this.enemyParty = summonerParty;
         this.playerParty = playerParty;
         isSummonerBattle = true;
@@ -161,7 +164,6 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-
     void HandleItemSelection() {
         if (Input.GetKeyDown(KeyCode.RightArrow))
                 ++currentItemSelection;
@@ -183,9 +185,6 @@ public class BattleSystem : MonoBehaviour
             ActionSelection();
         }
     }
-
-    
-
 
     void HandlePartySelection() {
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -260,6 +259,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator RunTurns(BattleAction playerAction) {
+        cameraManager.changeCamera("StaticView");
         state = BattleState.RUNNINGTURN;
         dialogueBox.EnableMoveSelector(false);
         dialogueBox.EnableDialogueText(true);
@@ -328,7 +328,6 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
-
         bool canRunMove = sourceUnit.Devil.OnBeforeMove();
         if (!canRunMove) {
             yield return ShowStatusChanges(sourceUnit);
@@ -589,6 +588,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     void ActionSelection() {
+        cameraManager.changeCamera("StaticView");
         state = BattleState.ACTIONSELECTION;
         dialogueBox.EnableDialogueText(true);
         dialogueBox.EnableActionSelector(true);
@@ -622,6 +622,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     void MoveSelection() {
+        cameraManager.changeCamera("PlayerPan");
         state = BattleState.MOVESELECTION;
         dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableDialogueText(false);
