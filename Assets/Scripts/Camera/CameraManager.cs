@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
 {
     private Animator animator;
     private CameraPan currentCamPan;
+    private string currentCam;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -18,6 +19,7 @@ public class CameraManager : MonoBehaviour
         if (currentCamPan != null) 
             currentCamPan.Deactivate();
 
+        currentCam = cameraName;
         animator.Play(cameraName);
         
         Transform child = transform.Find("State-Driven Camera").Find(cameraName);
@@ -29,5 +31,14 @@ public class CameraManager : MonoBehaviour
                 currentCamPan.Activate();
             }
         }
+    }
+
+    public void focusCamera(Transform newFocus) {
+        Transform cam = transform.Find("State-Driven Camera").Find(currentCam);
+        if (cam == null)
+            return;
+
+        var vCam = cam.GetComponent<CinemachineVirtualCamera>();
+        vCam.LookAt = newFocus;
     }
 }

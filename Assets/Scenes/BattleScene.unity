@@ -4551,9 +4551,8 @@ GameObject:
   m_Component:
   - component: {fileID: 689584662}
   - component: {fileID: 689584664}
-  - component: {fileID: 689584663}
   m_Layer: 0
-  m_Name: EnemyPan
+  m_Name: EnemyFocus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4567,27 +4566,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689584661}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.012358077, y: -0.65818524, z: 0.010806633, w: 0.752677}
-  m_LocalPosition: {x: 17.84, y: 2, z: -0.17}
+  m_LocalRotation: {x: 0.1163751, y: 0.14358604, z: -0.017005317, w: 0.9826244}
+  m_LocalPosition: {x: -26.62, y: 1.88, z: 0.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 143202792}
   m_Father: {fileID: 2032882700}
   m_LocalEulerAnglesHint: {x: 13.117, y: 5.164, z: -0.205}
---- !u!114 &689584663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689584661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f3a2d213872dd0498a1b748602a015c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 970119278}
 --- !u!114 &689584664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4609,7 +4595,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 2097929166}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40.6
+    FieldOfView: 40.13
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -6388,6 +6374,7 @@ MonoBehaviour:
   enemyBattleStation: {fileID: 2097929166}
   maxHP: 0
   currentHP: 0
+  newInstance: {fileID: 0}
 --- !u!114 &970119283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9654,8 +9641,8 @@ MonoBehaviour:
     m_VirtualCamera: {fileID: 1332805380}
     m_ActivateAfter: 0
     m_MinDuration: 0
-  - m_FullHash: -1609543864
-    m_VirtualCamera: {fileID: 0}
+  - m_FullHash: 66650260
+    m_VirtualCamera: {fileID: 689584664}
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:
@@ -9673,7 +9660,7 @@ MonoBehaviour:
     m_ParentHash: 756556552
   - m_Hash: -976252740
     m_ParentHash: 756556552
-  - m_Hash: -1609543864
+  - m_Hash: 66650260
     m_ParentHash: 756556552
 --- !u!1001 &2069066227
 PrefabInstance:
@@ -10198,6 +10185,7 @@ MonoBehaviour:
   enemyBattleStation: {fileID: 2097929166}
   maxHP: 0
   currentHP: 0
+  newInstance: {fileID: 0}
 --- !u!114 &2097929171
 MonoBehaviour:
   m_ObjectHideFlags: 0

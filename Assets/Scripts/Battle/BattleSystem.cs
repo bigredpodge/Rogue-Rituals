@@ -623,6 +623,7 @@ public class BattleSystem : MonoBehaviour
 
     void MoveSelection() {
         cameraManager.changeCamera("PlayerPan");
+        cameraManager.focusCamera(playerUnit.newInstance.transform);
         state = BattleState.MOVESELECTION;
         dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableDialogueText(false);
@@ -684,7 +685,9 @@ public class BattleSystem : MonoBehaviour
     IEnumerator TrapRitual(RitualItem ritualItem) {
         state = BattleState.BUSY;
         yield return dialogueBox.TypeDialogue("Initiating Capture Ritual...");
-        var captureObj = Instantiate(captureBallPrefab, enemyUnit.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        var captureObj = Instantiate(captureBallPrefab, enemyUnit.transform.position + new Vector3(0f, 0.2f, 0f), Quaternion.identity);
+        cameraManager.changeCamera("EnemyFocus");
+        cameraManager.focusCamera(captureObj.transform);
         var ball = captureObj.GetComponent<MeshRenderer>();
         yield return enemyUnit.RemoveUnit();
 
@@ -696,6 +699,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         if (shakeCount == 4) {
+            yield return new WaitForSeconds(1f);
             yield return dialogueBox.TypeDialogue(enemyUnit.Devil.Base.Name + " was caught!");
 
             yield return new WaitForSeconds(1f);
@@ -713,6 +717,7 @@ public class BattleSystem : MonoBehaviour
             Destroy(ball);
             enemyUnit.Setup(enemyDevil);
             yield return enemyUnit.EnterBattleAnimation();
+            cameraManager.changeCamera("StaticView");
             yield return new WaitForSeconds(1f);
             yield return dialogueBox.TypeDialogue(enemyUnit.Devil.Base.Name + " broke out!");
             yield return new WaitForSeconds(1f);

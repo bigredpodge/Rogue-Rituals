@@ -20,7 +20,7 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] Transform playerBattleStation, enemyBattleStation;
     public int maxHP;
     public int currentHP;
-    private GameObject newInstance;
+    public GameObject newInstance;
     private Vector3 originalPos;
     private Vector3 originalScale;
 
