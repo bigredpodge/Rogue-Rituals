@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
-  m_Name: Mark For Death
+  m_Name: Acid
   m_EditorClassIdentifier: 
-  name: Mark For Death
-  description: Doom the opponent.
-  brand: 9
+  name: Acid
+  description: Burn the opponent with toxic acid, with a high chance to burn.
+  brand: 3
   power: 0
   accuracy: 100
   alwaysHits: 0
@@ -25,9 +25,9 @@ MonoBehaviour:
   priority: 0
   moveCategory: 2
   effects:
-  - chance: 100
+  - chance: 70
     target: 0
     boosts: []
-    status: 3
+    status: 1
     healSource: 0
     healMultiplier: 0

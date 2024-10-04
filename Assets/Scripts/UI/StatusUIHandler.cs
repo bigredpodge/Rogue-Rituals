@@ -16,9 +16,8 @@ public class StatusUIHandler : MonoBehaviour
         for (int i = 0; i < statusSlots.Length; i++) {
             if (i < devil.Statuses.Count) {
                 statusSlots[i].gameObject.SetActive(true);
-                var condition = statuses.ElementAt(i).Key;
-                var time = statuses.ElementAt(i).Value;
-                statusSlots[i].Setup(condition, time);
+                var condition = statuses[i];
+                statusSlots[i].Setup(condition);
             }
             else 
                 statusSlots[i].gameObject.SetActive(false);

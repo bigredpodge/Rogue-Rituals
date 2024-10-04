@@ -2269,7 +2269,7 @@ Transform:
   m_GameObject: {fileID: 365802655}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11420475, y: 0.0071465843, z: -0.0025747735, w: 0.9934282}
-  m_LocalPosition: {x: -29.1, y: 2.72, z: -7.63}
+  m_LocalPosition: {x: -29.316, y: 2.57, z: -6.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6208,7 +6208,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11420476, y: 0.0071465843, z: -0.0025747742, w: 0.9934282}
-  m_LocalPosition: {x: -29.1, y: 2.72, z: -7.63}
+  m_LocalPosition: {x: -29.316, y: 2.57, z: -6.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6406,7 +6406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   devils:
-  - _base: {fileID: 11400000, guid: eba916d01a2abcb4199a0922e6c54802, type: 2}
+  - _base: {fileID: 11400000, guid: 0d1009f38824cd3498984e567b05df21, type: 2}
     level: 5
     heldItem: {fileID: 0}
   - _base: {fileID: 11400000, guid: 401c90b38efa75b4ab79bf0796af98f5, type: 2}

@@ -15,20 +15,25 @@ public class ConditionsDB
     }
 
     public static Dictionary<ConditionID, Condition> Conditions { get; set; } = new Dictionary<ConditionID, Condition>() {
-        {ConditionID.psn, new Condition() {
-                Name = "Poison",
-                StartMessage = " has been poisoned.",
-                OnAfterTurn = (Devil devil) => {
-                    devil.DamageHP(devil.MaxHP / 8);
-                    devil.StatusChanges.Enqueue(devil.Base.Name + " was hurt by poison.");
-                }
-            }
-        },
         {ConditionID.brn, new Condition() {
                 Name = "Burn",
                 StartMessage = " is now burning.",
+
+                OnStart = (Devil devil) => {
+                    devil.BurnSeverity = 1;
+                },
+
+                OnRefresh = (Devil devil) => {
+                    if (devil.BurnSeverity < 4) {
+                        devil.BurnSeverity++;
+                        devil.StatusChanges.Enqueue(devil.Base.Name + "'s burn got worse!");
+                    }
+                    else
+                        devil.StatusChanges.Enqueue(devil.Base.Name + "'s burn couldn't get worse!");
+                },
+
                 OnAfterTurn = (Devil devil) => {
-                    devil.DamageHP(devil.MaxHP / 8);
+                    devil.DamageHP(devil.BurnSeverity * (devil.MaxHP / 8));
                     devil.StatusChanges.Enqueue(devil.Base.Name + " is burning.");
                 }
             }
@@ -36,44 +41,25 @@ public class ConditionsDB
         {ConditionID.slp, new Condition() {
                 Name = "Sleep",
                 StartMessage = " falls asleep.",
+
                 OnStart = (Devil devil) => {
-                    devil.StatusTime = Random.Range(1, 4);
+                    devil.SleepTime = Random.Range(1, 4);
                 },
+
+                OnRefresh = (Devil devil) => {
+                    devil.SleepTime = devil.SleepTime + Random.Range(1, 2);
+                    devil.StatusChanges.Enqueue(devil.Base.Name + " sleeps deeper");
+                },
+
                 OnBeforeMove = (Devil devil) => {
-                    if (devil.StatusTime <= 0) {
+                    if (devil.SleepTime <= 0) {
                         devil.CureStatus(ConditionID.slp);
                         devil.StatusChanges.Enqueue(devil.Base.Name+" woke up.");
                         return true;
                     }
 
-                    devil.StatusTime--;
+                    devil.SleepTime--;
                     devil.StatusChanges.Enqueue(devil.Base.Name+" is sleeping.");
-                    return false;
-                }
-            }
-        },
-        {ConditionID.par, new Condition() {
-                Name = "Paralyse",
-                StartMessage = " becomes paralysed.",
-                OnBeforeMove = (Devil devil) => {
-                    if (Random.Range(1, 5) == 1) {
-                        devil.StatusChanges.Enqueue(devil.Base.Name + " is paralysed.");
-                        return false;
-                    }
-                    return true;
-                }
-            }
-        },
-        {ConditionID.fbl, new Condition() {
-                Name = "Feeble",
-                StartMessage = " is enfeebled.",
-                OnBeforeMove = (Devil devil) => {
-                    if (Random.Range(1, 5) == 1) {
-                        devil.CureStatus(ConditionID.fbl);
-                        devil.StatusChanges.Enqueue(devil.Base.Name + " is no longer feeble!");
-                        return true;
-                    }
-                    devil.StatusChanges.Enqueue(devil.Base.Name + " is frozen.");
                     return false;
                 }
             }
@@ -81,8 +67,29 @@ public class ConditionsDB
         {ConditionID.dom, new Condition() {
                 Name = "Doom",
                 StartMessage = " is doomed.",
+
                 OnStart = (Devil devil) => {
-                    //effect
+                    devil.DoomTime = 10;
+                },
+
+                OnRefresh = (Devil devil) => {
+                    devil.DoomTime--;
+                    devil.StatusChanges.Enqueue(devil.Base.Name + "'s doom inches closer");
+
+                    if (devil.DoomTime <= 0) {
+                        devil.DamageHP(devil.MaxHP);
+                        devil.StatusChanges.Enqueue(devil.Base.Name + "'s time has come");
+                    }
+                },
+
+                OnAfterTurn = (Devil devil) => {
+                    devil.DoomTime--;
+                    devil.StatusChanges.Enqueue(devil.Base.Name + "'s doom inches closer");
+
+                    if (devil.DoomTime <= 0) {
+                        devil.DamageHP(devil.MaxHP);
+                        devil.StatusChanges.Enqueue(devil.Base.Name + "'s time has come");
+                    }
                 }
             }
         },
@@ -92,9 +99,9 @@ public class ConditionsDB
     public static float GetStatusBonus(Condition condition) {
         if (condition == null)
             return 1f;
-        else if (condition.Id == ConditionID.slp || condition.Id == ConditionID.fbl )
+        else if (condition.Id == ConditionID.slp)
             return 2f;
-        else if (condition.Id == ConditionID.par || condition.Id == ConditionID.psn || condition.Id == ConditionID.brn )
+        else if (condition.Id == ConditionID.brn )
             return 1.5f;
         
         return 1f;
@@ -102,5 +109,5 @@ public class ConditionsDB
 }
 
 public enum ConditionID {
-    none, psn, brn, slp, par, fbl, dom
+    none, brn, slp, dom
 }

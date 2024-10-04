@@ -28,7 +28,6 @@ MonoBehaviour:
   - chance: 100
     target: 1
     boosts: []
-    status: 6
-    statusTime: 5
+    status: 3
     healSource: 0
     healMultiplier: 0

@@ -52,8 +52,11 @@ public class Devil
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> IVs { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
-    public Dictionary<Condition, int> Statuses{ get; set;}
-    public int StatusTime { get; set; }
+    public List<Condition> Statuses{ get; set;}
+    public int SleepTime { get; set; }
+    public int PoisonSeverity { get; set; }
+    public int BurnSeverity { get; set; }
+    public int DoomTime { get; set; }
     public Queue<string> StatusChanges { get; private set; }
     public event System.Action OnStatusChanged;
     public event System.Action OnHPChanged;
@@ -80,7 +83,7 @@ public class Devil
         StatusChanges = new Queue<string>();
 
         HP = MaxHP;
-        Statuses = new Dictionary<Condition, int>();
+        Statuses = new List<Condition>();
     }
 
     void CalculateStats() {
@@ -288,21 +291,23 @@ public class Devil
         return Moves.Any(item => item.Base == moveBase);
     }
 
-    public void SetStatus(ConditionID conditionId, int time) {
+    public void SetStatus(ConditionID conditionId) {
         var status = ConditionsDB.Conditions[conditionId];
-        if (Statuses.ContainsKey(status))
-            Statuses[status] = time;
-        else {
-            Statuses.Add(status, time);
+        if (!Statuses.Contains(status)) {
+            Statuses.Add(status);
             status?.OnStart?.Invoke(this);
             StatusChanges.Enqueue(Base.Name + status.StartMessage);
+            OnStatusChanged?.Invoke();
+        }
+        else {
+            status?.OnRefresh?.Invoke(this);
             OnStatusChanged?.Invoke();
         }
     }
 
     public void CureStatus(ConditionID conditionId) {
         var status = ConditionsDB.Conditions[conditionId];
-        if (!Statuses.ContainsKey(status))
+        if (!Statuses.Contains(status))
             return; 
         StatusChanges.Enqueue(Base.Name + " shook off its " + ConditionsDB.Conditions[conditionId].Name);
         Statuses.Remove(status);
@@ -311,40 +316,26 @@ public class Devil
 
     public bool OnBeforeMove() {
         bool canPerformMove = true;
-        if (Statuses.Count == 0)
+        /*if (Statuses.Count == 0)
             return canPerformMove;
 
         for (int i = 0; i < Statuses.Count; i++) {
-            var condition = Statuses.ElementAt(i).Key;
+            var condition = Statuses[i];
             
             if (condition?.OnBeforeMove != null) {
-                Statuses[condition] -= 1;
-
-                if (Statuses[condition] <= 0) {
-                    CureStatus(condition.Id);
-                    break;
-                }
-
                 if (!condition.OnBeforeMove(this)) 
                     canPerformMove = false;
             }
         }
-
+        */
         return canPerformMove;
     }
 
     public void OnAfterTurn () {
         for (int i = 0; i < Statuses.Count; i++) {
-            var condition = Statuses.ElementAt(i).Key;
-            if(condition?.OnAfterTurn != null) {
+            var condition = Statuses[i];
+            if(condition?.OnAfterTurn != null)
                 condition?.OnAfterTurn?.Invoke(this);
-
-                Statuses[condition] -= 1;
-                if (Statuses[condition] <= 0) {
-                    CureStatus(condition.Id);
-                    break;
-                }
-            }
         }
     }
 

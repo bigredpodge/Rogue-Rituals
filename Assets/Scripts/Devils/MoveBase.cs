@@ -74,7 +74,6 @@ public class MoveEffects {
 
     [Header("Status")]
     [SerializeField] ConditionID status;
-    [SerializeField] int statusTime = 10;
 
     [Header("Heals")]
     [SerializeField] HealSource healSource;
@@ -93,9 +92,6 @@ public class MoveEffects {
     }
     public ConditionID Status {
         get { return status; }
-    }
-    public int StatusTime {
-        get { return statusTime; }
     }
     public HealSource HealSource {
         get { return healSource; }

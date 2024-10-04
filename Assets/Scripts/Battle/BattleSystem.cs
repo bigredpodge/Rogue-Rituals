@@ -436,8 +436,13 @@ public class BattleSystem : MonoBehaviour
         var effects = move.Base.Effects;
         foreach (var effect in effects) {
             var rnd = UnityEngine.Random.Range(1, 101);
-            if (rnd > effect.Chance)
+            if (rnd > effect.Chance) {
+                if (move.Base.Category == MoveCategory.Status) {
+                    yield return dialogueBox.TypeDialogue("It failed!");
+                    yield return new WaitForSeconds(1f);
+                }
                 break;
+            }
 
             // Stat Boost
             if (effect.Boosts != null) {
@@ -450,10 +455,10 @@ public class BattleSystem : MonoBehaviour
             // Status Cond
             if (effect.Status != ConditionID.none) {
                 if (effect.Target == MoveTarget.Self) {
-                    sourceUnit.Devil.SetStatus(effect.Status, effect.StatusTime);
+                    sourceUnit.Devil.SetStatus(effect.Status);
                 }
                 else {
-                    targetUnit.Devil.SetStatus(effect.Status, effect.StatusTime);
+                    targetUnit.Devil.SetStatus(effect.Status);
                 }
             }
 
@@ -729,8 +734,7 @@ public class BattleSystem : MonoBehaviour
     int TryToCatch(Devil devil, RitualItem ritualItem) {
         var statusBonus = 1f;
 
-        foreach (var entry in devil.Statuses) {
-            var condition = entry.Key;
+        foreach (var condition in devil.Statuses) {
             if (ConditionsDB.GetStatusBonus(condition) > statusBonus)
                 statusBonus = ConditionsDB.GetStatusBonus(condition);
         }
