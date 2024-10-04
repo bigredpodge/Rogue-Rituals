@@ -48,7 +48,7 @@ public class ConditionsDB
 
                 OnRefresh = (Devil devil) => {
                     devil.SleepTime = devil.SleepTime + Random.Range(1, 2);
-                    devil.StatusChanges.Enqueue(devil.Base.Name + " sleeps deeper");
+                    devil.StatusChanges.Enqueue(devil.Base.Name + " sleeps deeper.");
                 },
 
                 OnBeforeMove = (Devil devil) => {
@@ -69,26 +69,26 @@ public class ConditionsDB
                 StartMessage = " is doomed.",
 
                 OnStart = (Devil devil) => {
-                    devil.DoomTime = 10;
+                    devil.DoomTime = 4;
                 },
 
                 OnRefresh = (Devil devil) => {
                     devil.DoomTime--;
-                    devil.StatusChanges.Enqueue(devil.Base.Name + "'s doom inches closer");
+                    devil.StatusChanges.Enqueue(devil.Base.Name + "'s doom inches closer...");
 
                     if (devil.DoomTime <= 0) {
                         devil.DamageHP(devil.MaxHP);
-                        devil.StatusChanges.Enqueue(devil.Base.Name + "'s time has come");
+                        devil.StatusChanges.Enqueue(devil.Base.Name + "'s time has come.");
                     }
                 },
 
                 OnAfterTurn = (Devil devil) => {
                     devil.DoomTime--;
-                    devil.StatusChanges.Enqueue(devil.Base.Name + "'s doom inches closer");
+                    devil.StatusChanges.Enqueue(devil.Base.Name + "'s doom inches closer...");
 
                     if (devil.DoomTime <= 0) {
                         devil.DamageHP(devil.MaxHP);
-                        devil.StatusChanges.Enqueue(devil.Base.Name + "'s time has come");
+                        devil.StatusChanges.Enqueue(devil.Base.Name + "'s time has come.");
                     }
                 }
             }

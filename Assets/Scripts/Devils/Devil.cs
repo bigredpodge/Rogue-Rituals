@@ -314,6 +314,12 @@ public class Devil
         OnStatusChanged?.Invoke();
     }
 
+    public void CureAllStatus() {
+        for (int i = 0; i < Statuses.Count; i++) {
+            CureStatus(Statuses[i].Id);
+        }
+    }
+
     public bool OnBeforeMove() {
         bool canPerformMove = true;
         /*if (Statuses.Count == 0)
@@ -337,6 +343,7 @@ public class Devil
             if(condition?.OnAfterTurn != null)
                 condition?.OnAfterTurn?.Invoke(this);
         }
+        OnStatusChanged?.Invoke();
     }
 
     public void OnRecall() {

@@ -379,6 +379,7 @@ public class BattleSystem : MonoBehaviour
                 yield return RunMoveEffects(sourceUnit, targetUnit, move);
 
             yield return CheckFelled(targetUnit);
+            yield return CheckFelled(sourceUnit);
         }
         else {
             if (sourceUnit.IsPlayerUnit)
@@ -418,6 +419,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator CheckFelled(BattleUnit felledUnit) {
         if (felledUnit.Devil.HP <= 0) {
             yield return dialogueBox.TypeDialogue(felledUnit.Devil.Base.Name + " has been felled!");
+            felledUnit.Devil.CureAllStatus();
             yield return felledUnit.RemoveUnit();
             yield return new WaitForSeconds(1f);
 

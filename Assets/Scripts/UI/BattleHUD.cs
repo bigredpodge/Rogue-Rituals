@@ -10,7 +10,7 @@ using Unity.VisualScripting;
 public class BattleHUD : MonoBehaviour
 {
     
-    [SerializeField] TMP_Text nameText, levelText;
+    [SerializeField] TMP_Text nameText, levelText, doomText;
     [SerializeField] HPBar hpBar;
     [SerializeField] GameObject expBar;
     
@@ -45,6 +45,7 @@ public class BattleHUD : MonoBehaviour
 
         _devil = devil;
         nameText.text = devil.Base.Name;
+        doomText.text = "";
     
         hpBar.SetHP(devil.HP, devil.MaxHP);
         SetExp();
@@ -57,6 +58,7 @@ public class BattleHUD : MonoBehaviour
 
     public void SetStatuses() {
         statusUIHandler.CheckStatusUI(_devil);
+        CheckDoom();
     }
 
     public void SetLevel() {
@@ -67,6 +69,15 @@ public class BattleHUD : MonoBehaviour
         float normalizedExp = GetNormalizedExp();
         expBar.transform.localScale = new Vector3(normalizedExp, 1f, 1f);
     }
+
+    public void CheckDoom() {
+        if (!_devil.Statuses.Contains(ConditionsDB.Conditions[ConditionID.dom])) {
+            doomText.text = "";
+        }
+        else
+            doomText.text = ""+_devil.DoomTime;
+    }
+
     public IEnumerator SetExpSmooth(bool reset=false) {
         if (reset)
             expBar.transform.localScale = new Vector3(0f, 1f, 1f);
