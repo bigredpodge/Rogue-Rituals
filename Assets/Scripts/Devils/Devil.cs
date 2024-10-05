@@ -136,18 +136,22 @@ public class Devil
 
     public void ApplyBoosts(List<StatBoost> statBoosts) {
         foreach (var statBoost in statBoosts) {
-            var stat = statBoost.stat;
-            var boost = statBoost.boost;
-
-            if (boost > 0) 
-                StatusChanges.Enqueue(Base.Name+"'s "+stat+" rose!");
-            else
-                StatusChanges.Enqueue(Base.Name+"'s "+stat+" fell!");
-
-            StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -5, 5);
-
-            Debug.Log(stat+"has been boosted to"+StatBoosts[stat]);
+           ApplyBoost(statBoost);
         }
+    }
+
+    public void ApplyBoost(StatBoost statBoost) {
+        var stat = statBoost.stat;
+        var boost = statBoost.boost;
+
+        if (boost > 0) 
+            StatusChanges.Enqueue(Base.Name+"'s "+stat+" rose!");
+        else
+            StatusChanges.Enqueue(Base.Name+"'s "+stat+" fell!");
+
+        StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -5, 5);
+
+        Debug.Log(stat+"has been boosted to"+StatBoosts[stat]);
     }
 
     public bool CheckForLevelUp() {

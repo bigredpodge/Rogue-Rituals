@@ -538,6 +538,9 @@ public class BattleSystem : MonoBehaviour
             weather.OnAfterRound(playerUnit.Devil);
             weather.OnAfterRound(enemyUnit.Devil);
             yield return new WaitForSeconds(1f);
+            
+            yield return ShowStatusChanges(playerUnit);
+            yield return ShowStatusChanges(enemyUnit);
 
             weatherCount--;
             if (weatherCount <= 0) {

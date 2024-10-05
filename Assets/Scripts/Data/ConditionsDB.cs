@@ -69,7 +69,7 @@ public class ConditionsDB
                 StartMessage = " is doomed.",
 
                 OnStart = (Devil devil) => {
-                    devil.DoomTime = 4;
+                    devil.DoomTime = 10;
                 },
 
                 OnRefresh = (Devil devil) => {

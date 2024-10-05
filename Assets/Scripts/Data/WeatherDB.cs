@@ -27,7 +27,54 @@ public class WeatherDB
                     if (currentWeather.NaturalBrands.Contains(devil.Base.Brand1) || currentWeather.NaturalBrands.Contains(devil.Base.Brand2))
                         return;
 
-                    devil.DamageHP((devil.MaxHP / 16));
+                    devil.DamageHP((devil.MaxHP / 12));
+                }
+            }
+        },
+        {WeatherID.ashstorm, new Weather() {
+                Name = "Ashstorm",
+                StartMessage = "Sulphurous ash swirls around the battlefield.",
+                ContinueMessage = "The hot ash blinds and burns.",
+                EndMessage = "The hot ash settles.",
+                NaturalBrands = new List<DevilBrand> { DevilBrand.Heat },
+
+                OnAfterRound = (Devil devil) => {
+                    Weather currentWeather = Weathers[WeatherID.ashstorm];
+                    if (currentWeather.NaturalBrands.Contains(devil.Base.Brand1) || currentWeather.NaturalBrands.Contains(devil.Base.Brand2))
+                        return;
+
+                    devil.DamageHP((devil.MaxHP / 12));
+
+                    if (devil.StatBoosts[Stat.Accuracy] > -1) {
+                        StatBoost accuracyDown = new StatBoost {
+                            stat = Stat.Accuracy,
+                            boost = -1
+                        };
+                        devil.ApplyBoost(accuracyDown);
+                    }
+                }
+            }
+        },
+        {WeatherID.moonlight, new Weather() {
+                Name = "Moonlight",
+                StartMessage = "The battlefield is illuminated by moonlight.",
+                ContinueMessage = "The full moon shines brightly.",
+                EndMessage = "The moonlight fades from view.",
+                NaturalBrands = new List<DevilBrand> { DevilBrand.Lunacy },
+
+                OnAfterRound = (Devil devil) => {
+                    Weather currentWeather = Weathers[WeatherID.moonlight];
+                    if (currentWeather.NaturalBrands.Contains(devil.Base.Brand1) || currentWeather.NaturalBrands.Contains(devil.Base.Brand2)) {
+                        devil.HealHP(devil.MaxHP / 12);
+
+                        if (devil.StatBoosts[Stat.Strength] < 1) {
+                            StatBoost strengthUp = new StatBoost {
+                                stat = Stat.Strength,
+                                boost = 1
+                            };
+                            devil.ApplyBoost(strengthUp);
+                        } 
+                    }   
                 }
             }
         },
@@ -44,6 +91,6 @@ public class WeatherDB
 }
 
 public enum WeatherID {
-    none, plague
+    none, plague, ashstorm, moonlight
 }
 
