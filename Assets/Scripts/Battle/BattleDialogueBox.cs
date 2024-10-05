@@ -5,13 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 using System.Threading;
 using Unity.VisualScripting;
+using DG.Tweening;
 
 public class BattleDialogueBox : MonoBehaviour
 {
     public enum DialogueState { CHOOSE, FORGETMOVE, RELEASEDEVIL, MOVEFORGOTTEN, DEVILRELEASED, BUSY }
     [SerializeField] TMP_Text dialogueText;
     [SerializeField] Color highlightedColor;
-    [SerializeField] GameObject actionSelector, moveSelector, moveDetails, targetSelector, dialogueBox;
+    [SerializeField] GameObject actionSelector, moveSelector, moveDetails, targetSelector, dialogueBox, playerMenu;
     [SerializeField] RectTransform dialogueTextBox, dialogueBoxBackground;
     [SerializeField] TargetUI[] targetSlots;
     [SerializeField] List<TMP_Text> actionTexts, moveTexts, shopItemTexts, battleItemTexts, battleItemCounts;
@@ -27,12 +28,19 @@ public class BattleDialogueBox : MonoBehaviour
     private DevilParty targetParty;
     private string fullText;
     private int currentMoveForgetSelection, currentChoiceSelection, currentReleaseSelection;
+    private Vector3 playerMenuOriginalPos;
+    private float posYOffset = 220f;
     private bool forgetMoveChoice;
     public TargetMenu TargetMenu {
         get { return targetMenu; }
     }
     [SerializeField] float textSpeed;
 
+    public void Awake() {
+        playerMenuOriginalPos = playerMenu.transform.localPosition;
+        playerMenu.transform.localPosition = new Vector3(playerMenuOriginalPos.x, playerMenuOriginalPos.y - posYOffset);
+    }
+    
     public void Update() {
         if (state == DialogueState.CHOOSE) {
             HandleChoiceSelection();
@@ -308,6 +316,18 @@ public class BattleDialogueBox : MonoBehaviour
         state = DialogueState.MOVEFORGOTTEN;
     }  
 
+    public void PushUpPlayerMenu() {
+        playerMenu.transform.DOLocalMoveY(playerMenuOriginalPos.y, 1f);
+    }
+
+    public void PushDownPlayerMenu() {
+        playerMenu.transform.DOLocalMoveY(playerMenuOriginalPos.y - posYOffset, 1f)
+        .OnComplete(() => {
+            EnableActionSelector(false);
+            EnableMoveSelector(false);
+        });
+
+    }   
 
     Color GetBrandColor(DevilBrand brand) {
         Color[] colors = {  /*Orange*/ new Color(1f, 0.5f, 0f), /*Blue*/ new Color(0f, 0f, 0.75f), /*Green*/ new Color(0f, 0.75f, 0f), /*Yellow*/ new Color(.8f, .8f, 0f), /*Red*/ new Color(0.75f, 0f, 0f), 

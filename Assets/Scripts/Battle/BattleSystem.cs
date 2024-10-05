@@ -89,6 +89,8 @@ public class BattleSystem : MonoBehaviour
        
         yield return new WaitForSeconds(1f);
         
+        dialogueBox.PushUpPlayerMenu();
+        playerUnit.Hud.PushUp();
         ActionSelection();
     }
 
@@ -251,8 +253,9 @@ public class BattleSystem : MonoBehaviour
     IEnumerator RunTurns(BattleAction playerAction) {
         cameraManager.changeCamera("StaticView");
         state = BattleState.RUNNINGTURN;
-        dialogueBox.EnableMoveSelector(false);
         dialogueBox.EnableDialogueText(true);
+        dialogueBox.PushDownPlayerMenu();
+        playerUnit.Hud.PushDown();
 
         if (playerAction == BattleAction.MOVE) {
             playerUnit.Devil.CurrentMove = playerUnit.Devil.Moves[currentMove];
@@ -315,6 +318,9 @@ public class BattleSystem : MonoBehaviour
         if (state != BattleState.BATTLEOVER) {
             currentAction = 0;
             yield return CheckWeather();
+
+            dialogueBox.PushUpPlayerMenu();
+            playerUnit.Hud.PushUp();
             ActionSelection();
         }
     }
@@ -661,7 +667,6 @@ public class BattleSystem : MonoBehaviour
         cameraManager.focusCamera(playerUnit.newInstance.transform);
         state = BattleState.MOVESELECTION;
         dialogueBox.UpdateActionSelection(5);
-        //dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableDialogueText(false);
         dialogueBox.EnableMoveSelector(true);
     }

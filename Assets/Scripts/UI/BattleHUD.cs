@@ -25,16 +25,17 @@ public class BattleHUD : MonoBehaviour
     }
 
     private Vector3 originalPos;
-    private float posOffset = 350f;
+    private float posXOffset = 350f;
+    private float posYOffset = 110f;
 
     Devil _devil;
 
     public void Awake() {
         originalPos = this.transform.localPosition;
         if (isPlayerHud)
-            this.transform.localPosition = new Vector3(originalPos.x + posOffset, originalPos.y);
+            this.transform.localPosition = new Vector3(originalPos.x + posXOffset, originalPos.y - posYOffset);
         else
-            this.transform.localPosition = new Vector3(originalPos.x - posOffset, originalPos.y);
+            this.transform.localPosition = new Vector3(originalPos.x - posXOffset, originalPos.y);
     }
 
     public void SetData(Devil devil) {
@@ -127,10 +128,18 @@ public class BattleHUD : MonoBehaviour
 
     public void SlideOut() {
         if (isPlayerHud)
-            this.transform.DOLocalMoveX(originalPos.x + posOffset, 1f);
+            this.transform.DOLocalMoveX(originalPos.x + posXOffset, 1f);
         
         else
-            this.transform.DOLocalMoveX(originalPos.x - posOffset, 1f);
+            this.transform.DOLocalMoveX(originalPos.x - posXOffset, 1f);
+    }
+
+    public void PushUp() {
+        this.transform.DOLocalMoveY(originalPos.y, 1f);
+    }
+
+    public void PushDown() {
+        this.transform.DOLocalMoveY(originalPos.y - posYOffset, 1f);
     }   
     
 }
