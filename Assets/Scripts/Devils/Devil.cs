@@ -49,6 +49,7 @@ public class Devil
     public int HP { get; set; }
     public List<Move> Moves { get; set; }
     public Move CurrentMove { get; set; }
+    public List<MoveBase> MovesToLearn { get; set; }
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> IVs { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
@@ -84,6 +85,7 @@ public class Devil
 
         HP = MaxHP;
         Statuses = new List<Condition>();
+        MovesToLearn = new List<MoveBase>();
     }
 
     void CalculateStats() {
@@ -170,7 +172,7 @@ public class Devil
         Moves.Add(new Move(move));
     }
 
-    public List<MoveBase> GetLearnableMoveAtCurrentLevel() {
+    public List<MoveBase> GetLearnableMovesAtCurrentLevel() {
         List<LearnableMove> currentLearnableMoves = new List<LearnableMove>(Base.LearnableMoves.Where(x => x.Level == level));
         List<MoveBase> moveBases = new List<MoveBase>();
         for (int i = 0; i < currentLearnableMoves.Count; i++)
@@ -290,6 +292,14 @@ public class Devil
 
     public bool KnowsMove(MoveBase moveBase) {
         return Moves.Any(item => item.Base == moveBase);
+    }
+
+    public void QueueMoveToLearn(MoveBase moveBase) {
+        MovesToLearn.Add(moveBase);
+    }
+
+    public void ClearMoveToLearnQueue() {
+        MovesToLearn = null;
     }
 
     public void SetStatus(ConditionID conditionId) {

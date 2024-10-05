@@ -138,7 +138,7 @@ public class ShopSystem : MonoBehaviour
     void ChooseTargetDevil() {
         state = ShopState.TARGETSELECT;
         targetParty = playerUnit.GetComponent<DevilParty>();
-        dialogueBox.TargetMenu.SetDevilData(targetParty.Devils);
+        dialogueBox.TargetMenu.SetDevilData(targetParty.Devils, false);
         dialogueBox.EnableTargetSelector(true);
         dialogueBox.SetDialogue("Choose a devil to give the item.");
     }

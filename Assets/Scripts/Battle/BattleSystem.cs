@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using System.Collections.Generic;
+using System.Linq;
 
 public enum BattleState { START, ACTIONSELECTION, MOVESELECTION, RUNNINGTURN, PARTYSCREEN, ITEMSELECTION, BATTLEOVER, CHOOSETOFORGET, FORGETMOVE, MOVEFORGOTTEN, BUSY }
 public enum BattleAction { MOVE, SWITCHDEVIL, CATCHDEVIL, USEITEM }
@@ -691,27 +693,11 @@ public class BattleSystem : MonoBehaviour
                 expModifier = 25f;
 
             int expGain = Mathf.FloorToInt(((expYield * enemyLevel) / 7) * expModifier);
-            playerUnit.Devil.Exp += expGain;
 
-            //todo: give the whole party exp and show this. bonus for finishing blow
-
-            yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name+" gained "+expGain+" exp!");
-            yield return playerUnit.Hud.SetExpSmooth(false);
-            yield return new WaitForSeconds(1f); 
-
-            //Check Levelup
-            while (playerUnit.Devil.CheckForLevelUp()) {
-                playerUnit.Hud.SetLevel();
-                yield return dialogueBox.TypeDialogue(playerUnit.Devil.Base.Name+" grew to level "+playerUnit.Devil.Level+"!");
-                yield return playerUnit.Hud.ShowStatGrowth();
-
-                //Check for new move
-                var newMoves = playerUnit.Devil.GetLearnableMoveAtCurrentLevel();
-                if (newMoves != null)
-                    yield return dialogueBox.LearnNewMoves(newMoves, playerUnit.Devil);
-
-                yield return playerUnit.Hud.SetExpSmooth(true);
-            }
+            yield return dialogueBox.TypeDialogue("Your party gained exp!");
+            yield return GiveAllExp(expGain);
+            
+            
             yield return playerUnit.RemoveUnit();
             OnBattleOver(true);
         }
@@ -722,7 +708,63 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-     
+    IEnumerator GiveAllExp(int expGain) {
+        dialogueBox.TargetMenu.SetDevilData(playerParty.Devils, true);
+        dialogueBox.TargetMenu.gameObject.SetActive(true);
+
+        List<bool> expGivenFlags = new List<bool>();
+
+        for (int i = 0; i < playerParty.Devils.Count; i++) {
+            expGivenFlags.Add(false);
+        }
+
+        for (int i = 0; i < playerParty.Devils.Count; i++) {
+            if (i==0)
+                playerParty.Devils[i].Exp += expGain;
+            else
+                playerParty.Devils[i].Exp += (expGain /2);
+
+            //todo - add participated in battle flags to increase exp gain
+
+            StartCoroutine(GiveExp(i, expGivenFlags)); 
+        }
+
+        yield return new WaitUntil(() => expGivenFlags.All(flag => flag));
+        yield return new WaitForSeconds(1f);
+        dialogueBox.TargetMenu.gameObject.SetActive(false);
+        yield return CheckNewMoves();
+    }
+
+    IEnumerator GiveExp(int index, List<bool> expGivenFlags) {
+        yield return dialogueBox.TargetMenu.UpdateExp(index, false);
+        yield return new WaitForSeconds(0.5f);
+        //Check Levelup
+        while (playerParty.Devils[index].CheckForLevelUp()) {
+            dialogueBox.TargetMenu.UpdateLevel(index);
+            var newMoves = playerParty.Devils[index].GetLearnableMovesAtCurrentLevel();
+                if (newMoves != null) {
+                    foreach (MoveBase move in newMoves)
+                        playerParty.Devils[index].QueueMoveToLearn(move);
+                }
+
+            yield return new WaitForSeconds(0.3f);
+            yield return dialogueBox.TargetMenu.UpdateExp(index, true);
+        }
+
+        expGivenFlags[index] = true;
+    }
+
+    IEnumerator CheckNewMoves() {
+        for (int i = 0; i < playerParty.Devils.Count; i++) {
+            if (playerParty.Devils[i].MovesToLearn == null)
+                break;
+
+            yield return dialogueBox.LearnNewMoves(playerParty.Devils[i].MovesToLearn, playerParty.Devils[i]);
+            playerParty.Devils[i].ClearMoveToLearnQueue();
+        }
+
+        yield return new WaitForSeconds(1f);
+    }     
 
     IEnumerator TrapRitual(RitualItem ritualItem) {
         state = BattleState.BUSY;

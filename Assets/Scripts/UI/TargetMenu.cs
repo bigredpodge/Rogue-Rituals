@@ -29,13 +29,13 @@ public class TargetMenu : MonoBehaviour
         }
     }
 
-    public void SetDevilData(List<Devil> devils) {
+    public void SetDevilData(List<Devil> devils, bool expBarActive) {
         this.devils = devils;
         activeMemberSlots = 0;
         for (int i = 0; i < memberSlots.Length; i++) {
             if (i < devils.Count) {
                 memberSlots[i].gameObject.SetActive(true);
-                memberSlots[i].SetDataFromDevil(devils[i]);
+                memberSlots[i].SetDataFromDevil(devils[i], expBarActive);
                 memberSlots[i].SetBackground(true);
                 ++activeMemberSlots;
             }
@@ -44,12 +44,20 @@ public class TargetMenu : MonoBehaviour
         }
     }
 
+    public IEnumerator UpdateExp(int i, bool reset) {
+        yield return memberSlots[i].SetExpSmooth(reset);
+    }
+
+    public void UpdateLevel(int i) {
+        memberSlots[i].SetLevel();
+    }
+
     public void SetDevilToTeachData(Dictionary<Devil, bool> devilsToTeach) {
         activeMemberSlots = 0;
         for (int i = 0; i < devilsToTeach.Count; i++) {
             if (i < devilsToTeach.Count) {
                 memberSlots[i].gameObject.SetActive(true);
-                memberSlots[i].SetDataFromDevil(devilsToTeach.Keys.ToList()[i]);
+                memberSlots[i].SetDataFromDevil(devilsToTeach.Keys.ToList()[i], false);
                 memberSlots[i].SetBackground(devilsToTeach.Values.ToList()[i]);
                 ++activeMemberSlots;
             }

@@ -70,14 +70,6 @@ public class BattleHUD : MonoBehaviour
         expBar.transform.localScale = new Vector3(normalizedExp, 1f, 1f);
     }
 
-    public void CheckDoom() {
-        if (!_devil.Statuses.Contains(ConditionsDB.Conditions[ConditionID.dom])) {
-            doomText.text = "";
-        }
-        else
-            doomText.text = ""+_devil.DoomTime;
-    }
-
     public IEnumerator SetExpSmooth(bool reset=false) {
         if (reset)
             expBar.transform.localScale = new Vector3(0f, 1f, 1f);
@@ -115,6 +107,14 @@ public class BattleHUD : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
         statGrowthUI.SetActive(false);
+    }
+
+    public void CheckDoom() {
+        if (!_devil.Statuses.Contains(ConditionsDB.Conditions[ConditionID.dom])) {
+            doomText.text = "";
+        }
+        else
+            doomText.text = ""+_devil.DoomTime;
     }
 
     public IEnumerator WaitForHPUpdate() {
