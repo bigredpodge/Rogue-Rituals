@@ -11,7 +11,8 @@ public class BattleDialogueBox : MonoBehaviour
     public enum DialogueState { CHOOSE, FORGETMOVE, RELEASEDEVIL, MOVEFORGOTTEN, DEVILRELEASED, BUSY }
     [SerializeField] TMP_Text dialogueText;
     [SerializeField] Color highlightedColor;
-    [SerializeField] GameObject actionSelector, moveSelector, moveDetails, targetSelector;
+    [SerializeField] GameObject actionSelector, moveSelector, moveDetails, targetSelector, dialogueBox;
+    [SerializeField] RectTransform dialogueTextBox, dialogueBoxBackground;
     [SerializeField] TargetUI[] targetSlots;
     [SerializeField] List<TMP_Text> actionTexts, moveTexts, shopItemTexts, battleItemTexts, battleItemCounts;
     [SerializeField] List<Image> shopItemSprites, battleItemSprites;
@@ -24,6 +25,7 @@ public class BattleDialogueBox : MonoBehaviour
     private MoveBase targetMove;
     private Devil targetDevil;
     private DevilParty targetParty;
+    private string fullText;
     private int currentMoveForgetSelection, currentChoiceSelection, currentReleaseSelection;
     private bool forgetMoveChoice;
     public TargetMenu TargetMenu {
@@ -48,6 +50,11 @@ public class BattleDialogueBox : MonoBehaviour
     }
 
     public IEnumerator TypeDialogue(string dialogue) {
+        dialogueText.text = dialogue;
+        dialogueText.ForceMeshUpdate();
+        Vector2 textSize = dialogueText.GetPreferredValues(dialogue);
+        dialogueBoxBackground.sizeDelta = new Vector2(textSize.x, textSize.y);
+        dialogueTextBox.sizeDelta = new Vector2(textSize.x, dialogueBoxBackground.sizeDelta.y);
         dialogueText.text = "";
         foreach (var letter in dialogue.ToCharArray()) {
             dialogueText.text += letter;
@@ -56,7 +63,7 @@ public class BattleDialogueBox : MonoBehaviour
     }
 
     public void EnableDialogueText(bool enabled) {
-        dialogueText.enabled = enabled;
+        dialogueBox.SetActive(enabled);
     }
     public void EnableActionSelector(bool enabled) {
         actionSelector.SetActive(enabled);

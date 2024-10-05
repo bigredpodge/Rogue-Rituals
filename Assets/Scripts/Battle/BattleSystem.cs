@@ -124,14 +124,10 @@ public class BattleSystem : MonoBehaviour
     }
 
     void HandleActionSelection() {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
                 ++currentAction;
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-                currentAction += 2;
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-                --currentAction;
         else if (Input.GetKeyDown(KeyCode.UpArrow)) 
-                currentAction -= 2;
+                --currentAction;
 
         currentAction = Mathf.Clamp(currentAction, 0, 3);
 
@@ -225,14 +221,10 @@ public class BattleSystem : MonoBehaviour
     }
 
     void HandleMoveSelection() {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
                 ++currentMove;
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-                currentMove += 2;
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-                --currentMove;
         else if (Input.GetKeyDown(KeyCode.UpArrow))
-                currentMove -= 2;
+                --currentMove;
 
         currentMove = Mathf.Clamp(currentMove, 0, playerUnit.Devil.Moves.Count - 1);
 
@@ -668,7 +660,8 @@ public class BattleSystem : MonoBehaviour
         cameraManager.changeCamera("PlayerPan");
         cameraManager.focusCamera(playerUnit.newInstance.transform);
         state = BattleState.MOVESELECTION;
-        dialogueBox.EnableActionSelector(false);
+        dialogueBox.UpdateActionSelection(5);
+        //dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableDialogueText(false);
         dialogueBox.EnableMoveSelector(true);
     }
