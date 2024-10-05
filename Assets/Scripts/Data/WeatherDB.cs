@@ -20,9 +20,11 @@ public class WeatherDB
                 StartMessage = "A plague of insects descends on the battlefield.",
                 ContinueMessage = "The plague of insects storms violently.",
                 EndMessage = "The plague of insects dissipates.",
+                NaturalBrands = new List<DevilBrand> { DevilBrand.Filth, DevilBrand.Squall },
 
                 OnAfterRound = (Devil devil) => {
-                    if (devil.Base.Brand1 == DevilBrand.Filth || devil.Base.Brand2 == DevilBrand.Filth || devil.Base.Brand1 == DevilBrand.Squall || devil.Base.Brand2 == DevilBrand.Squall)
+                    Weather currentWeather = Weathers[WeatherID.plague];
+                    if (currentWeather.NaturalBrands.Contains(devil.Base.Brand1) || currentWeather.NaturalBrands.Contains(devil.Base.Brand2))
                         return;
 
                     devil.DamageHP((devil.MaxHP / 16));
@@ -30,6 +32,15 @@ public class WeatherDB
             }
         },
     };
+
+    public static float GetWeatherBonus(Weather weather, Move move) {
+        if (weather == null)
+            return 1f;
+        else if (weather.NaturalBrands.Contains(move.Base.Brand))
+            return 1.5f;
+        
+        return 1f;
+    }
 }
 
 public enum WeatherID {

@@ -221,7 +221,7 @@ public class Devil
         get { return GetStat(Stat.Initiative); }
     }
 
-    public DamageDetails CalculateDamage(Move move, Devil attacker, bool debugModifier) {
+    public DamageDetails CalculateDamage(Move move, Devil attacker, float weather) {
         float critical = 1f;
         if (Random.value * 100f <= 6.25f)
             critical = 1.5f;
@@ -247,11 +247,8 @@ public class Devil
         float attack = (move.Base.Category == MoveCategory.Discipline) ? attacker.Discipline : attacker.Strength;
         float defense = (move.Base.Category == MoveCategory.Discipline) ? Willpower : Fortitude;
 
-        float debug = 1f;
-        if (debugModifier)
-            debug = 100f;
 
-        float modifiers = Random.Range(0.8f, 1f) * brand * critical * stab * item * debug;
+        float modifiers = Random.Range(0.8f, 1f) * brand * critical * stab * item * weather;
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
@@ -261,9 +258,9 @@ public class Devil
         return damageDetails;
     }
 
-    public DamageDetails TakeDamage(Move move, Devil attacker, bool debugModifier) {
+    public DamageDetails TakeDamage(Move move, Devil attacker, float weather) {
 
-        var damageDetails = CalculateDamage(move, attacker, debugModifier);
+        var damageDetails = CalculateDamage(move, attacker, weather);
 
         DamageHP(damageDetails.Damage);
         

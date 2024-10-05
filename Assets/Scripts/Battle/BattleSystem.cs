@@ -352,11 +352,12 @@ public class BattleSystem : MonoBehaviour
 
         if (CheckIfMoveHits(move, sourceUnit.Devil, targetUnit.Devil)) {
             if (move.Base.Category != MoveCategory.Status) {
-                bool debugModifier = debugMode;
-                if (!sourceUnit.IsPlayerUnit)
-                    debugModifier = false;
+                float modifier = 1f;
+                modifier = WeatherDB.GetWeatherBonus(weather, move);
+                if (sourceUnit.IsPlayerUnit && debugMode)
+                    modifier = 20f;
 
-                var damageDetails = targetUnit.Devil.TakeDamage(move, sourceUnit.Devil, debugModifier);
+                var damageDetails = targetUnit.Devil.TakeDamage(move, sourceUnit.Devil, modifier);
                 yield return targetUnit.Hud.WaitForHPUpdate();
                 yield return ShowDamageDetails(damageDetails);
                 lastDamage = damageDetails.Damage;
@@ -388,7 +389,7 @@ public class BattleSystem : MonoBehaviour
             
             if (move.Base.TakeRecoil == TakeRecoil.OnMiss) {
                 yield return new WaitForSeconds(1f);
-                var simulatedDamage = targetUnit.Devil.CalculateDamage(move, sourceUnit.Devil, false);
+                var simulatedDamage = targetUnit.Devil.CalculateDamage(move, sourceUnit.Devil, 1f);
                 yield return TakeRecoilDamage(sourceUnit, move, simulatedDamage.Damage);
             }
 
