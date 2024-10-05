@@ -19,7 +19,6 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] GameObject captureBallPrefab;
     [SerializeField] Inventory inventory;
     [SerializeField] CameraManager cameraManager;
-    //choice texts for now here, but should be consolidated into battledialoguebox script...
     [SerializeField] GameObject debugUI;
     [SerializeField] TMP_Text weatherText;
     public Weather weather;
@@ -680,7 +679,7 @@ public class BattleSystem : MonoBehaviour
     }
 
 
-    IEnumerator EndBattle(bool won) {
+    IEnumerator EndBattle(bool won, Devil capturedDevil = null) {
         state = BattleState.BATTLEOVER;
         playerParty.Devils.ForEach(p => p.OnBattleOver());
         if (won) {
@@ -697,8 +696,10 @@ public class BattleSystem : MonoBehaviour
             yield return dialogueBox.TypeDialogue("Your party gained exp!");
             yield return GiveAllExp(expGain);
             
-            
             yield return playerUnit.RemoveUnit();
+
+            if (capturedDevil !=null)
+                yield return dialogueBox.TryToAddDevil(capturedDevil, playerParty);
             OnBattleOver(true);
         }
         else {
@@ -788,13 +789,11 @@ public class BattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
-            playerParty.AddDevil(enemyUnit.Devil);
-            yield return dialogueBox.TypeDialogue(enemyUnit.Devil.Base.Name + " added to your party.");
-
             Destroy(ball);
+            cameraManager.changeCamera("StaticView");
 
             yield return new WaitForSeconds(1f);
-            StartCoroutine(EndBattle(true));
+            StartCoroutine(EndBattle(true, enemyUnit.Devil));
         }
         else {
             yield return new WaitForSeconds(1f);
@@ -811,6 +810,9 @@ public class BattleSystem : MonoBehaviour
     }
 
     int TryToCatch(Devil devil, RitualItem ritualItem) {
+        if (debugMode)
+            return 4;
+
         var statusBonus = 1f;
 
         foreach (var condition in devil.Statuses) {
@@ -819,7 +821,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         float a = (3 * devil.MaxHP - 2 * devil.HP) * devil.Base.CatchRate * ritualItem.CatchModifier * statusBonus / (3 * devil.MaxHP);
-        
+
         if (a >= 255)
             return 4;
 
@@ -835,5 +837,7 @@ public class BattleSystem : MonoBehaviour
 
         return shakeCount;
     }
+
+    
 
 }

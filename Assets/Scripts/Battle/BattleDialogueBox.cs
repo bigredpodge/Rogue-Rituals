@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 
 public class BattleDialogueBox : MonoBehaviour
 {
-    public enum DialogueState { CHOOSETOFORGET, FORGETMOVE, MOVEFORGOTTEN, BUSY }
+    public enum DialogueState { CHOOSE, FORGETMOVE, RELEASEDEVIL, MOVEFORGOTTEN, DEVILRELEASED, BUSY }
     [SerializeField] TMP_Text dialogueText;
     [SerializeField] Color highlightedColor;
     [SerializeField] GameObject actionSelector, moveSelector, moveDetails, targetSelector;
@@ -21,20 +21,25 @@ public class BattleDialogueBox : MonoBehaviour
     [SerializeField] TMP_Text[] choiceTexts;
     [SerializeField] GameObject choiceTextUI, moveToForgetUI;
     private DialogueState state = DialogueState.BUSY;
-    private MoveBase moveToLearn;
-    private Devil devilToTeach;
-    private int currentMoveForgetSelection, currentChoiceSelection;
+    private MoveBase targetMove;
+    private Devil targetDevil;
+    private DevilParty targetParty;
+    private int currentMoveForgetSelection, currentChoiceSelection, currentReleaseSelection;
+    private bool forgetMoveChoice;
     public TargetMenu TargetMenu {
         get { return targetMenu; }
     }
     [SerializeField] float textSpeed;
 
     public void Update() {
-        if (state == DialogueState.CHOOSETOFORGET) {
+        if (state == DialogueState.CHOOSE) {
             HandleChoiceSelection();
         }
         if (state == DialogueState.FORGETMOVE) {
             HandleMoveForgetSelection();
+        }
+        if (state == DialogueState.RELEASEDEVIL) {
+            HandleDevilReleaseSelection();
         }
     }
 
@@ -126,10 +131,18 @@ public class BattleDialogueBox : MonoBehaviour
         UpdateChoiceSelection();
         if (Input.GetKeyDown(KeyCode.Z)) {
             choiceTextUI.SetActive(false);
-                if(currentChoiceSelection == 0)
-                    StartCoroutine(ForgetMoves(devilToTeach));
+            if (currentChoiceSelection == 0) {
+                if (forgetMoveChoice)
+                    StartCoroutine(ForgetMoves(targetDevil));
                 else
+                    StartCoroutine(ChooseDevilToRelease());
+            }
+            else {
+                if (forgetMoveChoice)
                     StartCoroutine(DontForgetMoves());
+                else
+                    StartCoroutine(DontReleaseDevil());
+            }
         }
     }
 
@@ -148,12 +161,28 @@ public class BattleDialogueBox : MonoBehaviour
         learnMoveUI.UpdateMoveSelection(currentMoveForgetSelection);
 
         if(Input.GetKeyDown(KeyCode.Z)) {
-            if (currentMoveForgetSelection == 0) {
+            if (currentMoveForgetSelection == 0)
                 StartCoroutine(DontForgetMoves());
-            }
-            else {
-                StartCoroutine(ForgetMove(currentMoveForgetSelection, devilToTeach));
-            }
+            else
+                StartCoroutine(ForgetMove(currentMoveForgetSelection, targetDevil));
+        }
+    }
+
+    void HandleDevilReleaseSelection() {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+                ++currentReleaseSelection;
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+                --currentReleaseSelection;
+
+        currentReleaseSelection = Mathf.Clamp(currentReleaseSelection, 0, 5);
+
+        targetMenu.UpdateTargetSelection(currentReleaseSelection);
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            StartCoroutine(ReleaseDevil());
+        }
+
+        if(Input.GetKeyDown(KeyCode.X)) {
+            StartCoroutine(DontReleaseDevil());
         }
     }
 
@@ -171,18 +200,69 @@ public class BattleDialogueBox : MonoBehaviour
 
             }
             else {
-                moveToLearn = newMove;
-                devilToTeach = target;
-                yield return TypeDialogue(devilToTeach.Base.Name + " wants to learn "+ moveToLearn.Name + ".");
+                targetMove = newMove;
+                targetDevil = target;
+                yield return TypeDialogue(targetDevil.Base.Name + " wants to learn "+ targetMove.Name + ".");
                 yield return new WaitForSeconds(1f);
                 yield return TypeDialogue("But they already know four moves. Forget one?");
                 choiceTexts[0].text = "Yes";
                 choiceTexts[1].text = "No";
                 choiceTextUI.SetActive(true);
-                state = DialogueState.CHOOSETOFORGET;
+                state = DialogueState.CHOOSE;
+                forgetMoveChoice = true;
 
                 yield return new WaitUntil(() => state == DialogueState.MOVEFORGOTTEN);
             }
+    }
+
+    public IEnumerator TryToAddDevil(Devil devil, DevilParty party) {
+        Debug.Log(party.Devils.Count);
+        if (party.Devils.Count < 6) {
+            party.AddDevil(devil);
+            yield return TypeDialogue(devil.Base.Name + " added to your party.");
+            yield break;
+        }
+       
+        yield return TypeDialogue("Your party is too full to add " + devil.Base.Name + ". Release a devil?");
+        choiceTexts[0].text = "Yes";
+        choiceTexts[1].text = "No";
+        choiceTextUI.SetActive(true);
+
+        targetDevil = devil;
+        targetParty = party;
+        state = DialogueState.CHOOSE;
+        forgetMoveChoice = false;
+
+        yield return new WaitUntil(() => state == DialogueState.DEVILRELEASED);
+    }
+
+    IEnumerator DontReleaseDevil() {
+        yield return TypeDialogue("You retain your party members. " + targetDevil.Base.Name + " returned to hell.");
+        yield return new WaitForSeconds(1f);
+        state = DialogueState.DEVILRELEASED;
+    }
+
+    IEnumerator ChooseDevilToRelease() {
+        yield return TypeDialogue("Choose a devil to replace with " + targetDevil.Base.Name + ".");
+        yield return new WaitForSeconds(1f);
+        TargetMenu.SetDevilData(targetParty.Devils, false);
+        EnableTargetSelector(true);
+        state = DialogueState.RELEASEDEVIL;
+    }
+
+    IEnumerator ReleaseDevil() {
+        state = DialogueState.BUSY;
+        EnableTargetSelector(false);
+
+        yield return TypeDialogue("Goodbye, " + targetParty.Devils[currentReleaseSelection].Base.Name + "!");
+        targetParty.ReleaseDevilAt(currentReleaseSelection);
+        yield return new WaitForSeconds(1f);
+
+        yield return TypeDialogue("Welcome, " + targetDevil.Base.Name + "!");
+        targetParty.AddDevil(targetDevil);
+        yield return new WaitForSeconds(1f);
+
+        state = DialogueState.DEVILRELEASED;
     }
 
     public IEnumerator ForgetMoves(Devil target) {
@@ -190,7 +270,7 @@ public class BattleDialogueBox : MonoBehaviour
 
         yield return TypeDialogue("Choose a move to forget.");
         yield return new WaitForSeconds(1f);
-        learnMoveUI.SetMoveData(target.Moves, moveToLearn);
+        learnMoveUI.SetMoveData(target.Moves, targetMove);
         EnableDialogueText(false);
         EnableMoveSelector(true);
         moveToForgetUI.SetActive(true);
@@ -205,8 +285,8 @@ public class BattleDialogueBox : MonoBehaviour
         moveToForgetUI.SetActive(false);
 
         var selectedMove = target.Moves[selection-1].Base;
-        target.Moves[selection-1] = new Move(moveToLearn);
-        yield return TypeDialogue(target.Base.Name + " forgot " + selectedMove.Name + " and learned " + moveToLearn.Name + ".");
+        target.Moves[selection-1] = new Move(targetMove);
+        yield return TypeDialogue(target.Base.Name + " forgot " + selectedMove.Name + " and learned " + targetMove.Name + ".");
         state = DialogueState.MOVEFORGOTTEN;
     }
 
@@ -217,7 +297,7 @@ public class BattleDialogueBox : MonoBehaviour
         EnableMoveSelector(false);
         moveToForgetUI.SetActive(false);
 
-        yield return TypeDialogue("Did not learn " + moveToLearn.Name + ".");
+        yield return TypeDialogue("Did not learn " + targetMove.Name + ".");
         state = DialogueState.MOVEFORGOTTEN;
     }  
 

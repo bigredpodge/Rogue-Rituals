@@ -33,4 +33,8 @@ public class DevilParty : MonoBehaviour
         }
     }
 
+    public void ReleaseDevilAt(int i) {
+        devils.RemoveAt(i);
+    }
+
 }

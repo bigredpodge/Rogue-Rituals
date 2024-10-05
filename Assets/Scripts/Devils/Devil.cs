@@ -85,7 +85,6 @@ public class Devil
 
         HP = MaxHP;
         Statuses = new List<Condition>();
-        MovesToLearn = new List<MoveBase>();
     }
 
     void CalculateStats() {
@@ -295,6 +294,8 @@ public class Devil
     }
 
     public void QueueMoveToLearn(MoveBase moveBase) {
+        if (MovesToLearn == null)
+            MovesToLearn = new List<MoveBase>();
         MovesToLearn.Add(moveBase);
     }
 
