@@ -9,8 +9,6 @@ public class Condition
     public string Name { get; set; }
     public string Description { get; set; }
     public string StartMessage { get; set; }
-    public int statusTime { get; set; }
-    public int statusSeverity { get; set; }
     public Action<Devil> OnStart { get; set; }
     public Action<Devil> OnRefresh { get; set; }
     public Func<Devil, bool> OnBeforeMove { get; set; }

@@ -1,14 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
-using Unity.VisualScripting;
-using JetBrains.Annotations;
-using UnityEngine.Rendering;
+using TMPro;
 
 public enum BattleState { START, ACTIONSELECTION, MOVESELECTION, RUNNINGTURN, PARTYSCREEN, ITEMSELECTION, BATTLEOVER, CHOOSETOFORGET, FORGETMOVE, MOVEFORGOTTEN, BUSY }
 public enum BattleAction { MOVE, SWITCHDEVIL, CATCHDEVIL, USEITEM }
@@ -25,7 +19,10 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] CameraManager cameraManager;
     //choice texts for now here, but should be consolidated into battledialoguebox script...
     [SerializeField] GameObject debugUI;
-    private int currentAction, currentMove, currentMemberSelection, currentItemSelection, currentChoiceSelection, currentMoveForgetSelection;
+    [SerializeField] TMP_Text weatherText;
+    public Weather weather;
+    public int weatherCount;
+    private int currentAction, currentMove, currentMemberSelection, currentItemSelection;
     private bool debugMode = false;
     public event Action<bool> OnBattleOver;
     DevilParty playerParty, enemyParty;
@@ -322,9 +319,11 @@ public class BattleSystem : MonoBehaviour
             if (state == BattleState.BATTLEOVER) yield break;
         }
 
-        if (state != BattleState.BATTLEOVER)
+        if (state != BattleState.BATTLEOVER) {
             currentAction = 0;
+            yield return CheckWeather();
             ActionSelection();
+        }
     }
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
@@ -468,6 +467,10 @@ public class BattleSystem : MonoBehaviour
             if (effect.HealSource == HealSource.Discipline)
                 yield return RunHeal(sourceUnit, effect);
 
+            //Weather
+            if (effect.Weather != WeatherID.none) 
+                yield return SetWeather(effect.Weather);
+
         }
         yield return ShowStatusChanges(sourceUnit);
         yield return ShowStatusChanges(targetUnit);
@@ -515,6 +518,34 @@ public class BattleSystem : MonoBehaviour
             moveAccuracy *= boostValues[-evasion];
 
         return UnityEngine.Random.Range(1, 101) <= moveAccuracy;
+    }
+
+    IEnumerator SetWeather(WeatherID weatherId) {
+        var newWeather = WeatherDB.Weathers[weatherId];
+        weather = newWeather;
+        weatherCount = 5;
+        weatherText.text = newWeather.Name;
+        yield return dialogueBox.TypeDialogue(newWeather.StartMessage);
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator CheckWeather() {
+        if (weather == null)
+            yield break;
+        else {
+            yield return dialogueBox.TypeDialogue(weather.ContinueMessage);
+            weather.OnAfterRound(playerUnit.Devil);
+            weather.OnAfterRound(enemyUnit.Devil);
+            yield return new WaitForSeconds(1f);
+
+            weatherCount--;
+            if (weatherCount <= 0) {
+                yield return dialogueBox.TypeDialogue(weather.EndMessage);
+                weather = null;
+                weatherText.text = "";
+                yield return new WaitForSeconds(1f);
+            }
+        }
     }
 
     IEnumerator ShowStatusChanges(BattleUnit sourceUnit) {

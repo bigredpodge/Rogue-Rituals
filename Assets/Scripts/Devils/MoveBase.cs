@@ -75,6 +75,9 @@ public class MoveEffects {
     [Header("Status")]
     [SerializeField] ConditionID status;
 
+    [Header("Weather")]
+    [SerializeField] WeatherID weather;
+
     [Header("Heals")]
     [SerializeField] HealSource healSource;
     [SerializeField] float healMultiplier = 1f;
@@ -92,6 +95,9 @@ public class MoveEffects {
     }
     public ConditionID Status {
         get { return status; }
+    }
+    public WeatherID Weather {
+        get { return weather; }
     }
     public HealSource HealSource {
         get { return healSource; }
