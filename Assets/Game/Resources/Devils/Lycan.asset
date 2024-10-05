@@ -16,6 +16,7 @@ MonoBehaviour:
   rank: Devil
   domain: the Moon
   description: 
+  sprite: {fileID: 0}
   model: {fileID: 982405307309655834, guid: 19fb212eae49c9d47a4c3c76646e8f2d, type: 3}
   brand1: 7
   brand2: 0
@@ -31,7 +32,7 @@ MonoBehaviour:
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: e5ea9e689ad492d48a1dc4fec31965ac, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 67325012097e9ad46af7c146140341bb, type: 2}
+  - moveBase: {fileID: 11400000, guid: 0b0dc1feaabc9914eaca99b7124840c8, type: 2}
     level: 3
   - moveBase: {fileID: 11400000, guid: fe94cbe736bda174c95123f0a3ca6fe9, type: 2}
     level: 7
@@ -39,3 +40,4 @@ MonoBehaviour:
     level: 11
   - moveBase: {fileID: 11400000, guid: 91e926744942c754f9e24783f43e5efd, type: 2}
     level: 15
+  teachableMoves: []
