@@ -25,7 +25,7 @@ public class BattleHUD : MonoBehaviour
     }
 
     private Vector3 originalPos;
-    private float posOffset = 500f;
+    private float posOffset = 350f;
 
     Devil _devil;
 
