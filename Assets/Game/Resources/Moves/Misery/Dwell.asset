@@ -12,16 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Dwell
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Dwell
+  description: Prepare for the worst, raising your discipline, twice if despairing
+    (not implemented).
+  brand: 9
   power: 0
   accuracy: 100
   alwaysHits: 0
   alwaysSuperEffective: 0
   takeRecoil: 0
   recoilMultiplier: 1
-  ap: 10
+  ap: 15
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 2
+  effects:
+  - chance: 0
+    target: 0
+    boosts:
+    - stat: 2
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0

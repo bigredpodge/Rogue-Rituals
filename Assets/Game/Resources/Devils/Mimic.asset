@@ -16,6 +16,7 @@ MonoBehaviour:
   rank: Devil
   domain: Tricks
   description: 
+  sprite: {fileID: 0}
   model: {fileID: 8118468995395705577, guid: 5018ed70bd6d60e4dbb2cdd064f79410, type: 3}
   brand1: 8
   brand2: 0
@@ -31,8 +32,6 @@ MonoBehaviour:
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: ab406dff9d8a1a04587e447332cff79c, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: ad451732f5e0b824688d46ce7a9aedd7, type: 2}
-    level: 3
   - moveBase: {fileID: 11400000, guid: b3489b07aca12334392f4373fc97e697, type: 2}
     level: 6
   - moveBase: {fileID: 11400000, guid: 861b12c5e142c344da8a54daef6231d8, type: 2}
@@ -55,3 +54,4 @@ MonoBehaviour:
     level: 51
   - moveBase: {fileID: 11400000, guid: 03d14e36b63f8c949afb27782f6b1c2d, type: 2}
     level: 75
+  teachableMoves: []

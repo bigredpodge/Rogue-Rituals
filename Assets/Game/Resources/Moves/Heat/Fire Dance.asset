@@ -13,19 +13,24 @@ MonoBehaviour:
   m_Name: Fire Dance
   m_EditorClassIdentifier: 
   name: Fire Dance
-  description: Pick up the pace, increasing your initiative.
+  description: increase own willpower
   brand: 1
   power: 0
   accuracy: 100
   alwaysHits: 1
+  alwaysSuperEffective: 0
+  takeRecoil: 0
+  recoilMultiplier: 1
   ap: 20
   priority: 0
   moveCategory: 2
   effects:
-  - boosts:
-    - stat: 5
+  - chance: 100
+    target: 1
+    boosts:
+    - stat: 4
       boost: 1
     status: 0
-    statusTime: 0
-    chance: 100
-    target: 1
+    weather: 0
+    healSource: 0
+    healMultiplier: 1

@@ -12,16 +12,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Liquid Courage
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Liquid Courage
+  description: Inflict drunk on self, trying to raise many stats.
+  brand: 7
   power: 0
   accuracy: 100
   alwaysHits: 0
   alwaysSuperEffective: 0
   takeRecoil: 0
   recoilMultiplier: 1
-  ap: 10
+  ap: 5
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 2
+  effects:
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 0
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 1
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 2
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 3
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 4
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 5
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 5
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 6
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 40
+    target: 1
+    boosts:
+    - stat: 7
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0
+  - chance: 100
+    target: 1
+    boosts: []
+    status: 9
+    weather: 0
+    healSource: 0
+    healMultiplier: 0

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Tempest
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Tempest
+  description: Summon a thunderstorm, dealing high damage over time with a chance
+    to despair and feeble the weak.
+  brand: 2
   power: 0
   accuracy: 100
   alwaysHits: 0
@@ -23,5 +24,12 @@ MonoBehaviour:
   recoilMultiplier: 1
   ap: 10
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 2
+  effects:
+  - chance: 0
+    target: 0
+    boosts: []
+    status: 0
+    weather: 5
+    healSource: 0
+    healMultiplier: 0

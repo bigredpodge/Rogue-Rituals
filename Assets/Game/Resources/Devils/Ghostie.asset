@@ -16,42 +16,61 @@ MonoBehaviour:
   rank: Devil
   domain: Loss
   description: 
+  sprite: {fileID: 0}
   model: {fileID: 8118468995395705577, guid: 5018ed70bd6d60e4dbb2cdd064f79410, type: 3}
   brand1: 9
   brand2: 0
-  maxHP: 50
-  strength: 50
-  discipline: 50
-  fortitude: 50
-  willpower: 50
-  initiative: 50
-  expYield: 102
+  maxHP: 55
+  strength: 35
+  discipline: 69
+  fortitude: 64
+  willpower: 62
+  initiative: 59
+  expYield: 95
   growthRate: 0
-  catchRate: 200
+  catchRate: 170
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: ab406dff9d8a1a04587e447332cff79c, type: 2}
+  - moveBase: {fileID: 11400000, guid: 5c51a85bcc226934ca135c0b516b7362, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: ad451732f5e0b824688d46ce7a9aedd7, type: 2}
+  - moveBase: {fileID: 11400000, guid: db78e63921d87d643aa0f5650285cee7, type: 2}
     level: 3
-  - moveBase: {fileID: 11400000, guid: b3489b07aca12334392f4373fc97e697, type: 2}
+  - moveBase: {fileID: 11400000, guid: 4336c4871e69b5c47ad89fb9463de982, type: 2}
     level: 6
-  - moveBase: {fileID: 11400000, guid: 861b12c5e142c344da8a54daef6231d8, type: 2}
+  - moveBase: {fileID: 11400000, guid: 1f429b3e00eb76a458c11da2f4ad4391, type: 2}
     level: 9
-  - moveBase: {fileID: 11400000, guid: 0cd59da0ca6383841bf702e20228c2e5, type: 2}
-    level: 11
   - moveBase: {fileID: 11400000, guid: 320dfbca1a09165448e68cf32326b17b, type: 2}
     level: 13
-  - moveBase: {fileID: 11400000, guid: b4b6cab1929005941a0aff9cbb262757, type: 2}
-    level: 18
-  - moveBase: {fileID: 11400000, guid: 28e8d6b55f9e7ce4eaf24115e7df0d21, type: 2}
-    level: 24
-  - moveBase: {fileID: 11400000, guid: 61b0344f2816bef4592257df33be5fd7, type: 2}
-    level: 28
-  - moveBase: {fileID: 11400000, guid: 9be3c532becf9e84ab4907f23fc95061, type: 2}
-    level: 32
-  - moveBase: {fileID: 11400000, guid: 4b0f7e1a8c6df444082c67292c4159e7, type: 2}
+  - moveBase: {fileID: 11400000, guid: d730f4b4fd8a6a046a4bb061469b8b21, type: 2}
+    level: 16
+  - moveBase: {fileID: 11400000, guid: f2465dabe4c01784c9d42b7ce2f031f5, type: 2}
+    level: 21
+  - moveBase: {fileID: 11400000, guid: e5d5ab094bf3e2a418ac183932c7121b, type: 2}
+    level: 25
+  - moveBase: {fileID: 11400000, guid: e581368c235e80f439af98248ad92ce7, type: 2}
+    level: 30
+  - moveBase: {fileID: 11400000, guid: e17cb025cac00b4489bb1823d7628418, type: 2}
     level: 34
-  - moveBase: {fileID: 11400000, guid: 430a7a406a061cd4ab063d6aed3ffd9c, type: 2}
-    level: 51
-  - moveBase: {fileID: 11400000, guid: 03d14e36b63f8c949afb27782f6b1c2d, type: 2}
-    level: 75
+  - moveBase: {fileID: 11400000, guid: f5d6b524a5f057049a36f6f06881e1c3, type: 2}
+    level: 39
+  - moveBase: {fileID: 11400000, guid: 4702ef71111d84b48aebbaba315e1d23, type: 2}
+    level: 43
+  - moveBase: {fileID: 11400000, guid: 08005b70e63b1bd458f4e6cd8c83523e, type: 2}
+    level: 49
+  - moveBase: {fileID: 11400000, guid: 8f33b39b8350a2f4fa08e2ddd6e531d7, type: 2}
+    level: 55
+  - moveBase: {fileID: 11400000, guid: 9f9335e5528b00b45ac6c5b0cfcb6c34, type: 2}
+    level: 55
+  teachableMoves:
+  - {fileID: 11400000, guid: a5452b4a24488244fa732ff0aa059fd7, type: 2}
+  - {fileID: 11400000, guid: 61b0344f2816bef4592257df33be5fd7, type: 2}
+  - {fileID: 11400000, guid: 9e58ff5fe3fba6a4cbfeeb5213075eab, type: 2}
+  - {fileID: 11400000, guid: 5ca5dfcd5eff6094da2abac842b1e68c, type: 2}
+  - {fileID: 11400000, guid: 110bcde77cc734b4eb8754013913ab8e, type: 2}
+  - {fileID: 11400000, guid: 42b231108a6d1b246a85fabcfd1ae4b1, type: 2}
+  - {fileID: 11400000, guid: 4702ef71111d84b48aebbaba315e1d23, type: 2}
+  - {fileID: 11400000, guid: f2465dabe4c01784c9d42b7ce2f031f5, type: 2}
+  - {fileID: 11400000, guid: e17cb025cac00b4489bb1823d7628418, type: 2}
+  - {fileID: 11400000, guid: 08005b70e63b1bd458f4e6cd8c83523e, type: 2}
+  - {fileID: 11400000, guid: 0662b8217cbca884f84f93137666bc58, type: 2}
+  - {fileID: 11400000, guid: b856f1f77cda840448a7eda6cc77e5c0, type: 2}
+  - {fileID: 11400000, guid: 299898d1094558e40adb50d67bbbb723, type: 2}

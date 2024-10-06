@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Sleight of Hand
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Sleight of Hand
+  description: Attempts to steal an item from the opponent (not yet implemented).
+  brand: 6
   power: 0
   accuracy: 100
   alwaysHits: 0
@@ -23,5 +23,5 @@ MonoBehaviour:
   recoilMultiplier: 1
   ap: 10
   priority: 0
-  moveCategory: 0
+  moveCategory: 2
   effects: []

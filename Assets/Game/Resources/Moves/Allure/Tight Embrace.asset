@@ -10,22 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
-  m_Name: Drawl
+  m_Name: Tight Embrace
   m_EditorClassIdentifier: 
-  name: Drawl
-  description: Reduce your opponent's iniatitive.
-  brand: 9
-  power: 0
+  name: Tight Embrace
+  description: Embrace the enemy, squeezing the life from them with a chance to madden.
+  brand: 6
+  power: 60
   accuracy: 100
-  alwaysHits: 1
-  ap: 20
+  alwaysHits: 0
+  alwaysSuperEffective: 0
+  takeRecoil: 0
+  recoilMultiplier: 1
+  ap: 15
   priority: 0
-  moveCategory: 2
-  effects:
-  - boosts:
-    - stat: 5
-      boost: -1
-    status: 0
-    statusTime: 0
-    chance: 100
-    target: 0
+  moveCategory: 0
+  effects: []

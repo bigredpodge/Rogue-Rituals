@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Inner Turmoil
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
+  name: Inner Turmoil
+  description: Raise two stats at random (unimplemented)
+  brand: 8
   power: 0
   accuracy: 100
   alwaysHits: 0
@@ -23,5 +23,16 @@ MonoBehaviour:
   recoilMultiplier: 1
   ap: 10
   priority: 0
-  moveCategory: 0
-  effects: []
+  moveCategory: 2
+  effects:
+  - chance: 0
+    target: 1
+    boosts:
+    - stat: 0
+      boost: 1
+    - stat: 5
+      boost: 1
+    status: 0
+    weather: 0
+    healSource: 0
+    healMultiplier: 0

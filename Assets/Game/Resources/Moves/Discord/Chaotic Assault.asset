@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Chaotic Assault
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
-  accuracy: 100
+  name: Chaotic Assault
+  description: Assault the opponent with chaotic unpredictability
+  brand: 8
+  power: 90
+  accuracy: 90
   alwaysHits: 0
   alwaysSuperEffective: 0
   takeRecoil: 0

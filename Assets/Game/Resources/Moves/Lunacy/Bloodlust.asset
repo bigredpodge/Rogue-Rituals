@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Bloodlust
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Bloodlust
+  description: Chance to inflict drunk on self.
   brand: 0
-  power: 0
-  accuracy: 100
+  power: 110
+  accuracy: 85
   alwaysHits: 0
   alwaysSuperEffective: 0
   takeRecoil: 0
@@ -24,4 +24,11 @@ MonoBehaviour:
   ap: 10
   priority: 0
   moveCategory: 0
-  effects: []
+  effects:
+  - chance: 20
+    target: 1
+    boosts: []
+    status: 9
+    weather: 0
+    healSource: 0
+    healMultiplier: 0

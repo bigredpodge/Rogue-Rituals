@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
   m_Name: Pandemonium
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  brand: 0
-  power: 0
-  accuracy: 100
+  name: Pandemonium
+  description: Rally up chaotic violence.
+  brand: 8
+  power: 90
+  accuracy: 90
   alwaysHits: 0
   alwaysSuperEffective: 0
-  takeRecoil: 0
+  takeRecoil: 1
   recoilMultiplier: 1
   ap: 10
   priority: 0
-  moveCategory: 0
+  moveCategory: 1
   effects: []
