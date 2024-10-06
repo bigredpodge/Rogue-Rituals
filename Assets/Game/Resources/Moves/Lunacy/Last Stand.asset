@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 800ba2d1f201d6c41885d9af0e8b89ec, type: 3}
-  m_Name: Roiling Tempest
+  m_Name: Last Stand
   m_EditorClassIdentifier: 
-  name: Roiling Tempest
-  description: They say the world will end in a great storm, to wipe the world anew.
-  brand: 2
-  power: 130
-  accuracy: 75
+  name: 
+  description: 
+  brand: 0
+  power: 0
+  accuracy: 100
   alwaysHits: 0
-  ap: 5
+  alwaysSuperEffective: 0
+  takeRecoil: 0
+  recoilMultiplier: 1
+  ap: 10
   priority: 0
-  moveCategory: 1
+  moveCategory: 0
   effects: []

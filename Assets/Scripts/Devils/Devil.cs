@@ -55,7 +55,10 @@ public class Devil
     public Dictionary<Stat, int> StatBoosts { get; private set; }
     public List<Condition> Statuses{ get; set;}
     public int SleepTime { get; set; }
-    public int PoisonSeverity { get; set; }
+    public int DespairTime { get; set; }
+    public int WitherTime { get; set; }
+    public int DrunkTime { get; set; }
+    public int BerserkTime { get; set; }
     public int BurnSeverity { get; set; }
     public int DoomTime { get; set; }
     public Queue<string> StatusChanges { get; private set; }
