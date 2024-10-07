@@ -337,7 +337,7 @@ public class Devil
 
     public bool OnBeforeMove() {
         bool canPerformMove = true;
-        /*if (Statuses.Count == 0)
+        if (Statuses.Count == 0)
             return canPerformMove;
 
         for (int i = 0; i < Statuses.Count; i++) {
@@ -348,7 +348,6 @@ public class Devil
                     canPerformMove = false;
             }
         }
-        */
         return canPerformMove;
     }
 

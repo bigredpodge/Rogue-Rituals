@@ -718,11 +718,12 @@ public class BattleSystem : MonoBehaviour
         }
 
         for (int i = 0; i < playerParty.Devils.Count; i++) {
-            if (i==0)
-                playerParty.Devils[i].Exp += expGain;
-            else
-                playerParty.Devils[i].Exp += (expGain /2);
-
+            if (playerParty.Devils[i].HP > 0) {
+                if (i==0)
+                    playerParty.Devils[i].Exp += expGain;
+                else
+                    playerParty.Devils[i].Exp += (expGain /2);
+            }
             //todo - add participated in battle flags to increase exp gain
 
             StartCoroutine(GiveExp(i, expGivenFlags)); 
