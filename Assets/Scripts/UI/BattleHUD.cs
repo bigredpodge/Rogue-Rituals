@@ -13,6 +13,7 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] TMP_Text nameText, levelText, doomText;
     [SerializeField] HPBar hpBar;
     [SerializeField] GameObject expBar;
+    [SerializeField] Image portrait;
     
     //stat growth UI
     [SerializeField] GameObject statGrowthUI;
@@ -47,6 +48,9 @@ public class BattleHUD : MonoBehaviour
         _devil = devil;
         nameText.text = devil.Base.Name;
         doomText.text = "";
+
+        portrait.sprite = devil.GetSprite();
+        
     
         hpBar.SetHP(devil.HP, devil.MaxHP);
         SetExp();
@@ -56,6 +60,7 @@ public class BattleHUD : MonoBehaviour
         _devil.OnStatusChanged += SetStatuses;
         _devil.OnHPChanged += UpdateHP;
     }
+
 
     public void SetStatuses() {
         statusUIHandler.CheckStatusUI(_devil);
@@ -91,6 +96,7 @@ public class BattleHUD : MonoBehaviour
 
     public IEnumerator UpdateHPAsync() {
         yield return hpBar.SetHPSmooth(_devil.HP, _devil.MaxHP);
+        portrait.sprite = _devil.GetSprite();
     }
 
     public IEnumerator ShowStatGrowth() {

@@ -22,7 +22,7 @@ public class TargetUI : MonoBehaviour
         else
             expBar.SetActive(false);
 
-        sprite.sprite = devil.Base.Sprite;
+        sprite.sprite = _devil.GetSprite();
         nameText.text = devil.Base.Name;
         countText.text = "Lvl"+devil.Level;
     }

@@ -306,6 +306,13 @@ public class Devil
         MovesToLearn = null;
     }
 
+    public Sprite GetSprite() {
+        if (HP < (Base.MaxHP / 4))
+            return Base.LowHPSprite;
+
+        return Base.HealthySprite;
+    }
+
     public void SetStatus(ConditionID conditionId) {
         var status = ConditionsDB.Conditions[conditionId];
         if (!Statuses.Contains(status)) {
